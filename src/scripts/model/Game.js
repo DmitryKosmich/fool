@@ -13,6 +13,7 @@
         this.trump = trump || null;
         this.players = players || [];
         this.retreat = [];
+        this.table = [];
     }
 
     /**
@@ -77,6 +78,22 @@
      */
     Game.prototype.setRetreat = function (retreat) {
         this.retreat = retreat;
+    };
+
+    /**
+     *
+     * @returns {Array}
+     */
+    Game.prototype.getTable = function () {
+        return this.table;
+    };
+
+    /**
+     *
+     * @param {Array} table
+     */
+    Game.prototype.setTable = function (table) {
+        this.table = table;
     };
 
     FOOL.classes.Game = Game;

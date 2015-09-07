@@ -1,5 +1,8 @@
 var FOOL = {
     classes: {},
+    currentGame: null,
+    robot: {},
+    uiBuilder: {},
     color: {
         CROSSES: 1,
         HEARTS: 2,

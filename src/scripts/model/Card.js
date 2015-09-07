@@ -8,7 +8,7 @@
     function Card(value, color, name) {
         this.value = value || null;
         this.color = color || null;
-        this.color = name || null;
+        this.name = name || null;
     }
 
     /**

@@ -94,7 +94,41 @@
         return this.game;
     };
 
-    Player.prototype.
+    /**
+     * Get cards from the pack.
+     */
+    Player.prototype.getCard = function () {
+        //todo...
+    };
+
+    /**
+     * Toss the card on the table.
+     * @param {number} index - Index of the card, which player is going to toss.
+     */
+    Player.prototype.tossCard = function (index) {
+        //todo...
+    };
+
+    /**
+     * Throw the cards from the table to retreat
+     */
+    Player.prototype.sendToRetreat = function () {
+        //todo...
+    };
+
+    /**
+     * Pick up cards from the table.
+     */
+    Player.prototype.pull = function () {
+        //todo...
+    };
+
+    /**
+     * Human player provides an opportunity to go to the robot.
+     */
+    Player.prototype.goRobot = function () {
+        //todo...
+    };
 
     FOOL.classes.Player = Player;
 
