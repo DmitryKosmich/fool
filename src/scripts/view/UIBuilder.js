@@ -13,6 +13,9 @@
      */
     UIBuilder.prototype.show = function (game) {
         //todo...
+
+        var renderFinishedEvent = FOOL.events.factory.create(FOOL.events.types.READY_TO_START, game);
+        FOOL.events.tunnel.sendEvent(renderFinishedEvent);
     };
 
     FOOL.classes.UIBuilder = UIBuilder;
