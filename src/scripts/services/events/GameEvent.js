@@ -2,8 +2,8 @@
     'use strict';
 
     /**
-     * @param eventType event type
-     * @param data event data
+     * @param {Number} eventType event type
+     * @param {FOOL.classes.Game} data event data
      * @constructor
      */
     function GameEvent(eventType, data) {
@@ -12,14 +12,14 @@
     }
 
     /**
-     * @returns {Object}
+     * @returns {FOOL.classes.Game}
      */
     GameEvent.prototype.getData = function() {
         return this.data;
     };
 
     /**
-     * @returns {Object}
+     * @returns {Number}
      */
     GameEvent.prototype.getEventType = function() {
         return this.eventType;

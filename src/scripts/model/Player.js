@@ -80,7 +80,7 @@
 
     /**
      *
-     * @param {Game} game
+     * @param {FOOL.classes.Game} game
      */
     Player.prototype.setGame = function (game) {
         this.game = game;
@@ -88,7 +88,7 @@
 
     /**
      *
-     * @returns {Game|null}
+     * @returns {FOOL.classes.Game|null}
      */
     Player.prototype.getGame = function () {
         return this.game;

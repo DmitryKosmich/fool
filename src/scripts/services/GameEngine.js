@@ -1,21 +1,29 @@
 (function (FOOL) {
     'use strict';
 
-    function GameEngine() {
+    /**
+     *
+     * @constructor
+     */
+    function GameEngine() {}
 
-    }
+    /**
+     *
+     * @param {Object|undefined} options
+     */
+    GameEngine.prototype.start = function (options) {
+        var gameOptions = options ? options : FOOL.defaults;
 
-    GameEngine.prototype.onStart = function(event) {
-        var game = event.getData();
-        // TODO do something once preparations completed
     };
 
-    GameEngine.prototype.subscribe = function() {
-        var readyToStartListener = new FOOL.events.EventListener(this.onStart);
-        FOOL.events.tunnel.addListener(FOOL.events.types.READY_TO_START, readyToStartListener);
+    /**
+     * This method should control the game process.
+     * @param {FOOL.events.GameEvent} event
+     */
+    GameEngine.prototype.process = function(event) {
+        //todo: this method should control the game process.
     };
 
     FOOL.engine = new GameEngine();
-    FOOL.engine.subscribe();
 
 })(FOOL);

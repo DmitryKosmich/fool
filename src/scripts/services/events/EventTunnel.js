@@ -1,25 +1,36 @@
 (function (FOOL) {
     'use strict';
 
+    /**
+     *
+     * @constructor
+     */
     function EventTunnel() {
         this.listeners = [];
     }
 
+    /**
+     *
+     * @param {Number} eventType
+     * @param {FOOL.events.EventListener} listener
+     */
     EventTunnel.prototype.addListener = function (eventType, listener) {
-        var eventListeners = this.listeners[eventType];
-        if (typeof eventListeners == "undefined") {
+        if (!this.listeners[eventType]) {
             this.listeners[eventType] = [];
         }
         this.listeners[eventType].push(listener);
     };
 
+    /**
+     *
+     * @param {FOOL.events.GameEvent} event
+     */
     EventTunnel.prototype.sendEvent = function (event) {
-        var eventListeners = this.listeners[event.getEventType()];
-        if (typeof eventListeners != "undefined") {
-            for (var i = 0; i < eventListeners.length; i++) {
-                var listener = eventListeners[i];
-                listener.onEvent(event);
-            }
+        FOOL.engine.process(event);
+        var i, eventListeners = this.listeners[event.getEventType()],
+            length = eventListeners ? eventListeners.length : 0;
+        for (i = 0; i < length; i += 1) {
+            eventListeners[i].onEvent(event);
         }
     };
 

@@ -4,7 +4,7 @@
     /**
      *
      * @param {Array} pack
-     * @param {Card} trump
+     * @param {FOOL.classes.Card} trump
      * @param {Array} players
      * @constructor
      */
@@ -34,7 +34,7 @@
 
     /**
      *
-     * @returns {Card|null|*}
+     * @returns {FOOL.classes.Card|null|*}
      */
     Game.prototype.getTrump = function () {
         return this.trump;
@@ -42,7 +42,7 @@
 
     /**
      *
-     * @param {Card} trump
+     * @param {FOOL.classes.Card} trump
      */
     Game.prototype.setTrump = function (trump) {
         this.trump = trump;

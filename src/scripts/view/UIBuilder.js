@@ -9,7 +9,7 @@
 
     /**
      * Displays the game on the screen.
-     * @param {Game} game
+     * @param {FOOL.classes.Game} game
      */
     UIBuilder.prototype.show = function (game) {
         //todo...

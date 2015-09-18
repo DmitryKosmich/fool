@@ -12,17 +12,14 @@ Hello!!!
 <script src="scripts/services/events/GameEvent.js"></script>
 <script src="scripts/services/events/EventFactory.js"></script>
 <script src="scripts/services/events/EventListener.js"></script>
+<script src="scripts/services/GameEngine.js"></script>
 <script src="scripts/services/events/EventTunnel.js"></script>
 
 <!-- Checking event tunnel -->
-<script type="application/javascript">
-    var testListener = new FOOL.events.EventListener(function(event) {
-        console.log("Event received: " + event.getEventType());
+<script>
+    FOOL.engine.start({
+        playersNumber: 3
     });
-    FOOL.events.tunnel.addListener(FOOL.events.types.GAME_STARTED, testListener);
-    var game = {};
-    var testEvent = FOOL.events.factory.create(FOOL.events.types.GAME_STARTED, game);
-    FOOL.events.tunnel.sendEvent(testEvent);
 </script>
 </body>
 </html>

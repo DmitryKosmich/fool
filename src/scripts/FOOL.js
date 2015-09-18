@@ -23,6 +23,10 @@ var FOOL = {
     }
 };
 
+FOOL.defaults = {
+    playersNumber: 2
+};
+
 FOOL.pack = [
     {
         color: FOOL.color.CROSSES,
