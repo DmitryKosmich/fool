@@ -98,7 +98,13 @@
      * Get cards from the pack.
      */
     Player.prototype.getCard = function () {
-        //todo...
+        if (this.cards.length < 6) {
+            var pack = FOOL.currentGame.getPack();
+            this.cards.push(pack.pop());
+            FOOL.events.tunnel.sendEvent(new FOOL.events.GameEvent(FOOL.events.types.GET_CARD, FOOL.currentGame));
+        } else {
+            alert('I can\'t get card');
+        }
     };
 
     /**
@@ -106,28 +112,35 @@
      * @param {number} index - Index of the card, which player is going to toss.
      */
     Player.prototype.tossCard = function (index) {
-        //todo...
+        if (this.cards.length > 0) {
+            var table = FOOL.currentGame.getTable();
+            table.push(this.cards.splice(index, 1)[0]);
+            FOOL.events.tunnel.sendEvent(new FOOL.events.GameEvent(FOOL.events.types.TOSS_CARD, FOOL.currentGame));
+        } else {
+            alert('I don\'t have cards');
+        }
     };
 
     /**
      * Throw the cards from the table to retreat
      */
     Player.prototype.sendToRetreat = function () {
-        //todo...
+        var table = FOOL.currentGame.getTable();
+        var retreat = FOOL.currentGame.getRetreat();
+        FOOL.currentGame.setRetreat(retreat.concat(table));
+        FOOL.currentGame.setTable([]);
+        FOOL.events.tunnel.sendEvent(new FOOL.events.GameEvent(FOOL.events.types.SEND_TO_RETREAT, FOOL.currentGame));
     };
 
     /**
      * Pick up cards from the table.
      */
     Player.prototype.pull = function () {
-        //todo...
-    };
-
-    /**
-     * Human player provides an opportunity to go to the robot.
-     */
-    Player.prototype.goRobot = function () {
-        //todo...
+        var table = FOOL.currentGame.getTable();
+        var playerCard = this.getCards();
+        this.setCards(playerCard.concat(table));
+        FOOL.currentGame.setTable([]);
+        FOOL.events.tunnel.sendEvent(new FOOL.events.GameEvent(FOOL.events.types.PULL, FOOL.currentGame));
     };
 
     FOOL.classes.Player = Player;

@@ -18,12 +18,17 @@ var FOOL = {
             BOUT_STARTED: 10,
             BOUT_ENDED_DEFENDER_SUCCEED: 11,
             BOUT_ENDED_ATTACKER_SUCCEED: 12,
-            ATTACKER_FINISHED: 20
+            ATTACKER_FINISHED: 20,
+            GET_CARD: 30,
+            TOSS_CARD: 31,
+            SEND_TO_RETREAT: 32,
+            PULL: 33
         }
     }
 };
 
 FOOL.defaults = {
+    playerName: 'User',
     playersNumber: 2
 };
 

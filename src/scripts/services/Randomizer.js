@@ -16,6 +16,6 @@
         //todo: this method should mix the pack
     };
 
-    FOOL.engine = new Randomizer();
+    FOOL.randomizer = new Randomizer();
 
 })(FOOL);
