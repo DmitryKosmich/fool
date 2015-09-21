@@ -1,10 +1,126 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title></title>
+    <title>Fool</title>
+    <link rel="stylesheet" href="styles/styles.css">
 </head>
 <body>
-Hello!!!
+
+<div class="container">
+    <nav class="menu">
+        <ul class="menu-items">
+            <li class="menu-item">Restart</li>
+            <li class="menu-item">Options</li>
+        </ul>
+    </nav>
+
+    <div class="opponents-container">
+        <ul class="opponents">
+            <li class="player active opponent-player">
+                <ul class="cards">
+                    <li class="card close">
+                        <img src="images/cards/10-3.png">
+                        <img src="images/cards/back.png">
+                    </li>
+                    <li class="card close">
+                        <img src="images/cards/10-3.png">
+                        <img src="images/cards/back.png">
+                    </li>
+                    <li class="card close">
+                        <img src="images/cards/10-3.png">
+                        <img src="images/cards/back.png">
+                    </li>
+                </ul>
+            </li>
+            <li class="player opponent-player">
+                <ul class="cards">
+                    <li class="card close">
+                        <img src="images/cards/10-3.png">
+                        <img src="images/cards/back.png">
+                    </li>
+                    <li class="card close">
+                        <img src="images/cards/2-2.png">
+                        <img src="images/cards/back.png">
+                    </li>
+                    <li class="card close">
+                        <img src="images/cards/5-1.png">
+                        <img src="images/cards/back.png">
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <div class="table-container">
+        <ul class="cards table-cards">
+            <li class="card open">
+                <img src="images/cards/10-2.png">
+                <img src="images/cards/back.png">
+            </li>
+            <li class="card open">
+                <img src="images/cards/8-1.png">
+                <img src="images/cards/back.png">
+            </li>
+            <li class="card open">
+                <img src="images/cards/6-4.png">
+                <img src="images/cards/back.png">
+            </li>
+            <li class="card open">
+                <img src="images/cards/11-3.png">
+                <img src="images/cards/back.png">
+            </li>
+            <li class="card open">
+                <img src="images/cards/4-3.png">
+                <img src="images/cards/back.png">
+            </li>
+            <li class="card open">
+                <img src="images/cards/3-2.png">
+                <img src="images/cards/back.png">
+            </li>
+        </ul>
+        <ul class="cards pack-cards">
+            <li class="card close">
+                <img src="images/cards/10-3.png">
+                <img src="images/cards/back.png">
+            </li>
+            <li class="card close">
+                <img src="images/cards/10-3.png">
+                <img src="images/cards/back.png">
+            </li>
+            <li class="card close">
+                <img src="images/cards/10-3.png">
+                <img src="images/cards/back.png">
+            </li>
+        </ul>
+    </div>
+
+    <br class="clear"/>
+
+    <div class="user-container">
+        <div class="player">
+            <ul class="cards">
+                <li class="card open">
+                    <img src="images/cards/10-3.png">
+                    <img src="images/cards/back.png">
+                </li>
+                <li class="card open">
+                    <img src="images/cards/10-3.png">
+                    <img src="images/cards/back.png">
+                </li>
+                <li class="card open">
+                    <img src="images/cards/10-3.png">
+                    <img src="images/cards/back.png">
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="helper">
+        <div class="message show"></div>
+        <div class="button"><img src="images/question.png"></div>
+    </div>
+</div>
+
 <script src="scripts/FOOL.js"></script>
 <script src="scripts/model/Card.js"></script>
 <script src="scripts/model/Player.js"></script>
