@@ -28,8 +28,10 @@ var FOOL = {
 };
 
 FOOL.defaults = {
+    robotName: 'Robot',
     playerName: 'User',
-    playersNumber: 2
+    playersNumber: 2,
+    startCardsNumber: 6
 };
 
 FOOL.pack = [

@@ -3,37 +3,33 @@
 
     /**
      *
-     * @param {FOOL.classes.Player} player
      * @constructor
      */
-    function Robot(player) {
-        this.player = player || null;
-    }
-
-    /**
-     *
-     * @param {FOOL.classes.Player} player
-     */
-    Robot.prototype.setPlayer = function (player) {
-        this.player = player;
-    };
+    function Robot() {}
 
     /**
      *
      * @returns {FOOL.classes.Player|null|*}
      */
-    Robot.prototype.getPlayer = function () {
-        return this.player;
+    Robot.prototype.getActivePlayer = function () {
+        var i,
+            allPlayers = FOOL.currentGame.getPlayers(),
+            length = allPlayers ? allPlayers.length : 0;
+        for (i = 0; i < length; i += 1) {
+            if (allPlayers[i].isActive()) {
+                return allPlayers[i];
+            }
+        }
+        new Error('Active player can not be found!');
     };
 
     /**
-     * The robot analyzes the state of the game and makes a move.
-     * @param {FOOL.classes.Game} game
+     * The robot analyzes the state of the game and makes an action.
      */
-    Robot.prototype.makeMove = function (game) {
-        //todo...
+    Robot.prototype.makeAction = function () {
+        var currentPlayer = this.getActivePlayer();
     };
 
-    FOOL.classes.Robot = Robot;
+    FOOL.robot = new Robot();
 
 })(FOOL);
