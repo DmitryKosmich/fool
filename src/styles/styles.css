@@ -32,7 +32,6 @@ body {
     min-width: 800px;
     min-height: 600px;
     overflow: auto;
-    padding-top: 30px;
 }
 
 .container .opponents-container {
@@ -49,6 +48,7 @@ body {
     float: left;
 }
 
+.container > .table-container > .retreat-cards,
 .container > .table-container > .pack-cards {
     float: right;
 }
@@ -65,17 +65,16 @@ body {
 /* navbar */
 .menu {
     font-family: 'quicksandregular' 'Arial';
-    position: fixed;
     width: 100%;
     z-index: 9999;
     top: 0;
 }
 
 .menu > .menu-items >.menu-item {
-    padding: 5px 10px 5px 10px;
+    padding: 10px;
     display: inline-block;
     cursor: pointer;
-    color: #55A8B3;
+    color: #4F6A77;
 }
 .menu > .menu-items >.menu-item:hover {
     color: #83A4A9;
@@ -110,9 +109,9 @@ body {
     width: 100px;
     top: 0;
 
-    -webkit-box-shadow: 0px 0px 5px 0px rgba(3,26,30,1);
-    -moz-box-shadow: 0px 0px 5px 0px rgba(3,26,30,1);
-    box-shadow: 0px 0px 5px 0px rgba(3,26,30,1);
+    -webkit-box-shadow: 0 0 5px 0 rgba(3,26,30,1);
+    -moz-box-shadow: 0 0 5px 0 rgba(3,26,30,1);
+    box-shadow: 0 0 5px 0 rgba(3,26,30,1);
 
     transition:          all 0.1s ease;
     -webkit-transition:  all 0.1s ease;
@@ -121,12 +120,14 @@ body {
 }
 
 .cards > .card:hover {
-    -webkit-box-shadow: 0px 0px 10px 0px rgba(3,26,30,0.6);
-    -moz-box-shadow: 0px 0px 10px 0px rgba(3,26,30,0.6);
-    box-shadow: 0px 0px 10px 0px rgba(3,26,30,0.6);
+    -webkit-box-shadow: 0 0 10px 0 rgba(3,26,30,0.6);
+    -moz-box-shadow: 0 0 10px 0 rgba(3,26,30,0.6);
+    box-shadow: 0 0 10px 0 rgba(3,26,30,0.6);
     top: -10px;
 }
 
+.cards.retreat-cards > .card:last-child,
+.cards.pack-cards > .card:last-child,
 .cards > .card:last-child {
     margin-right: 0;
 }
@@ -142,6 +143,37 @@ body {
 
 .cards > .card.close img:first-child {
     display: none;
+}
+
+.cards.retreat-cards > .card,
+.cards.pack-cards > .card {
+    margin-right: -98px;
+}
+
+.cards.pack-cards > .card:first-child {
+    left: -30px;
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    transform: rotate(90deg);
+}
+
+.opponent-player .cards > .card,
+.cards.table-cards > .card,
+.cards.retreat-cards > .card,
+.cards.pack-cards > .card {
+    -webkit-box-shadow: 0 0 5px 0 rgba(3,26,30,1);
+    -moz-box-shadow: 0 0 5px 0 rgba(3,26,30,1);
+    box-shadow: 0 0 5px 0 rgba(3,26,30,1);
+    top: 0;
+}
+
+.cards.pack-cards > .card:last-child:hover {
+    -webkit-box-shadow: 0 0 10px 0 rgba(3,26,30,0.6);
+    -moz-box-shadow: 0 0 10px 0 rgba(3,26,30,0.6);
+    box-shadow: 0 0 10px 0 rgba(3,26,30,0.6);
+    top: 10px;
 }
 
 /* helper */
