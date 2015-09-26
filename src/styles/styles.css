@@ -5,6 +5,11 @@
     box-sizing: border-box;
 }
 
+input:focus,
+button:focus {
+    outline:0;
+}
+
 @font-face {
     font-family: 'quicksandregular';
     src: url('../fonts/regular/quicksand-regular-webfont.eot');
@@ -19,6 +24,7 @@
 }
 
 body {
+    font-family: 'quicksandregular' 'Arial';
     position: absolute;
     width: 100%;
     height: 100%;
@@ -64,10 +70,18 @@ body {
 
 /* navbar */
 .menu {
-    font-family: 'quicksandregular' 'Arial';
+    background-color: rgba(175, 179, 184, 0);
     width: 100%;
     z-index: 9999;
     top: 0;
+    transition:          all 0.1s ease;
+    -webkit-transition:  all 0.1s ease;
+    -moz-transition:     all 0.1s ease;
+    -o-transition:       all 0.1s ease;
+}
+
+.menu:hover {
+    background-color: rgba(175, 179, 184, 0.1);
 }
 
 .menu > .menu-items >.menu-item {
@@ -76,6 +90,7 @@ body {
     cursor: pointer;
     color: #4F6A77;
 }
+
 .menu > .menu-items >.menu-item:hover {
     color: #83A4A9;
 }
@@ -112,11 +127,6 @@ body {
     -webkit-box-shadow: 0 0 5px 0 rgba(3,26,30,1);
     -moz-box-shadow: 0 0 5px 0 rgba(3,26,30,1);
     box-shadow: 0 0 5px 0 rgba(3,26,30,1);
-
-    transition:          all 0.1s ease;
-    -webkit-transition:  all 0.1s ease;
-    -moz-transition:     all 0.1s ease;
-    -o-transition:       all 0.1s ease;
 }
 
 .cards > .card:hover {
@@ -185,9 +195,34 @@ body {
 }
 
 .helper > .button {
-    width: 100px;
+    width: 80px;
+    margin: 10px;
 }
 
 .helper > .button > img {
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=10)";
+    filter: alpha(opacity=10);
+    -moz-opacity: 0.1;
+    -khtml-opacity: 0.1;
+    opacity: 0.1;
     width: 100%;
+}
+
+.helper > .button:hover > img {
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
+    filter: alpha(opacity=80);
+    -moz-opacity: 0.8;
+    -khtml-opacity: 0.8;
+    opacity: 0.8;
+}
+
+/* transition */
+.menu,
+.menu > .menu-items >.menu-item,
+.cards > .card,
+.helper > .button > img {
+    transition:          all 0.1s ease;
+    -webkit-transition:  all 0.1s ease;
+    -moz-transition:     all 0.1s ease;
+    -o-transition:       all 0.1s ease;
 }

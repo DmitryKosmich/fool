@@ -3,8 +3,9 @@
 <head>
     <title>Fool</title>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="vendor/modal/css/modal.css" />
     <link rel="stylesheet" href="styles/styles.css">
 </head>
 <body>
@@ -12,9 +13,9 @@
 <div class="container">
     <nav class="menu">
         <ul class="menu-items">
-            <li class="menu-item">Restart</li>
-            <li class="menu-item">Options</li>
-            <li class="menu-item">Authors</li>
+            <li class="menu-item">Начать заново</li>
+            <li class="menu-item md-trigger" data-modal="modal-options">Настройки</li>
+            <li class="menu-item">Авторы</li>
         </ul>
     </nav>
 
@@ -139,6 +140,33 @@
     </div>
 </div>
 
+<!-- modal -->
+<div class="md-modal md-effect-8" id="modal-options">
+    <div class="md-content">
+        <h1>Настройки</h1>
+        <form>
+            <div class="form-item">
+                <label for="player_name">Имя игрока:</label>
+                <input id="player_name" type="text" value="Игрок" />
+            </div>
+            <div class="form-item">
+                <label for="robot_name">Имя противника:</label>
+                <input id="robot_name" type="text" value="Робот" />
+            </div>
+            <div class="form-item">
+                <label for="players_number">Количество игроков:</label>
+                <input id="players_number" type="number" value="2" min="2" max="6"/>
+            </div>
+            <div class="form-item">
+                <label for="cards_number">Количество карт на старте:</label>
+                <input id="cards_number" type="number" value="6" min="1" max="26"/>
+            </div>
+            <button type="button" class="md-close">Сохранить</button>
+        </form>
+    </div>
+</div>
+<div class="md-overlay"></div>
+
 <script src="scripts/FOOL.js"></script>
 <script src="scripts/model/Card.js"></script>
 <script src="scripts/model/Player.js"></script>
@@ -150,11 +178,15 @@
 <script src="scripts/services/events/EventTunnel.js"></script>
 <script src="scripts/services/GameEngine.js"></script>
 
-<!-- Checking event tunnel -->
+<!-- Start of game -->
 <script>
         FOOL.engine.start({
             playersNumber: 3
         });
 </script>
+
+<!-- vendor -->
+<script src="vendor/modal/js/modal.js"></script>
+
 </body>
 </html>

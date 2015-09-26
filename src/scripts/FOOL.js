@@ -28,8 +28,8 @@ var FOOL = {
 };
 
 FOOL.defaults = {
-    robotName: 'Robot',
     playerName: 'User',
+    robotName: 'Robot',
     playersNumber: 2,
     startCardsNumber: 6
 };
