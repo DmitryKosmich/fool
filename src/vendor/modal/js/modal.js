@@ -67,7 +67,7 @@
 })( window );
 
 
-(function() {
+(function(FOOL) {
 
     function init() {
 
@@ -92,6 +92,7 @@
 
             el.addEventListener( 'click', function( ev ) {
                 classie.add( modal, 'md-show' );
+                FOOL.forms.OptionsForm.fill(FOOL.defaults);
                 overlay.removeEventListener( 'click', removeModalHandler );
                 overlay.addEventListener( 'click', removeModalHandler );
 
@@ -104,7 +105,9 @@
 
             close.addEventListener( 'click', function( ev ) {
                 ev.stopPropagation();
-                removeModalHandler();
+                if (FOOL.forms.OptionsForm.save()) {
+                    removeModalHandler();
+                }
             });
 
         } );
@@ -113,4 +116,4 @@
 
     init();
 
-})();
+})(FOOL);

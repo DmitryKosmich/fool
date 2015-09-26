@@ -96,6 +96,16 @@
         this.table = table;
     };
 
+    Game.prototype.getUserPlayer = function () {
+        var i, length = this.players ? this.players.length : 0;
+        for (i = 0; i < length; i += 1) {
+            if (!this.players[i].getIsRobot()) {
+                return this.players[i];
+            }
+        }
+        return null;
+    };
+
     FOOL.classes.Game = Game;
 
 })(FOOL);

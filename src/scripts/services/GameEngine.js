@@ -23,6 +23,7 @@
         FOOL.currentGame = new FOOL.classes.Game(pack, pack[0], players);
         FOOL.randomizer.shufflePack(FOOL.currentGame);
         FOOL.events.tunnel.sendEvent(new FOOL.events.GameEvent(FOOL.events.types.BOUT_STARTED, FOOL.currentGame));
+        FOOL.uiBuilder.show(FOOL.currentGame);
     };
 
     /**
@@ -31,7 +32,14 @@
      * @returns {Array}
      */
     function getNewPack(options) {
-        return JSON.parse(JSON.stringify(FOOL.pack));
+        console.log('=> getNewPack()');
+        var i, defaultPack = FOOL.pack,
+            length = defaultPack.length,
+            pack = [];
+        for (i = 0; i < length; i += 1) {
+            pack.push(new FOOL.classes.Card(defaultPack[i].value, defaultPack[i].color, defaultPack[i].name));
+        }
+        return pack;
     }
 
     /**
@@ -41,10 +49,11 @@
      * @returns {Array}
      */
     function initPlayers(options, pack) {
+        console.log('=> initPlayers()');
         var i,
             player,
             players = [],
-            length = (options.playersNumber || FOOL.defaults.playersNumber) - 1,
+            length = (options.playersNumber || FOOL.defaults.playersNumber),
             startCardsNumber = -1 * (options.startCardsNumber || FOOL.defaults.startCardsNumber);
 
         for (i = 0; i < length; i += 1) {

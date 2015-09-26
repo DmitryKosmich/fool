@@ -13,7 +13,7 @@
 <div class="container">
     <nav class="menu">
         <ul class="menu-items">
-            <li class="menu-item">Начать заново</li>
+            <li class="menu-item" onclick="FOOL.engine.start()">Начать заново</li>
             <li class="menu-item md-trigger" data-modal="modal-options">Настройки</li>
             <li class="menu-item">Авторы</li>
         </ul>
@@ -21,95 +21,35 @@
 
     <div class="opponents-container">
         <ul class="opponents">
-            <li class="player active opponent-player">
-                <ul class="cards">
-                    <li class="card close">
-                        <img src="images/cards/10-3.png">
-                        <img src="images/cards/back.png">
-                    </li>
-                    <li class="card close">
-                        <img src="images/cards/10-3.png">
-                        <img src="images/cards/back.png">
-                    </li>
-                    <li class="card close">
-                        <img src="images/cards/10-3.png">
-                        <img src="images/cards/back.png">
-                    </li>
-                </ul>
-            </li>
-            <li class="player opponent-player">
-                <ul class="cards">
-                    <li class="card close">
-                        <img src="images/cards/10-3.png">
-                        <img src="images/cards/back.png">
-                    </li>
-                    <li class="card close">
-                        <img src="images/cards/2-2.png">
-                        <img src="images/cards/back.png">
-                    </li>
-                    <li class="card close">
-                        <img src="images/cards/5-1.png">
-                        <img src="images/cards/back.png">
-                    </li>
-                </ul>
-            </li>
+            <!--<li class="player active opponent-player">-->
+                <!--<ul class="cards">-->
+                    <!--<li class="card close">-->
+                        <!--<img src="images/cards/10-3.png">-->
+                        <!--<img src="images/cards/back.png">-->
+                    <!--</li>-->
+                <!--</ul>-->
+            <!--</li>-->
         </ul>
     </div>
 
     <div class="table-container">
         <ul class="cards table-cards">
-            <li class="card open">
-                <img src="images/cards/10-2.png">
-                <img src="images/cards/back.png">
-            </li>
-            <li class="card open">
-                <img src="images/cards/8-1.png">
-                <img src="images/cards/back.png">
-            </li>
-            <li class="card open">
-                <img src="images/cards/6-4.png">
-                <img src="images/cards/back.png">
-            </li>
-            <li class="card open">
-                <img src="images/cards/11-3.png">
-                <img src="images/cards/back.png">
-            </li>
-            <li class="card open">
-                <img src="images/cards/4-3.png">
-                <img src="images/cards/back.png">
-            </li>
-            <li class="card open">
-                <img src="images/cards/3-2.png">
-                <img src="images/cards/back.png">
-            </li>
+            <!--<li class="card open">-->
+                <!--<img src="images/cards/10-2.png">-->
+                <!--<img src="images/cards/back.png">-->
+            <!--</li>-->
         </ul>
         <ul class="cards retreat-cards" title="Отбой">
-            <li class="card close">
-                <img src="images/cards/10-3.png">
-                <img src="images/cards/back.png">
-            </li>
-            <li class="card close">
-                <img src="images/cards/10-3.png">
-                <img src="images/cards/back.png">
-            </li>
-            <li class="card close">
-                <img src="images/cards/10-3.png">
-                <img src="images/cards/back.png">
-            </li>
+            <!--<li class="card close">-->
+                <!--<img src="images/cards/10-3.png">-->
+                <!--<img src="images/cards/back.png">-->
+            <!--</li>-->
         </ul>
         <ul class="cards pack-cards" title="Колода">
-            <li class="card open">
-                <img src="images/cards/10-3.png">
-                <img src="images/cards/back.png">
-            </li>
-            <li class="card close">
-                <img src="images/cards/10-3.png">
-                <img src="images/cards/back.png">
-            </li>
-            <li class="card close">
-                <img src="images/cards/10-3.png">
-                <img src="images/cards/back.png">
-            </li>
+            <!--<li class="card open">-->
+                <!--<img src="images/cards/10-3.png">-->
+                <!--<img src="images/cards/back.png">-->
+            <!--</li>-->
         </ul>
     </div>
 
@@ -117,19 +57,11 @@
 
     <div class="user-container">
         <div class="player">
-            <ul class="cards">
-                <li class="card open">
-                    <img src="images/cards/10-3.png">
-                    <img src="images/cards/back.png">
-                </li>
-                <li class="card open">
-                    <img src="images/cards/10-3.png">
-                    <img src="images/cards/back.png">
-                </li>
-                <li class="card open">
-                    <img src="images/cards/10-3.png">
-                    <img src="images/cards/back.png">
-                </li>
+            <ul class="cards player-cards">
+                <!--<li class="card open">-->
+                    <!--<img src="images/cards/10-3.png">-->
+                    <!--<img src="images/cards/back.png">-->
+                <!--</li>-->
             </ul>
         </div>
     </div>
@@ -144,22 +76,22 @@
 <div class="md-modal md-effect-8" id="modal-options">
     <div class="md-content">
         <h1>Настройки</h1>
-        <form>
+        <form id="options_form">
             <div class="form-item">
                 <label for="player_name">Имя игрока:</label>
-                <input id="player_name" type="text" value="Игрок" />
+                <input name="playerName" id="player_name" type="text" value="Игрок" />
             </div>
             <div class="form-item">
                 <label for="robot_name">Имя противника:</label>
-                <input id="robot_name" type="text" value="Робот" />
+                <input name="robotName" id="robot_name" type="text" value="Робот" />
             </div>
             <div class="form-item">
                 <label for="players_number">Количество игроков:</label>
-                <input id="players_number" type="number" value="2" min="2" max="6"/>
+                <input name="playersNumber" id="players_number" type="number" value="2" min="2" max="6"/>
             </div>
             <div class="form-item">
-                <label for="cards_number">Количество карт на старте:</label>
-                <input id="cards_number" type="number" value="6" min="1" max="26"/>
+                <label for="start_cards_number">Количество карт на старте:</label>
+                <input name="startCardsNumber" id="start_cards_number" type="number" value="6" min="1" max="26"/>
             </div>
             <button type="button" class="md-close">Сохранить</button>
         </form>
@@ -171,6 +103,8 @@
 <script src="scripts/model/Card.js"></script>
 <script src="scripts/model/Player.js"></script>
 <script src="scripts/model/Game.js"></script>
+<script src="scripts/view/UIBuilder.js"></script>
+<script src="scripts/view/forms/OptionsForm.js"></script>
 <script src="scripts/services/Randomizer.js"></script>
 <script src="scripts/services/events/GameEvent.js"></script>
 <script src="scripts/services/events/EventFactory.js"></script>
@@ -180,9 +114,8 @@
 
 <!-- Start of game -->
 <script>
-        FOOL.engine.start({
-            playersNumber: 3
-        });
+        FOOL.engine.start();
+//        FOOL.uiBuilder.show(FOOL.currentGame);
 </script>
 
 <!-- vendor -->

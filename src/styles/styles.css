@@ -5,8 +5,7 @@
     box-sizing: border-box;
 }
 
-input:focus,
-button:focus {
+*:focus {
     outline:0;
 }
 
@@ -70,7 +69,7 @@ body {
 
 /* navbar */
 .menu {
-    background-color: rgba(175, 179, 184, 0);
+    background-color: rgba(175, 179, 184, 0.05);
     width: 100%;
     z-index: 9999;
     top: 0;
@@ -85,13 +84,17 @@ body {
 }
 
 .menu > .menu-items >.menu-item {
-    padding: 10px;
     display: inline-block;
+    margin-right: -5px;
     cursor: pointer;
     color: #4F6A77;
+    padding: 10px;
 }
 
 .menu > .menu-items >.menu-item:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+    border-bottom: 4px solid #4F6A77;
+    padding-bottom: 6px;
     color: #83A4A9;
 }
 
@@ -217,12 +220,18 @@ body {
 }
 
 /* transition */
-.menu,
 .menu > .menu-items >.menu-item,
-.cards > .card,
-.helper > .button > img {
+.cards > .card {
     transition:          all 0.1s ease;
     -webkit-transition:  all 0.1s ease;
     -moz-transition:     all 0.1s ease;
     -o-transition:       all 0.1s ease;
+}
+
+.menu,
+.helper > .button > img {
+    transition:          all 0.5s ease;
+    -webkit-transition:  all 0.5s ease;
+    -moz-transition:     all 0.5s ease;
+    -o-transition:       all 0.5s ease;
 }

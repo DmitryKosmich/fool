@@ -2,6 +2,7 @@ var FOOL = {
     classes: {},
     currentGame: null,
     robot: {},
+    forms: {},
     uiBuilder: {},
     color: {
         CROSSES: 1,
