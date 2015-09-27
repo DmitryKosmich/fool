@@ -3,8 +3,8 @@
 
     /**
      * @param {Number} eventType event type
-     * @param {FOOL.classes.Game} data event data
-     * @param {Function | null} callback
+     * @param {Object} data event data
+     * @param {Function|undefined} callback
      * @constructor
      */
     function GameEvent(eventType, data, callback) {
@@ -14,7 +14,7 @@
     }
 
     /**
-     * @returns {FOOL.classes.Game}
+     * @returns {Object}
      */
     GameEvent.prototype.getData = function() {
         return this.data;

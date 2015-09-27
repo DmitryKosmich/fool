@@ -11,23 +11,28 @@ var FOOL = {
         DIAMONDS: 4
     },
     events: {
-        types: {
+        gameTypes: {
             READY_TO_START: 0,
             GAME_STARTED: 1,
             TRUMP_SELECTED: 2,
             GAME_FINISHED: 3,
-            PLAYER_INIT: 4,
+            PLAYERS_INIT: 4,
             PLAYER_UPDATE: 5,
-            RIVAL_INIT: 6,
-            RIVAL_UPDATE: 7,
+            RIVAL_UPDATE: 6,
             BOUT_STARTED: 10,
             BOUT_ENDED_DEFENDER_SUCCEED: 11,
             BOUT_ENDED_ATTACKER_SUCCEED: 12,
             ATTACKER_FINISHED: 20,
-            GET_CARD: 30,
+            TAKE_CARD: 30,
             TOSS_CARD: 31,
             SEND_TO_RETREAT: 32,
             PULL: 33
+        },
+        uiTypes: {
+            UI_CLEAR: 1000,
+            UI_TALON_RENDER: 1010,
+            UI_PLAYER_RENDER: 1011,
+            UI_TOOK_CARD: 1012
         }
     }
 };
@@ -39,7 +44,7 @@ FOOL.defaults = {
     startCardsNumber: 6
 };
 
-FOOL.pack = [
+FOOL.talon = [
     {
         color: FOOL.color.CROSSES,
         value: 2,

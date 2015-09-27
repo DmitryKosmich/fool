@@ -95,13 +95,13 @@
     };
 
     /**
-     * Get cards from the pack.
+     * Get cards from the talon.
      */
     Player.prototype.getCard = function () {
         if (this.cards.length < 6) {
-            var pack = FOOL.currentGame.getPack();
+            var pack = FOOL.currentGame.getTalon();
             this.cards.push(pack.pop());
-            FOOL.events.tunnel.sendEvent(new FOOL.events.GameEvent(FOOL.events.types.GET_CARD, FOOL.currentGame));
+            FOOL.events.tunnel.sendEvent(new FOOL.events.GameEvent(FOOL.events.gameTypes.TAKE_CARD, FOOL.currentGame));
         } else {
             alert('I can\'t get card');
         }
@@ -113,9 +113,9 @@
      */
     Player.prototype.tossCard = function (index) {
         if (this.cards.length > 0) {
-            var table = FOOL.currentGame.getTable();
+            var table = FOOL.currentGame.getBoutCards();
             table.push(this.cards.splice(index, 1)[0]);
-            FOOL.events.tunnel.sendEvent(new FOOL.events.GameEvent(FOOL.events.types.TOSS_CARD, FOOL.currentGame));
+            FOOL.events.tunnel.sendEvent(new FOOL.events.GameEvent(FOOL.events.gameTypes.TOSS_CARD, FOOL.currentGame));
         } else {
             alert('I don\'t have cards');
         }
@@ -125,22 +125,22 @@
      * Throw the cards from the table to retreat
      */
     Player.prototype.sendToRetreat = function () {
-        var table = FOOL.currentGame.getTable();
+        var table = FOOL.currentGame.getBoutCards();
         var retreat = FOOL.currentGame.getRetreat();
         FOOL.currentGame.setRetreat(retreat.concat(table));
-        FOOL.currentGame.setTable([]);
-        FOOL.events.tunnel.sendEvent(new FOOL.events.GameEvent(FOOL.events.types.SEND_TO_RETREAT, FOOL.currentGame));
+        FOOL.currentGame.setBoutCards([]);
+        FOOL.events.tunnel.sendEvent(new FOOL.events.GameEvent(FOOL.events.gameTypes.SEND_TO_RETREAT, FOOL.currentGame));
     };
 
     /**
      * Pick up cards from the table.
      */
     Player.prototype.pull = function () {
-        var table = FOOL.currentGame.getTable();
+        var table = FOOL.currentGame.getBoutCards();
         var playerCard = this.getCards();
         this.setCards(playerCard.concat(table));
-        FOOL.currentGame.setTable([]);
-        FOOL.events.tunnel.sendEvent(new FOOL.events.GameEvent(FOOL.events.types.PULL, FOOL.currentGame));
+        FOOL.currentGame.setBoutCards([]);
+        FOOL.events.tunnel.sendEvent(new FOOL.events.GameEvent(FOOL.events.gameTypes.PULL, FOOL.currentGame));
     };
 
     FOOL.classes.Player = Player;

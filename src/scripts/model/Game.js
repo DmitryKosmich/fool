@@ -3,35 +3,27 @@
 
     /**
      *
-     * @param {Array} pack
-     * @param {FOOL.classes.Card} trump
-     * @param {FOOL.classes.Player} player
-     * @param {Array} rivals
      * @constructor
      */
-    function Game(pack, trump, player, rivals) {
-        this.pack = pack || [];
-        this.trump = trump || null;
-        this.player = player || null;
-        this.rivals = rivals || [];
+    function Game() {
         this.retreat = [];
-        this.table = [];
+        this.boutCards = [];
     }
 
     /**
      *
      * @returns {Array|*}
      */
-    Game.prototype.getPack = function () {
-        return this.pack;
+    Game.prototype.getTalon = function () {
+        return this.talon;
     };
 
     /**
      *
-     * @param {Array} pack
+     * @param {Array} talon
      */
-    Game.prototype.setPack = function (pack) {
-        this.pack = pack;
+    Game.prototype.setTalon = function (talon) {
+        this.talon = talon;
     };
 
     /**
@@ -84,6 +76,38 @@
 
     /**
      *
+     * @returns {FOOL.classes.Player|null|*}
+     */
+    Game.prototype.getAttacker = function () {
+        return this.attacker;
+    };
+
+    /**
+     *
+     * @param {FOOL.classes.Player} attacker
+     */
+    Game.prototype.setAttacker = function (attacker) {
+        this.attacker = attacker;
+    };
+
+    /**
+     *
+     * @returns {FOOL.classes.Player|null|*}
+     */
+    Game.prototype.getDefender = function () {
+        return this.defender;
+    };
+
+    /**
+     *
+     * @param {FOOL.classes.Player} defender
+     */
+    Game.prototype.setDefender = function (defender) {
+        this.defender = defender;
+    };
+
+    /**
+     *
      * @returns {Array}
      */
     Game.prototype.getRetreat = function () {
@@ -102,26 +126,16 @@
      *
      * @returns {Array}
      */
-    Game.prototype.getTable = function () {
-        return this.table;
+    Game.prototype.getBoutCards = function () {
+        return this.boutCards;
     };
 
     /**
      *
-     * @param {Array} table
+     * @param {Array} boutCards
      */
-    Game.prototype.setTable = function (table) {
-        this.table = table;
-    };
-
-    Game.prototype.getUserPlayer = function () {
-        var i, length = this.players ? this.players.length : 0;
-        for (i = 0; i < length; i += 1) {
-            if (!this.players[i].getIsRobot()) {
-                return this.players[i];
-            }
-        }
-        return null;
+    Game.prototype.setBoutCards = function (boutCards) {
+        this.boutCards = boutCards;
     };
 
     FOOL.classes.Game = Game;

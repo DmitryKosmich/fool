@@ -21,10 +21,10 @@
      */
     function drawView(game) {
         drawOpponents(game.getPlayers());
-        drawTable(game.getTable());
-        drawPack(game.getPack());
+        drawTable(game.getBoutCards());
+        drawPack(game.getTalon());
         drawRetreat(game.getRetreat());
-        drawUserPack(game.getUserPlayer());
+        drawUserPack(game.getPlayer());
     }
 
     function drawOpponents(players) {
