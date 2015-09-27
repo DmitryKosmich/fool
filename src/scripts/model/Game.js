@@ -5,13 +5,15 @@
      *
      * @param {Array} pack
      * @param {FOOL.classes.Card} trump
-     * @param {Array} players
+     * @param {FOOL.classes.Player} player
+     * @param {Array} rivals
      * @constructor
      */
-    function Game(pack, trump, players) {
+    function Game(pack, trump, player, rivals) {
         this.pack = pack || [];
         this.trump = trump || null;
-        this.players = players || [];
+        this.player = player || null;
+        this.rivals = rivals || [];
         this.retreat = [];
         this.table = [];
     }
@@ -50,18 +52,34 @@
 
     /**
      *
-     * @returns {Array|*}
+     * @returns {FOOL.classes.Player|null|*}
      */
-    Game.prototype.getPlayers = function () {
-        return this.players;
+    Game.prototype.getPlayer = function () {
+        return this.player;
     };
 
     /**
      *
-     * @param {Array} players
+     * @param {FOOL.classes.Player} player
      */
-    Game.prototype.setPlayers = function (players) {
-        this.players = players;
+    Game.prototype.setPlayer = function (player) {
+        this.player = player;
+    };
+
+    /**
+     *
+     * @returns {Array|*}
+     */
+    Game.prototype.getRivals = function () {
+        return this.rivals;
+    };
+
+    /**
+     *
+     * @param {Array} rivals
+     */
+    Game.prototype.setRivals = function (rivals) {
+        this.rivals = rivals;
     };
 
     /**

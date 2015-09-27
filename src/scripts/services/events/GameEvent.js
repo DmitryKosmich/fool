@@ -4,11 +4,13 @@
     /**
      * @param {Number} eventType event type
      * @param {FOOL.classes.Game} data event data
+     * @param {Function | null} callback
      * @constructor
      */
-    function GameEvent(eventType, data) {
+    function GameEvent(eventType, data, callback) {
         this.eventType= eventType;
         this.data = data;
+        this.callback = callback ? callback : function() {};
     }
 
     /**
@@ -23,6 +25,13 @@
      */
     GameEvent.prototype.getEventType = function() {
         return this.eventType;
+    };
+
+    /**
+     * @returns {Function}
+     */
+    GameEvent.prototype.callBack = function(data) {
+        return this.callback(data);
     };
 
     FOOL.events.GameEvent = GameEvent;
