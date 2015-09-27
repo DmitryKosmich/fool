@@ -27,8 +27,7 @@
         for (i = 0; i < length; i += 1) {
             talon.push(new FOOL.classes.Card(defaultPack[i].value, defaultPack[i].color, defaultPack[i].name));
         }
-        // TODO uncomment when implemented :D
-        //FOOL.randomizer.shuffleTalon(talon);
+        FOOL.randomizer.shuffleTalon(talon);
         game.setTalon(talon);
         game.setTrump(talon[0]);
     }

@@ -83,7 +83,7 @@
         attacker = allPlayers[0];
         if (player == attacker) {
             defender = rivals[0];
-        } else if (rivals[rivals.length] == attacker) {
+        } else if (rivals[rivals.length - 1] == attacker) {
             defender = player;
         } else {
             for (i = 0; i < rivals.length - 1; i += 1) {
