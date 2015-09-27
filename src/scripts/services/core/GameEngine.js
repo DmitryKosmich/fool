@@ -23,9 +23,9 @@
      *
      * @param {Object|undefined} options
      */
-    GameEngine.prototype.start = function (options) {
-        console.log('=> GameEngine.prototype.start(' + options + ')');
-        var gameOptions = options ? options : FOOL.defaults;
+    GameEngine.prototype.start = function () {
+        console.log('=> GameEngine.prototype.start()');
+        var gameOptions = FOOL.defaults;
         FOOL.currentGame = new FOOL.classes.Game();
         this.controls.talonController.createTalon(FOOL.currentGame);
         gameOptions.game = FOOL.currentGame;
@@ -35,7 +35,7 @@
                     game: data.game
                 }, function() {}));
                 // TODO review whether this needed
-                //FOOL.uiBuilder.show(FOOL.currentGame);
+                FOOL.uiBuilder.show(FOOL.currentGame);
         }));
     };
 

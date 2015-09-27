@@ -51,7 +51,7 @@
             player = data.player,
             playerCards = player.getCards(),
             talon, pickedCard;
-        if (playerCards.length < 6) {
+        if (playerCards.length < FOOL.defaults.startCardsNumber) {
             talon = player.getGame().getTalon();
             pickedCard = talon.pop();
             playerCards.push(pickedCard);

@@ -56,7 +56,7 @@
     OptionsForm.prototype.fill = function (data) {
         var key, form = document.getElementById('options_form');
         for (key in data) {
-            if (Object.prototype.hasOwnProperty.call(data, key)) {
+            if (Object.prototype.hasOwnProperty.call(data, key) && form.elements[key]) {
                 form.elements[key].value = data[key];
             }
         }

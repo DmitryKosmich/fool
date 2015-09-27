@@ -20,7 +20,7 @@
      * @param game
      */
     function drawView(game) {
-        drawOpponents(game.getPlayers());
+        drawOpponents(game.getRivals());
         drawTable(game.getBoutCards());
         drawPack(game.getTalon());
         drawRetreat(game.getRetreat());

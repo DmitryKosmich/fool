@@ -95,19 +95,6 @@
     };
 
     /**
-     * Get cards from the talon.
-     */
-    Player.prototype.getCard = function () {
-        if (this.cards.length < 6) {
-            var pack = FOOL.currentGame.getTalon();
-            this.cards.push(pack.pop());
-            FOOL.events.tunnel.sendEvent(new FOOL.events.GameEvent(FOOL.events.gameTypes.TAKE_CARD, FOOL.currentGame));
-        } else {
-            alert('I can\'t get card');
-        }
-    };
-
-    /**
      * Toss the card on the table.
      * @param {number} index - Index of the card, which player is going to toss.
      */
