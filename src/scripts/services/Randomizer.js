@@ -12,13 +12,14 @@
      * @param {Array} cards
      */
     Randomizer.prototype.shuffleTalon = function (cards) {
-        var i, mixedCards = mix(cards),
-            length = mixedCards ? mixedCards.length : 0;
-        for (i = 0; i < length; i += 1) {
-            cards.push(mixedCards[i]);
-        }
+        cards.push.apply(cards, mix(cards).slice(0));
     };
 
+    /**
+     *
+     * @param {Array} cards
+     * @returns {Array}
+     */
     function mix(cards) {
         var randomNum, length = cards ? cards.length : 0, result = [];
         while (length) {
