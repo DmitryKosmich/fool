@@ -19,6 +19,7 @@
             this.listeners[eventType] = [];
         }
         this.listeners[eventType].push(listener);
+        return this;
     };
 
     /**
@@ -32,6 +33,7 @@
         for (i = 0; i < length; i += 1) {
             eventListeners[i].onEvent(event);
         }
+        return this;
     };
 
     FOOL.events.tunnel = new EventTunnel();

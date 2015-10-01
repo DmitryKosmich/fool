@@ -181,12 +181,13 @@
      * Initializes the controller.
      */
     PlayerController.prototype.initialize = function() {
-        var playersInitListener = new FOOL.events.EventListener(initPlayersHandler);
-        FOOL.events.tunnel.addListener(FOOL.events.gameTypes.PLAYERS_INIT, playersInitListener);
-        var playerUpdateListener = new FOOL.events.EventListener(updatePlayerHandler);
-        FOOL.events.tunnel.addListener(FOOL.events.gameTypes.PLAYER_UPDATE, playerUpdateListener);
-        var rivalUpdateListener = new FOOL.events.EventListener(updateRivalHandler);
-        FOOL.events.tunnel.addListener(FOOL.events.gameTypes.RIVAL_UPDATE, rivalUpdateListener);
+        var playersInitListener = new FOOL.events.EventListener(initPlayersHandler),
+            playerUpdateListener = new FOOL.events.EventListener(updatePlayerHandler),
+            rivalUpdateListener = new FOOL.events.EventListener(updateRivalHandler);
+        FOOL.events.tunnel
+            .addListener(FOOL.events.gameTypes.RIVAL_UPDATE, rivalUpdateListener)
+            .addListener(FOOL.events.gameTypes.PLAYERS_INIT, playersInitListener)
+            .addListener(FOOL.events.gameTypes.PLAYER_UPDATE, playerUpdateListener);
     };
 
     FOOL.engine.registerController(new PlayerController());

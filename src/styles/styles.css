@@ -1,3 +1,5 @@
+@import "animation.css";
+
 /* main */
 * {
     padding: 0;
@@ -101,7 +103,7 @@ body {
 /* player */
 .player {
     display: inline-block;
-    margin-right: 100px;
+    /*margin-right: 100px;*/
 }
 
 .player.opponent-player > .cards > .card {
@@ -115,7 +117,7 @@ body {
 /* cards */
 .cards {
     display: inline-block;
-    margin: 20px;
+    margin: 20px 125px 20px 20px;
 }
 
 .cards > .card {
@@ -139,11 +141,11 @@ body {
     top: -10px;
 }
 
-.cards.retreat-cards > .card:last-child,
+/*.cards.retreat-cards > .card:last-child,
 .cards.pack-cards > .card:last-child,
 .cards > .card:last-child {
     margin-right: 0;
-}
+}*/
 
 .cards > .card > img {
     width: 100%;
@@ -187,6 +189,34 @@ body {
     -moz-box-shadow: 0 0 10px 0 rgba(3,26,30,0.6);
     box-shadow: 0 0 10px 0 rgba(3,26,30,0.6);
     top: 10px;
+}
+
+.card.remove-card-up {
+    -webkit-animation: remove-card-up 0.5s; /* Safari 4+ */
+    -moz-animation:    remove-card-up 0.5s; /* Fx 5+ */
+    -o-animation:      remove-card-up 0.5s; /* Opera 12+ */
+    animation:         remove-card-up 0.5s  ; /* IE 10+, Fx 29+ */
+}
+
+.card.remove-card-down {
+    -webkit-animation: remove-card-down 0.5s; /* Safari 4+ */
+    -moz-animation:    remove-card-down 0.5s; /* Fx 5+ */
+    -o-animation:      remove-card-down 0.5s; /* Opera 12+ */
+    animation:         remove-card-down 0.5s  ; /* IE 10+, Fx 29+ */
+}
+
+.card.add-card-up {
+    -webkit-animation: add-card-up 0.5s; /* Safari 4+ */
+    -moz-animation:    add-card-up 0.5s; /* Fx 5+ */
+    -o-animation:      add-card-up 0.5s; /* Opera 12+ */
+    animation:         add-card-up 0.5s  ; /* IE 10+, Fx 29+ */
+}
+
+.card.add-card-down {
+    -webkit-animation: add-card-down 0.5s; /* Safari 4+ */
+    -moz-animation:    add-card-down 0.5s; /* Fx 5+ */
+    -o-animation:      add-card-down 0.5s; /* Opera 12+ */
+    animation:         add-card-down 0.5s  ; /* IE 10+, Fx 29+ */
 }
 
 /* helper */

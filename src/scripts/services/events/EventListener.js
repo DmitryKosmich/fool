@@ -16,6 +16,7 @@
      */
     EventListener.prototype.onEvent = function (event) {
         this.eventHandler(event);
+        return this;
     };
 
     FOOL.events.EventListener = EventListener;

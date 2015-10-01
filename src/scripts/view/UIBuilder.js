@@ -16,17 +16,21 @@
     };
 
     /**
-     *
-     * @param game
+     * This method should draw all game.
+     * @param {FOOL.classes.Game} game
      */
     function drawView(game) {
         drawOpponents(game.getRivals());
         drawTable(game.getBoutCards());
-        drawPack(game.getTalon());
+        drawTalon(game.getTalon());
         drawRetreat(game.getRetreat());
         drawUserPack(game.getPlayer());
     }
 
+    /**
+     * This method should draw the rivals.
+     * @param {Array} players
+     */
     function drawOpponents(players) {
         console.log('=> drawOpponents()');
         var i, opponentsContainer = document.getElementsByClassName('opponents')[0],
@@ -41,6 +45,11 @@
         opponentsContainer.innerHTML = opponents;
     }
 
+    /**
+     *
+     * @param {FOOL.classes.Player} opponent
+     * @returns {string} Returns html for a rival
+     */
     function getOpponentHTML(opponent) {
         console.log('=> getOpponentHTML()');
         var i, cards = opponent ? opponent.getCards() : null,
@@ -53,6 +62,10 @@
         return result;
     }
 
+    /**
+     * This method should draw the bout cards.
+     * @param {Array} tableCards - array of {@link FOOL.classes.Card} objects
+     */
     function drawTable(tableCards) {
         console.log('=> drawTable()');
         var i, tableContainer = document.getElementsByClassName('table-cards')[0],
@@ -64,17 +77,25 @@
         tableContainer.innerHTML = tableCardsHTML;
     }
 
-    function drawPack(packCards) {
+    /**
+     * This method should draw the talon.
+     * @param {Array} talonCards - array of {@link FOOL.classes.Card} objects
+     */
+    function drawTalon(talonCards) {
         console.log('=> drawPack()');
         var i, tableContainer = document.getElementsByClassName('pack-cards')[0],
-            length = packCards ? packCards.length : 0,
+            length = talonCards ? talonCards.length : 0,
             packCardsHTML = '';
         for (i = 0; i < length; i += 1) {
-            packCardsHTML += getCardHtml(packCards[i], (i === 0));
+            packCardsHTML += getCardHtml(talonCards[i], (i === 0));
         }
         tableContainer.innerHTML = packCardsHTML;
     }
 
+    /**
+     * This method should draw the retreat.
+     * @param {Array} retreatCards - array of {@link FOOL.classes.Card} objects
+     */
     function drawRetreat(retreatCards) {
         console.log('=> drawRetreat()');
         var i, tableContainer = document.getElementsByClassName('retreat-cards')[0],
@@ -86,6 +107,10 @@
         tableContainer.innerHTML = packCardsHTML;
     }
 
+    /**
+     * This method should draw the retreat.
+     * @param {FOOL.classes.Player} userPlayer
+     */
     function drawUserPack(userPlayer) {
         console.log('=> drawUserPack()');
         var i, userCards = userPlayer ? userPlayer.getCards() : null,
@@ -120,6 +145,40 @@
             '<img src="images/cards/' + id + '.png">' +
             '<img src="images/cards/back.png">' +
             '</li>';
+    }
+
+    /**
+     *
+     * @param {FOOL.classes.Card} card
+     * @param {HTMLLIElement} container
+     * @param {number} direction
+     * @param {boolean} isOpen
+     * @param {Function} callback
+     */
+    function addCard(card, container, direction, isOpen, callback) {
+        var elem, tempElem = document.createElement('div');
+        tempElem.innerHTML = getCardHtml(card, isOpen);
+        container.appendChild(tempElem.childNodes[0]);
+        elem = document.getElementById(getCardId(card));
+        setTimeout(function () {
+            FOOL.document.removeClass(elem, direction === FOOL.direction.UP ? 'add-card-up' : 'add-card-down');
+            callback ? callback() : 0;
+        }, 500);
+    }
+
+    /**
+     *
+     * @param {FOOL.classes.Card} card
+     * @param {number} direction
+     * @param {Function} callback
+     */
+    function removeCard(card, direction, callback) {
+        var elem = document.getElementById(getCardId(card));
+        FOOL.document.addClass(elem, direction === FOOL.direction.UP ? 'remove-card-up' : 'remove-card-down');
+        setTimeout(function () {
+            elem.parentNode.removeChild(elem);
+            callback ? callback() : 0;
+        }, 500);
     }
 
     FOOL.uiBuilder = new UIBuilder();

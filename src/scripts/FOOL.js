@@ -10,6 +10,10 @@ var FOOL = {
         SPADES: 3,
         DIAMONDS: 4
     },
+    direction: {
+        UP: 0,
+        DOWN: 1
+    },
     events: {
         gameTypes: {
             READY_TO_START: 0,
