@@ -21,7 +21,6 @@
 
     /**
      *
-     * @param {Object|undefined} options
      */
     GameEngine.prototype.start = function () {
         console.log('=> GameEngine.prototype.start()');
@@ -36,6 +35,7 @@
                 }, function() {}));
                 // TODO review whether this needed
                 FOOL.uiBuilder.show(FOOL.currentGame);
+                FOOL.uiBuilder.initUIListeners();
         }));
     };
 

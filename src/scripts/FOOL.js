@@ -36,8 +36,34 @@ var FOOL = {
             UI_CLEAR: 1000,
             UI_TALON_RENDER: 1010,
             UI_PLAYER_RENDER: 1011,
-            UI_TOOK_CARD: 1012
+            UI_TOOK_CARD: 1012,
+
+            UI_ON_PLAYER_CARD_CLICK: 2000,
+            UI_ON_BOUT_CLICK: 2001,
+            UI_ON_TALON_CLICK: 2003,
+            UI_ON_RETREAT_CLICK: 2004,
+            UI_ON_RIVAL_CARD_CLICK: 2005,
+            UI_ON_HELP_BUTTON_CLICK: 2006
         }
+    },
+    styles: {
+        PLAYER_CARD_SELECTOR: '.player-cards > .card',
+        RIVAL_CARD_SELECTOR: '.opponent-player .card',
+        BOUT_CARD_SELECTOR: '.table-cards > .card',
+        RETREAT_CARD_SELECTOR: '.retreat-cards > .card',
+        TALON_CARD_SELECTOR: '.pack-cards > .card',
+        HELPER_BUTTON_SELECTOR: '.helper > .button',
+
+        RIVALS_CONTAINER_CLASS_NAME: 'opponents',
+        PLAYER_CARDS_CONTAINER_CLASS_NAME: 'player-cards',
+        BOUT_CARDS_CONTAINER_CLASS_NAME: 'table-cards',
+        TALON_CARDS_CONTAINER_CLASS_NAME: 'pack-cards',
+        RETREAT_CARDS_CONTAINER_CLASS_NAME: 'retreat-cards',
+
+        ADD_CARD_UP_ANIMATION: '',
+        ADD_CARD_DOWN_ANIMATION: '',
+        REMOVE_CARD_UP_ANIMATION: '',
+        REMOVE_CARD_DOWN_ANIMATION: ''
     }
 };
 
