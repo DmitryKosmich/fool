@@ -57,13 +57,13 @@
     }
 
     /**
-     * Invokes {@link sendPlayerRenderEvent} passing each newly created player.
+     * Invokes {@link sendPlayerRenderEvent} or {@link sendRivalRenderEvent} passing each newly created player or rival accordingly.
      */
     function preRenderPlayers(player, rivals) {
         var i;
         sendPlayerRenderEvent(player);
         for (i = 0; i < rivals.length; i += 1) {
-            sendPlayerRenderEvent(rivals[i]);
+            sendRivalRenderEvent(rivals[i]);
         }
     }
 
@@ -98,11 +98,21 @@
     }
 
     /**
-     * Sends a new {@link FOOL.events.uiTypes.UI_CLEAR} event.
+     * Sends a new {@link FOOL.events.uiTypes.UI_PLAYER_RENDER} event.
      * @param {FOOL.classes.Player} player
      */
     function sendPlayerRenderEvent(player) {
         FOOL.events.tunnel.sendEvent(new FOOL.events.GameEvent(FOOL.events.uiTypes.UI_PLAYER_RENDER, {
+            player: player
+        }, function() {}));
+    }
+
+    /**
+     * Sends a new {@link FOOL.events.uiTypes.UI_RIVAL_RENDER} event.
+     * @param {FOOL.classes.Player} player that assumed to be a rival
+     */
+    function sendRivalRenderEvent(player) {
+        FOOL.events.tunnel.sendEvent(new FOOL.events.GameEvent(FOOL.events.uiTypes.UI_RIVAL_RENDER, {
             player: player
         }, function() {}));
     }
@@ -178,15 +188,37 @@
     }
 
     /**
+     * A handler for the {@link FOOL.events.uiTypes.UI_ON_PLAYER_CARD_CLICK} event.
+     * @param {GameEvent} event game event
+     */
+    function throwCardHandler(event) {
+        var data = event.getData(),
+            player = data.player,
+            card = data.card,
+            game = player.getGame(),
+            playerCards = player.getCards();
+        if (game.getPlayer() == player
+            && playerCards.indexOf(card) != -1) {
+            FOOL.events.tunnel.sendEvent(new FOOL.events.GameEvent(FOOL.events.gameTypes.THROW_CARD, {
+                player: player,
+                card: card
+            }, function() {}));
+        }
+        event.callBack();
+    }
+
+    /**
      * Initializes the controller.
      */
     PlayerController.prototype.initialize = function() {
         var playersInitListener = new FOOL.events.EventListener(initPlayersHandler),
             playerUpdateListener = new FOOL.events.EventListener(updatePlayerHandler),
-            rivalUpdateListener = new FOOL.events.EventListener(updateRivalHandler);
+            rivalUpdateListener = new FOOL.events.EventListener(updateRivalHandler),
+            throwCardListener = new FOOL.events.EventListener(throwCardHandler);
         FOOL.events.tunnel
             .addListener(FOOL.events.gameTypes.RIVAL_UPDATE, rivalUpdateListener)
             .addListener(FOOL.events.gameTypes.PLAYERS_INIT, playersInitListener)
+            .addListener(FOOL.events.uiTypes.UI_ON_PLAYER_CARD_CLICK, throwCardListener)
             .addListener(FOOL.events.gameTypes.PLAYER_UPDATE, playerUpdateListener);
     };
 

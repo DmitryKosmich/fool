@@ -39,6 +39,54 @@
         }));
     };
 
+    /**
+     *
+     * @param {GameEvent} event game event
+     */
+    function playerThrewCardHandler(event) {
+        var data = event.getData(),
+            player = data.player,
+            card = data.card,
+            game = player.getGame(),
+            isPlayer = game.getPlayer() == player,
+        // TODO add some validation here
+            validated = true,
+            cardIndex = player.getCards().indexOf(card);
+        if (validated) {
+            game.getBoutCards().push(card);
+            player.getCards().splice(cardIndex, 1);
+            FOOL.events.tunnel.sendEvent(new FOOL.events.GameEvent(isPlayer
+                ? FOOL.events.uiTypes.UI_PLAYER_RENDER
+                : FOOL.events.uiTypes.UI_RIVAL_RENDER, {
+                player: player,
+                cardsThrownOut: [ card ]
+            }, function() {}));
+            FOOL.events.tunnel.sendEvent(new FOOL.events.GameEvent(isPlayer
+                ? FOOL.events.uiTypes.UI_CG_PL_RENDER
+                : FOOL.events.uiTypes.UI_CG_RV_RENDER, {
+                player: player,
+                cardsAdded: [ card ]
+            }, function() {}));
+        } else {
+            // bad try, the card can't be thrown, because doesn't match the rules
+            FOOL.events.tunnel.sendEvent(new FOOL.events.GameEvent(FOOL.events.gameTypes.ATTACK_STARTED, {
+                player: player,
+                retry: true,
+                card: card
+            }, function() {}));
+        }
+    }
+
+    /**
+     * Initializes the game engine.
+     */
+    function initialize() {
+        var playerThrewCardListener = new FOOL.events.EventListener(playerThrewCardHandler);
+        FOOL.events.tunnel
+            .addListener(FOOL.events.gameTypes.THROW_CARD, playerThrewCardListener);
+    }
+
     FOOL.engine = new GameEngine();
+    initialize();
 
 })(FOOL);

@@ -102,9 +102,9 @@
         if (this.cards.length > 0) {
             var table = FOOL.currentGame.getBoutCards();
             table.push(this.cards.splice(index, 1)[0]);
-            FOOL.events.tunnel.sendEvent(new FOOL.events.GameEvent(FOOL.events.gameTypes.TOSS_CARD, FOOL.currentGame));
+            FOOL.events.tunnel.sendEvent(new FOOL.events.GameEvent(FOOL.events.gameTypes.THROW_CARD, FOOL.currentGame));
         } else {
-            alert('I don\'t have cards');
+            alert('I don\'t have a card');
         }
     };
 

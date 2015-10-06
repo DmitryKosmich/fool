@@ -49,18 +49,22 @@
     function takeCardEventHandler(event) {
         var data = event.getData(),
             player = data.player,
+            game = player.getGame(),
             playerCards = player.getCards(),
             talon, pickedCard;
         if (playerCards.length < FOOL.defaults.startCardsNumber) {
             talon = player.getGame().getTalon();
             pickedCard = talon.pop();
             playerCards.push(pickedCard);
-            FOOL.events.tunnel.sendEvent(new FOOL.events.GameEvent(FOOL.events.uiTypes.UI_TOOK_CARD, {
+            FOOL.events.tunnel.sendEvent(new FOOL.events.GameEvent(
+                game.getPlayer() == player
+                    ? FOOL.events.uiTypes.UI_PLAYER_RENDER
+                    : FOOL.events.uiTypes.UI_RIVAL_RENDER, {
                 player: player,
                 cardsPickedUp: [ pickedCard ]
             }, function() {}));
         } else {
-            alert('I can\'t get card');
+            alert('I can\'t get a card');
         }
         event.callBack();
     }

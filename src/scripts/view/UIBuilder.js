@@ -194,7 +194,11 @@
 
         [].forEach.call(playerCards, function(playerCard) {
             FOOL.document.addEventListener(playerCard, 'click', function () {
-                FOOL.events.tunnel.sendEvent(new FOOL.events.GameEvent(FOOL.events.uiTypes.UI_ON_PLAYER_CARD_CLICK));
+                FOOL.events.tunnel.sendEvent(new FOOL.events.GameEvent(FOOL.events.uiTypes.UI_ON_PLAYER_CARD_CLICK, {
+                    player: FOOL.currentGame.getPlayer(),
+                    // TODO throw a correct one here ;)
+                    card: FOOL.currentGame.getPlayer().getCards()[0]
+                }));
             });
         });
 
@@ -206,7 +210,7 @@
 
         [].forEach.call(talonCards, function(talonCard) {
             FOOL.document.addEventListener(talonCard, 'click', function () {
-                FOOL.events.tunnel.sendEvent(new FOOL.events.GameEvent(FOOL.events.uiTypes.UI_ON_RIVAL_CARD_CLICK));
+                FOOL.events.tunnel.sendEvent(new FOOL.events.GameEvent(FOOL.events.uiTypes.UI_ON_TALON_CLICK));
             });
         });
 
