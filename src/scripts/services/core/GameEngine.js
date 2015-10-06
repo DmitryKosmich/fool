@@ -14,7 +14,7 @@
      * @param {Object|undefined} controller
      */
     GameEngine.prototype.registerController = function (controller) {
-        console.log('=> GameEngine.prototype.registerController(' + controller + ')');
+        console.log('=> registerController(controller) :controller = ', controller);
         this.controls.push(controller);
         controller.initialize();
     };
@@ -23,7 +23,7 @@
      *
      */
     GameEngine.prototype.start = function () {
-        console.log('=> GameEngine.prototype.start()');
+        console.log('=> start()');
         var gameOptions = FOOL.defaults;
         FOOL.currentGame = new FOOL.classes.Game();
         this.controls.talonController.createTalon(FOOL.currentGame);

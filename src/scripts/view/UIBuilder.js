@@ -150,7 +150,7 @@
     /**
      *
      * @param {FOOL.classes.Card} card
-     * @param {HTMLLIElement} container
+     * @param {HTMLElement} container
      * @param {number} direction
      * @param {boolean} isOpen
      * @param {Function} callback

@@ -11,7 +11,7 @@
 
     /**
      *
-     * @param {Number} eventType
+     * @param {string} eventType
      * @param {FOOL.events.EventListener} listener
      */
     EventTunnel.prototype.addListener = function (eventType, listener) {
@@ -27,7 +27,7 @@
      * @param {FOOL.events.GameEvent} event
      */
     EventTunnel.prototype.sendEvent = function (event) {
-        console.log('=> EventTunnel.prototype.sendEvent(' + event.getEventType() + ')');
+        console.log('=> sendEvent(' + event.getEventType() + ')');
         var i, eventListeners = this.listeners[event.getEventType()],
             length = eventListeners ? eventListeners.length : 0;
         for (i = 0; i < length; i += 1) {

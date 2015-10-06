@@ -2,7 +2,7 @@
     'use strict';
 
     /**
-     * @param {Number} eventType event type
+     * @param {string} eventType event type
      * @param {Object} data event data
      * @param {Function|undefined} callback
      * @constructor
@@ -21,7 +21,7 @@
     };
 
     /**
-     * @returns {Number}
+     * @returns {string}
      */
     GameEvent.prototype.getEventType = function() {
         return this.eventType;

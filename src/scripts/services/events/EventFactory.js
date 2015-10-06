@@ -9,7 +9,7 @@
 
     /**
      *
-     * @param {Number} eventType
+     * @param {string} eventType
      * @param {FOOL.classes.Game} data
      * @returns {FOOL.events.GameEvent}
      */
