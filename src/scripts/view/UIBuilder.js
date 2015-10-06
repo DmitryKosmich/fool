@@ -54,7 +54,7 @@
         console.log('=> getOpponentHTML()');
         var i, cards = opponent ? opponent.getCards() : null,
             length = cards ? cards.length : 0,
-            result = '<li class="player ' + (opponent.getIsActive() ? 'active' : '') + ' opponent-player"><ul class="cards">';
+            result = '<li class="player ' + (opponent.getIsActive() ? 'active' : '') + ' opponent-player" id="' + opponent.getName() + '"><ul class="cards">';
         for (i = 0; i < length; i += 1) {
             result += getCardHtml(cards[i], false);
         }
@@ -193,41 +193,52 @@
             helper = document.querySelector(FOOL.styles.HELPER_BUTTON_SELECTOR);
 
         [].forEach.call(playerCards, function(playerCard) {
-            FOOL.document.addEventListener(playerCard, 'click', function () {
+            FOOL.document.addEventListener(playerCard, 'click', function (event) {
                 FOOL.events.tunnel.sendEvent(new FOOL.events.GameEvent(FOOL.events.uiTypes.UI_ON_PLAYER_CARD_CLICK, {
                     player: FOOL.currentGame.getPlayer(),
-                    // TODO throw a correct one here ;)
-                    card: FOOL.currentGame.getPlayer().getCards()[0]
+                    card: FOOL.uiDetector.getCard(event)
                 }));
             });
         });
 
         [].forEach.call(rivalCards, function(rivalCard) {
-            FOOL.document.addEventListener(rivalCard, 'click', function () {
-                FOOL.events.tunnel.sendEvent(new FOOL.events.GameEvent(FOOL.events.uiTypes.UI_ON_RIVAL_CARD_CLICK));
+            FOOL.document.addEventListener(rivalCard, 'click', function (event) {
+                FOOL.events.tunnel.sendEvent(new FOOL.events.GameEvent(FOOL.events.uiTypes.UI_ON_RIVAL_CARD_CLICK, {
+                    player: FOOL.uiDetector.getPlayer(event),
+                    card: FOOL.uiDetector.getCard(event)
+                }));
             });
         });
 
         [].forEach.call(talonCards, function(talonCard) {
             FOOL.document.addEventListener(talonCard, 'click', function () {
-                FOOL.events.tunnel.sendEvent(new FOOL.events.GameEvent(FOOL.events.uiTypes.UI_ON_TALON_CLICK));
+                FOOL.events.tunnel.sendEvent(new FOOL.events.GameEvent(FOOL.events.uiTypes.UI_ON_TALON_CLICK, {
+                    player: FOOL.currentGame.getPlayer(),
+                    talon: FOOL.currentGame.getTalon()
+                }));
             });
         });
 
         [].forEach.call(boutCards, function(boutCard) {
-            FOOL.document.addEventListener(boutCard, 'click', function () {
-                FOOL.events.tunnel.sendEvent(new FOOL.events.GameEvent(FOOL.events.uiTypes.UI_ON_BOUT_CLICK));
+            FOOL.document.addEventListener(boutCard, 'click', function (event) {
+                FOOL.events.tunnel.sendEvent(new FOOL.events.GameEvent(FOOL.events.uiTypes.UI_ON_BOUT_CLICK, {
+                    game: FOOL.currentGame
+                }));
             });
         });
 
         [].forEach.call(retreatCards, function(retreatCard) {
-            FOOL.document.addEventListener(retreatCard, 'click', function () {
-                FOOL.events.tunnel.sendEvent(new FOOL.events.GameEvent(FOOL.events.uiTypes.UI_ON_RETREAT_CLICK));
+            FOOL.document.addEventListener(retreatCard, 'click', function (event) {
+                FOOL.events.tunnel.sendEvent(new FOOL.events.GameEvent(FOOL.events.uiTypes.UI_ON_RETREAT_CLICK, {
+                    game: FOOL.currentGame
+                }));
             });
         });
 
-        FOOL.document.addEventListener(helper, 'click', function () {
-            FOOL.events.tunnel.sendEvent(new FOOL.events.GameEvent(FOOL.events.uiTypes.UI_ON_HELP_BUTTON_CLICK));
+        FOOL.document.addEventListener(helper, 'click', function (event) {
+            FOOL.events.tunnel.sendEvent(new FOOL.events.GameEvent(FOOL.events.uiTypes.UI_ON_HELP_BUTTON_CLICK, {
+                game: FOOL.currentGame
+            }));
         });
     };
 

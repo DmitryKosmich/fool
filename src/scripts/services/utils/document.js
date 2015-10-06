@@ -93,6 +93,15 @@
         }
     };
 
+
+    Document.prototype.getTargetOfEvent = function (event) {
+        var e = event || window.event,
+            target = e.target || e.srcElement;
+        if (target.nodeType == 3) // defeat Safari bug
+            target = target.parentNode;
+        return target;
+    };
+
     FOOL.document = new Document();
 
 })(FOOL);
