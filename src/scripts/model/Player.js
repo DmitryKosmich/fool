@@ -95,20 +95,6 @@
     };
 
     /**
-     * Toss the card on the table.
-     * @param {number} index - Index of the card, which player is going to toss.
-     */
-    Player.prototype.tossCard = function (index) {
-        if (this.cards.length > 0) {
-            var table = FOOL.currentGame.getBoutCards();
-            table.push(this.cards.splice(index, 1)[0]);
-            FOOL.events.tunnel.sendEvent(new FOOL.events.GameEvent(FOOL.events.gameTypes.THROW_CARD, FOOL.currentGame));
-        } else {
-            alert('I don\'t have a card');
-        }
-    };
-
-    /**
      * Throw the cards from the table to retreat
      */
     Player.prototype.sendToRetreat = function () {
