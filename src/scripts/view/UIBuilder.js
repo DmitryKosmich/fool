@@ -23,8 +23,11 @@
         drawOpponents(game.getRivals());
         drawTable(game.getBoutCards());
         drawTalon(game.getTalon());
-        drawRetreat(game.getRetreat());
-        drawUserPack(game.getPlayer());
+        renderRetreat(game.getRetreat());
+        renderPlayer({
+            cardsPickedUp: game.getPlayer().getCards(),
+            cardsThrownOut: []
+        });
     }
 
     /**
@@ -56,7 +59,7 @@
             length = cards ? cards.length : 0,
             result = '<li class="player ' + (opponent.getIsActive() ? 'active' : '') + ' opponent-player" id="' + opponent.getName() + '"><ul class="cards">';
         for (i = 0; i < length; i += 1) {
-            result += getCardHtml(cards[i], false);
+            result += getCardHtml(cards[i], null, false);
         }
         result += '</ul></li>';
         return result;
@@ -72,7 +75,7 @@
             length = tableCards ? tableCards.length : 0,
             tableCardsHTML = '';
         for (i = 0; i < length; i += 1) {
-            tableCardsHTML += getCardHtml(tableCards[i], true);
+            tableCardsHTML += getCardHtml(tableCards[i], null, true);
         }
         tableContainer.innerHTML = tableCardsHTML;
     }
@@ -87,40 +90,65 @@
             length = talonCards ? talonCards.length : 0,
             packCardsHTML = '';
         for (i = 0; i < length; i += 1) {
-            packCardsHTML += getCardHtml(talonCards[i], (i === 0));
+            packCardsHTML += getCardHtml(talonCards[i], null, (i === 0));
         }
         tableContainer.innerHTML = packCardsHTML;
     }
 
     /**
      * This method should draw the retreat.
-     * @param {Array} retreatCards - array of {@link FOOL.classes.Card} objects
      */
-    function drawRetreat(retreatCards) {
-        console.log('=> drawRetreat()');
-        var i, retreatContainer = document.getElementsByClassName(FOOL.styles.RETREAT_CARDS_CONTAINER_CLASS_NAME)[0],
-            length = retreatCards ? retreatCards.length : 0,
-            packCardsHTML = '';
-        for (i = 0; i < length; i += 1) {
-            packCardsHTML += getCardHtml(retreatCards[i], false);
+    function renderRetreat(data) {
+        console.log('=> renderRetreat()');
+        var i,
+            retreatContainer = document.getElementsByClassName(FOOL.styles.RETREAT_CARDS_CONTAINER_CLASS_NAME)[0],
+            timeOffsetLength = 0,
+            pickedUpCardsLength = data.pickedUpCards ? data.pickedUpCards.length : 0,
+            thrownOutCardsLength = data.thrownOutCards ? data.thrownOutCards.length : 0;
+        for (i = 0; i < pickedUpCardsLength; i += 1) {
+            (function (i) {
+                setTimeout(function () {
+                    addCard(data.pickedUpCards[i], retreatContainer, FOOL.direction.DOWN, true);
+                }, timeOffsetLength * FOOL.innerDefaults.animationInterval);
+            })(i);
+            timeOffsetLength +=1;
         }
-        retreatContainer.innerHTML = packCardsHTML;
+        for (i = 0; i < thrownOutCardsLength; i += 1) {
+            (function (i) {
+                setTimeout(function () {
+                    removeCard(data.thrownOutCards[i], FOOL.direction.UP);
+                }, timeOffsetLength * FOOL.innerDefaults.animationInterval);
+            })(i);
+            timeOffsetLength +=1;
+        }
     }
 
     /**
      * This method should draw the retreat.
-     * @param {FOOL.classes.Player} userPlayer
      */
-    function drawUserPack(userPlayer) {
-        console.log('=> drawUserPack()');
-        var i, userCards = userPlayer ? userPlayer.getCards() : null,
-            tableContainer = document.getElementsByClassName(FOOL.styles.PLAYER_CARDS_CONTAINER_CLASS_NAME)[0],
-            length = userCards ? userCards.length : 0,
-            userCardsHTML = '';
-        for (i = 0; i < length; i += 1) {
-            userCardsHTML += getCardHtml(userCards[i], true);
+    function renderPlayer(data) {
+        console.log('=> renderPlayer()');
+        var i,
+            playerContainer = document.getElementsByClassName(FOOL.styles.PLAYER_CARDS_CONTAINER_CLASS_NAME)[0],
+            timeOffsetLength = 0,
+            pickedUpCardsLength = data.cardsPickedUp ? data.cardsPickedUp.length : 0,
+            thrownOutCardsLength = data.cardsThrownOut ? data.cardsThrownOut.length : 0;
+        for (i = 0; i < pickedUpCardsLength; i += 1) {
+            (function (i) {
+                setTimeout(function () {
+                    addCard(data.cardsPickedUp[i], playerContainer, FOOL.direction.DOWN, true);
+                }, timeOffsetLength * FOOL.innerDefaults.animationInterval);
+            })(i);
+            timeOffsetLength +=1;
         }
-        tableContainer.innerHTML = userCardsHTML;
+        for (i = 0; i < thrownOutCardsLength; i += 1) {
+            (function (i) {
+                setTimeout(function () {
+                    removeCard(data.cardsThrownOut[i], FOOL.direction.UP);
+                }, timeOffsetLength * FOOL.innerDefaults.animationInterval);
+            })(i);
+            timeOffsetLength +=1;
+        }
     }
 
     /**
@@ -137,11 +165,16 @@
      * @param {FOOL.classes.Card} card
      * @param {boolean} isOpen
      * @returns {string}
+     * @param animationDirection
      */
-    function getCardHtml(card, isOpen) {
+    function getCardHtml(card, animationDirection, isOpen) {
         var id = getCardId(card);
         return '' +
-            '<li class="card ' + (isOpen ? 'open' : 'close') + '" id="' + id + '">' +
+            '<li class="card '
+                + (animationDirection ? (animationDirection === FOOL.direction.UP
+                    ? FOOL.styles.ADD_CARD_UP_ANIMATION
+                    : FOOL.styles.ADD_CARD_DOWN_ANIMATION) : '')
+                + (isOpen ? ' open' : ' close') + '" id="' + id + '">' +
             '<img src="images/cards/' + id + '.png">' +
             '<img src="images/cards/back.png">' +
             '</li>';
@@ -157,11 +190,13 @@
      */
     function addCard(card, container, direction, isOpen, callback) {
         var elem, tempElem = document.createElement('div');
-        tempElem.innerHTML = getCardHtml(card, isOpen);
+        tempElem.innerHTML = getCardHtml(card, direction, isOpen);
         container.appendChild(tempElem.childNodes[0]);
         elem = document.getElementById(getCardId(card));
         setTimeout(function () {
-            FOOL.document.removeClass(elem, direction === FOOL.direction.UP ? FOOL.styles.ADD_CARD_UP_ANIMATION : FOOL.styles.ADD_CARD_DOWN_ANIMATION);
+            FOOL.document.removeClass(elem, direction === FOOL.direction.UP
+                ? FOOL.styles.ADD_CARD_UP_ANIMATION
+                : FOOL.styles.ADD_CARD_DOWN_ANIMATION);
             callback ? callback() : 0;
         }, 500);
     }
@@ -174,7 +209,9 @@
      */
     function removeCard(card, direction, callback) {
         var elem = document.getElementById(getCardId(card));
-        FOOL.document.addClass(elem, direction === FOOL.direction.UP ? FOOL.styles.REMOVE_CARD_UP_ANIMATION : FOOL.styles.REMOVE_CARD_DOWN_ANIMATION);
+        FOOL.document.addClass(elem, direction === FOOL.direction.UP
+            ? FOOL.styles.REMOVE_CARD_UP_ANIMATION
+            : FOOL.styles.REMOVE_CARD_DOWN_ANIMATION);
         setTimeout(function () {
             elem.parentNode.removeChild(elem);
             callback ? callback() : 0;

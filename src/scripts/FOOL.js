@@ -38,6 +38,7 @@ var FOOL = {
             UI_TALON_RENDER: 'UI_TALON_RENDER',
             UI_PLAYER_RENDER: 'UI_PLAYER_RENDER',
             UI_RIVAL_RENDER: 'UI_RIVAL_RENDER',
+            UI_RETREAT_RENDER: 'UI_RETREAT_RENDER',
             UI_CG_PL_RENDER: 'UI_CURRENT_GAME_RENDER_UPD_BY_PLAYER',
             UI_CG_RV_RENDER: 'UI_CURRENT_GAME_RENDER_UPD_BY_RIVAL',
 
@@ -62,11 +63,12 @@ var FOOL = {
         BOUT_CARDS_CONTAINER_CLASS_NAME: 'table-cards',
         TALON_CARDS_CONTAINER_CLASS_NAME: 'pack-cards',
         RETREAT_CARDS_CONTAINER_CLASS_NAME: 'retreat-cards',
+        PLAYER_CLASS_NAME: 'player',
 
-        ADD_CARD_UP_ANIMATION: '',
-        ADD_CARD_DOWN_ANIMATION: '',
-        REMOVE_CARD_UP_ANIMATION: '',
-        REMOVE_CARD_DOWN_ANIMATION: ''
+        ADD_CARD_UP_ANIMATION: 'add-card-up',
+        ADD_CARD_DOWN_ANIMATION: 'add-card-down',
+        REMOVE_CARD_UP_ANIMATION: 'remove-card-up',
+        REMOVE_CARD_DOWN_ANIMATION: 'remove-card-up'
     }
 };
 
@@ -74,7 +76,12 @@ FOOL.defaults = {
     playerName: 'User',
     robotName: 'Robot',
     playersNumber: 2,
-    startCardsNumber: 6
+    startCardsNumber: 6,
+    animationInterval: 250
+};
+
+FOOL.innerDefaults = {
+    animationInterval: 250
 };
 
 FOOL.talon = [

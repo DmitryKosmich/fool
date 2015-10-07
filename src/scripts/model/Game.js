@@ -6,6 +6,12 @@
      * @constructor
      */
     function Game() {
+        this.talon = [];
+        this.trump = null;
+        this.player = null;
+        this.rivals = [];
+        this.attacker = null;
+        this.defender = null;
         this.retreat = [];
         this.boutCards = [];
     }

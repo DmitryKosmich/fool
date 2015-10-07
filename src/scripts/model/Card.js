@@ -13,7 +13,7 @@
 
     /**
      *
-     * @returns {null|Number}
+     * @returns {null|number}
      */
     Card.prototype.getColor = function () {
         return this.color;
@@ -21,7 +21,7 @@
 
     /**
      *
-     * @param {Number} color
+     * @param {number} color
      */
     Card.prototype.setColor = function (color) {
         this.color = color;
@@ -29,7 +29,7 @@
 
     /**
      *
-     * @returns {null|Number}
+     * @returns {null|number}
      */
     Card.prototype.getValue = function () {
         return this.value;
@@ -37,7 +37,7 @@
 
     /**
      *
-     * @param {Number} value
+     * @param {number} value
      */
     Card.prototype.setValue = function (value) {
         this.value = value;
@@ -45,7 +45,7 @@
 
     /**
      *
-     * @returns {String}
+     * @returns {string}
      */
     Card.prototype.getName = function () {
         return this.name;
@@ -53,7 +53,7 @@
 
     /**
      *
-     * @param {String} name
+     * @param {string} name
      */
     Card.prototype.setName = function (name) {
         this.name = name;

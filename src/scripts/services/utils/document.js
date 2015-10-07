@@ -32,6 +32,15 @@
     /**
      *
      * @param {HTMLElement} o
+     * @param {String} c
+     */
+    Document.prototype.hasClass = function (o, c) {
+        return new RegExp('(\\s|^)' + c + '(\\s|$)').test(o.className);
+    };
+
+    /**
+     *
+     * @param {HTMLElement} o
      * @param {String} type
      * @param {Function} handler
      * @param {boolean} useCapture
@@ -73,7 +82,7 @@
 
     /**
      *
-     * @param {HTMLLIElement} o
+     * @param {HTMLElement} o
      * @param {String} type
      * @param {Function} handler
      * @returns {boolean}

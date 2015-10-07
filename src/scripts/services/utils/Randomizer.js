@@ -12,7 +12,7 @@
      * @param {Array} cards
      */
     Randomizer.prototype.shuffleTalon = function (cards) {
-        cards.push.apply(cards, mix(cards).slice(0));
+        [].push.apply(cards, mix(cards).slice(0));
     };
 
     /**
