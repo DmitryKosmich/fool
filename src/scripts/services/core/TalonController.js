@@ -64,7 +64,9 @@
                 cardsPickedUp: [ pickedCard ]
             }, function() {}));
         } else {
-            alert('I can\'t get a card');
+            FOOL.events.tunnel.sendEvent(new FOOL.events.GameEvent(FOOL.events.uiTypes.UI_SHOW_MESSAGE, {
+                message: FOOL.messages.FULL_PACK_OF_CARDS
+            }, function() {}));
         }
         event.callBack();
     }
@@ -74,7 +76,8 @@
      */
     TalonController.prototype.initialize = function() {
         var takeCardEventListener = new FOOL.events.EventListener(takeCardEventHandler);
-        FOOL.events.tunnel.addListener(FOOL.events.gameTypes.TAKE_CARD, takeCardEventListener);
+        FOOL.events.tunnel.addListener(FOOL.events.gameTypes.TAKE_CARD, takeCardEventListener)
+            .addListener(FOOL.events.uiTypes.UI_ON_TALON_CLICK, takeCardEventListener);
     };
 
     FOOL.engine.controls.talonController = new TalonController();

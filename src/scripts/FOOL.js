@@ -47,8 +47,15 @@ var FOOL = {
             UI_ON_TALON_CLICK: 'UI_ON_TALON_CLICK',
             UI_ON_RETREAT_CLICK: 'UI_ON_RETREAT_CLICK',
             UI_ON_RIVAL_CARD_CLICK: 'UI_ON_RIVAL_CARD_CLICK',
-            UI_ON_HELP_BUTTON_CLICK: 'UI_ON_HELP_BUTTON_CLICK'
+            UI_ON_HELP_BUTTON_CLICK: 'UI_ON_HELP_BUTTON_CLICK',
+
+            UI_SHOW_MESSAGE: 'UI_SHOW_MESSAGE'
         }
+    },
+    messages: {
+        NOT_YOUR_TURN: "Сейчас не ваша очередь ходить, дождитесь своего хода!",
+        FULL_PACK_OF_CARDS: "У вас достаточно карт, нельзя брать более шести.",
+        CANNOT_THROW_CARD_AGAINST_RULES: "Вы не можете ходить данной картой, это противоречит правилам."
     },
     styles: {
         PLAYER_CARD_SELECTOR: '.player-cards > .card',

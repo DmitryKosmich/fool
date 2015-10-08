@@ -14,6 +14,11 @@
         this.defender = null;
         this.retreat = [];
         this.boutCards = [];
+        this.talon = [];
+        this.rivals = [];
+        this.trump = null;
+        this.player = null;
+        this.activePlayer = null;
     }
 
     /**
@@ -110,6 +115,22 @@
      */
     Game.prototype.setDefender = function (defender) {
         this.defender = defender;
+    };
+
+    /**
+     *
+     * @returns {FOOL.classes.Player|null|*}
+     */
+    Game.prototype.getActivePlayer = function () {
+        return this.activePlayer;
+    };
+
+    /**
+     *
+     * @param {FOOL.classes.Player} activePlayer
+     */
+    Game.prototype.setActivePlayer = function (activePlayer) {
+        this.activePlayer = activePlayer;
     };
 
     /**
