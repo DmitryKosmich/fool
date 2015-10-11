@@ -3,8 +3,8 @@
 
     /**
      * @param {string} eventType event type
-     * @param {Object} data event data
-     * @param {Function|undefined} callback
+     * @param {Object} [data] event data
+     * @param {Function|undefined} [callback]
      * @constructor
      */
     function GameEvent(eventType, data, callback) {

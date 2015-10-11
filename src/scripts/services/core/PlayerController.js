@@ -10,12 +10,14 @@
     /**
      * Initializes states of the player and its rivals.
      * @param options
-     * @returns {Array}
      */
     function initPlayers(options) {
         var player = createPlayer(options),
             rivals = createRivals(options);
-        preRenderPlayers(player, rivals);
+        FOOL.events.tunnel.sendEvent(new FOOL.events.GameEvent(FOOL.events.uiTypes.UI_RIVALS_RENDER, {
+            rivals: rivals
+        }, function() {}));
+//        preRenderPlayers(player, rivals);
         selectAttacker(options.game);
         prePopulatePlayerCards(options);
     }
@@ -202,6 +204,14 @@
             FOOL.events.tunnel.sendEvent(new FOOL.events.GameEvent(FOOL.events.gameTypes.THROW_CARD, {
                 player: player,
                 card: card
+            }, function() {}));
+            FOOL.events.tunnel.sendEvent(new FOOL.events.GameEvent(FOOL.events.uiTypes.UI_PLAYER_RENDER, {
+                player: player,
+                cardsThrownOut: [card]
+            }, function() {}));
+            FOOL.events.tunnel.sendEvent(new FOOL.events.GameEvent(FOOL.events.uiTypes.UI_BOUT_RENDER, {
+                player: player,
+                cardsPickedUp: [card]
             }, function() {}));
         }
         event.callBack();

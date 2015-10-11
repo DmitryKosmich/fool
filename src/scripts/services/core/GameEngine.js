@@ -30,13 +30,12 @@
         gameOptions.game = FOOL.currentGame;
         FOOL.events.tunnel.sendEvent(new FOOL.events.GameEvent(FOOL.events.gameTypes.PLAYERS_INIT, gameOptions,
             function(data) {
+                FOOL.events.tunnel.sendEvent(new FOOL.events.GameEvent(FOOL.events.uiTypes.UI_GAME_RENDER, FOOL.currentGame));
                 FOOL.events.tunnel.sendEvent(new FOOL.events.GameEvent(FOOL.events.gameTypes.BOUT_STARTED, {
                     game: data.game
                 }, function() {}));
-                // TODO review whether this needed
-                FOOL.uiBuilder.show(FOOL.currentGame);
-                FOOL.uiBuilder.initUIListeners();
-        }));
+            })
+        );
     };
 
     /**
@@ -65,9 +64,7 @@
                 player: player,
                 cardsThrownOut: [ card ]
             }, function() {}));
-            FOOL.events.tunnel.sendEvent(new FOOL.events.GameEvent(isPlayer
-                ? FOOL.events.uiTypes.UI_CG_PL_RENDER
-                : FOOL.events.uiTypes.UI_CG_RV_RENDER, {
+            FOOL.events.tunnel.sendEvent(new FOOL.events.GameEvent(FOOL.events.uiTypes.UI_BOUT_RENDER, {
                 player: player,
                 cardsAdded: [ card ]
             }, function() {}));

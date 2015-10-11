@@ -4,6 +4,7 @@
     /**
      *
      * @constructor
+     * @namespace Game
      */
     function Game() {
         this.talon = [];
@@ -14,10 +15,6 @@
         this.defender = null;
         this.retreat = [];
         this.boutCards = [];
-        this.talon = [];
-        this.rivals = [];
-        this.trump = null;
-        this.player = null;
         this.activePlayer = null;
     }
 

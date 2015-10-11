@@ -8,41 +8,252 @@
     function UIBuilder() {}
 
     /**
-     * Displays the game on the screen.
-     * @param {FOOL.classes.Game} game
+     * @param {Object} params
+     * @param {Object} params.data
+     * @param {HTMLElement} params.container - parent element of cards
+     * @param {boolean} params.isOpen - card is open or close
+     * @param {boolean} [params.hasAnimation]
+     * @param {number} [params.interval]
+     * @param {number[]} [params.showExceptionArr]
+     * @param {Function} [params.callback]
      */
-    UIBuilder.prototype.show = function (game) {
-        drawView(game);
+    UIBuilder.prototype.render = function (params) {
+        console.log('=> render(params) params:', params);
+        var data = params.data,
+            isOpen = params.isOpen,
+            container = params.container,
+            hasAnimation = params.hasAnimation,
+            showExceptionArr = params.showExceptionArr,
+            animationInterval = hasAnimation ? (params.interval || FOOL.innerDefaults.animationInterval) : 0,
+            callback = params.callback,
+
+            i,
+            timeOffsetLength = 0,
+            pickedUpCardsLength = data.cardsPickedUp ? data.cardsPickedUp.length : 0,
+            thrownOutCardsLength = data.cardsThrownOut ? data.cardsThrownOut.length : 0;
+
+        // pick up for container
+        for (i = 0; i < pickedUpCardsLength; i += 1) {
+            (function (i) {
+                setTimeout(function () {
+                    var isShown = isOpen;
+                    if (showExceptionArr && showExceptionArr.indexOf(i) !== -1) {
+                        isShown = !isOpen;
+                    }
+
+                    var cardParams = {
+                        card: data.cardsPickedUp[i],
+                        container: container,
+                        hasAnimation: hasAnimation,
+                        direction: FOOL.direction.DOWN,
+                        isOpen : isShown,
+                        callback : callback
+                    };
+
+                    FOOL.uiCardCarrier.addCard(cardParams);
+
+                }, timeOffsetLength * animationInterval);
+            })(i);
+            timeOffsetLength +=1;
+        }
+
+        // throw out for container
+        for (i = 0; i < thrownOutCardsLength; i += 1) {
+            (function (i) {
+                setTimeout(function () {
+                    var cardParams = {
+                        card: data.cardsThrownOut[i],
+                        hasAnimation: hasAnimation,
+                        direction: FOOL.direction.UP,
+                        callback : callback
+                    };
+                    FOOL.uiCardCarrier.removeCard(cardParams);
+                }, timeOffsetLength * animationInterval);
+            })(i);
+            timeOffsetLength +=1;
+        }
     };
 
     /**
-     * This method should draw all game.
-     * @param {FOOL.classes.Game} game
+     *
      */
-    function drawView(game) {
-        drawOpponents(game.getRivals());
-        drawTable(game.getBoutCards());
-        drawTalon(game.getTalon());
-        renderRetreat(game.getRetreat());
-        renderPlayer({
-            cardsPickedUp: game.getPlayer().getCards(),
-            cardsThrownOut: []
+    UIBuilder.prototype.clear = function () {
+        var containers = [
+            document.getElementsByClassName(FOOL.styles.PLAYER_CARDS_CONTAINER_CLASS_NAME)[0],
+            document.getElementsByClassName(FOOL.styles.TALON_CARDS_CONTAINER_CLASS_NAME)[0],
+            document.getElementsByClassName(FOOL.styles.RETREAT_CARDS_CONTAINER_CLASS_NAME)[0],
+            document.getElementsByClassName(FOOL.styles.BOUT_CARDS_CONTAINER_CLASS_NAME)[0],
+            document.getElementsByClassName(FOOL.styles.RIVALS_CONTAINER_CLASS_NAME)[0]
+        ];
+
+        containers.forEach(function (container) {
+            container.innerHTML = '';
         });
-    }
+    };
 
     /**
-     * This method should draw the rivals.
-     * @param {Array} players
+     *
+     * @param {Object} data
+     * @param {boolean} [hasAnimation]
+     * @param {Function} [callback]
      */
-    function drawOpponents(players) {
-        console.log('=> drawOpponents()');
+    UIBuilder.prototype.renderTalon = function (data, hasAnimation, callback) {
+//        console.log('=> renderTalon(data) data:', data);
+        var params = {
+            data: data,
+            container: document.getElementsByClassName(FOOL.styles.TALON_CARDS_CONTAINER_CLASS_NAME)[0],
+            isOpen: false,
+            showExceptionArr: [0],
+            hasAnimation: hasAnimation,
+            callback: callback
+        };
+        UIBuilder.prototype.render(params);
+    };
+
+    /**
+     *
+     * @param {Object} data
+     * @param {boolean} [hasAnimation]
+     * @param {Function} [callback]
+     */
+    UIBuilder.prototype.renderPlayer = function (data, hasAnimation, callback) {
+//        console.log('=> renderPlayer(data) data:', data);
+        var params = {
+            data: data,
+            container: document.getElementsByClassName(FOOL.styles.PLAYER_CARDS_CONTAINER_CLASS_NAME)[0],
+            isOpen: true,
+            hasAnimation: hasAnimation,
+            callback: callback
+        };
+        UIBuilder.prototype.render(params);
+    };
+
+    /**
+     *
+     * @param {Object} data
+     * @param {boolean} [hasAnimation]
+     * @param {Function} [callback]
+     */
+    UIBuilder.prototype.renderRival = function (data, hasAnimation, callback) {
+        console.log('=> renderRival(data) data:', data);
+        var params = {
+            data: data,
+            container: document.getElementById('' + data.player.getId()).childNodes[0],
+            isOpen: false,
+            hasAnimation: hasAnimation,
+            callback: callback
+        };
+        UIBuilder.prototype.render(params);
+    };
+
+    /**
+     *
+     * @param {Object} data
+     * @param {boolean} [hasAnimation]
+     * @param {Function} [callback]
+     */
+    UIBuilder.prototype.renderRivals = function (data, hasAnimation, callback) {
+//        console.log('=> renderRivals(data) data:', data);
+        var rivals = data.rivals,
+            rivalData = {};
+        initRivalContainers(rivals);
+        rivals.forEach(function (rival) {
+            rivalData = {
+                player: rival,
+                cardsPickedUp: rival.getCards()
+            };
+            UIBuilder.prototype.renderRival(rivalData, hasAnimation, callback);
+        });
+    };
+
+    /**
+     *
+     * @param {Object} data
+     * @param {boolean} [hasAnimation]
+     * @param {Function} [callback]
+     */
+    UIBuilder.prototype.renderRetreat = function (data, hasAnimation, callback) {
+//        console.log('=> renderRetreat(data) data:', data);
+        var params = {
+            data: data,
+            container: document.getElementsByClassName(FOOL.styles.RETREAT_CARDS_CONTAINER_CLASS_NAME)[0],
+            isOpen: false,
+            hasAnimation: hasAnimation,
+            callback: callback
+        };
+        UIBuilder.prototype.render(params);
+    };
+
+    /**
+     *
+     * @param {Object} data
+     * @param {boolean} [hasAnimation]
+     * @param {Function} [callback]
+     */
+    UIBuilder.prototype.renderBout = function (data, hasAnimation, callback) {
+//        console.log('=> renderBout(data) data:', data);
+        var params = {
+            data: data,
+            container: document.getElementsByClassName(FOOL.styles.BOUT_CARDS_CONTAINER_CLASS_NAME)[0],
+            isOpen: true,
+            hasAnimation: hasAnimation,
+            callback: callback
+        };
+        UIBuilder.prototype.render(params);
+    };
+
+    /**
+     * Displays the game on the screen.
+     * @param {Object} data
+     * @param {Function} [callback]
+     */
+    UIBuilder.prototype.renderGame = function (data, callback) {
+//        console.log('=> renderGame(data) data:', data);
+        var currentGame = data || FOOL.currentGame,
+            talonCards = currentGame.getTalon(),
+            retreatCards = currentGame.getRetreat(),
+            boutCards = currentGame.getBoutCards(),
+            rivals = currentGame.getRivals(),
+            player = currentGame.getPlayer();
+
+        UIBuilder.prototype.clear();
+
+        UIBuilder.prototype.renderRivals({
+            rivals: rivals
+        });
+
+        UIBuilder.prototype.renderPlayer({
+            player: player,
+            cardsPickedUp: player.getCards()
+        });
+
+        UIBuilder.prototype.renderTalon({
+            cardsPickedUp: talonCards
+        });
+
+        UIBuilder.prototype.renderRetreat({
+            cardsPickedUp: retreatCards
+        });
+
+        UIBuilder.prototype.renderBout({
+            cardsPickedUp: boutCards
+        });
+
+        initHelperButton();
+    };
+
+    /**
+     *
+     * @param {Player[]} rivals
+     */
+    function initRivalContainers(rivals) {
         var i,
             opponentsContainer = document.getElementsByClassName(FOOL.styles.RIVALS_CONTAINER_CLASS_NAME)[0],
-            length = players ? players.length : 0,
+            length = rivals ? rivals.length : 0,
             opponents = '';
         for (i = 0; i < length; i += 1) {
-            if (players[i].getIsRobot()) {
-                opponents += getOpponentHTML(players[i]);
+            if (rivals[i].getIsRobot()) {
+                opponents += '<li class="player ' + (rivals[i].getIsActive() ? 'active' : '') + ' opponent-player" id="' + rivals[i].getId() + '"><ul class="cards opponent-cards"></ul></li>';
             }
         }
         opponentsContainer.innerHTML = opponents;
@@ -50,234 +261,15 @@
 
     /**
      *
-     * @param {FOOL.classes.Player} opponent
-     * @returns {string} Returns html for a rival
      */
-    function getOpponentHTML(opponent) {
-        console.log('=> getOpponentHTML()');
-        var i, cards = opponent ? opponent.getCards() : null,
-            length = cards ? cards.length : 0,
-            result = '<li class="player ' + (opponent.getIsActive() ? 'active' : '') + ' opponent-player" id="' + opponent.getName() + '"><ul class="cards">';
-        for (i = 0; i < length; i += 1) {
-            result += getCardHtml(cards[i], null, false);
-        }
-        result += '</ul></li>';
-        return result;
-    }
-
-    /**
-     * This method should draw the bout cards.
-     * @param {Array} tableCards - array of {@link FOOL.classes.Card} objects
-     */
-    function drawTable(tableCards) {
-        console.log('=> drawTable()');
-        var i, tableContainer = document.getElementsByClassName(FOOL.styles.BOUT_CARDS_CONTAINER_CLASS_NAME)[0],
-            length = tableCards ? tableCards.length : 0,
-            tableCardsHTML = '';
-        for (i = 0; i < length; i += 1) {
-            tableCardsHTML += getCardHtml(tableCards[i], null, true);
-        }
-        tableContainer.innerHTML = tableCardsHTML;
-    }
-
-    /**
-     * This method should draw the talon.
-     * @param {Array} talonCards - array of {@link FOOL.classes.Card} objects
-     */
-    function drawTalon(talonCards) {
-        console.log('=> drawPack()');
-        var i, tableContainer = document.getElementsByClassName(FOOL.styles.TALON_CARDS_CONTAINER_CLASS_NAME)[0],
-            length = talonCards ? talonCards.length : 0,
-            packCardsHTML = '';
-        for (i = 0; i < length; i += 1) {
-            packCardsHTML += getCardHtml(talonCards[i], null, (i === 0));
-        }
-        tableContainer.innerHTML = packCardsHTML;
-    }
-
-    /**
-     * This method should draw the retreat.
-     */
-    function renderRetreat(data) {
-        console.log('=> renderRetreat()');
-        var i,
-            retreatContainer = document.getElementsByClassName(FOOL.styles.RETREAT_CARDS_CONTAINER_CLASS_NAME)[0],
-            timeOffsetLength = 0,
-            pickedUpCardsLength = data.pickedUpCards ? data.pickedUpCards.length : 0,
-            thrownOutCardsLength = data.thrownOutCards ? data.thrownOutCards.length : 0;
-        for (i = 0; i < pickedUpCardsLength; i += 1) {
-            (function (i) {
-                setTimeout(function () {
-                    addCard(data.pickedUpCards[i], retreatContainer, FOOL.direction.DOWN, true);
-                }, timeOffsetLength * FOOL.innerDefaults.animationInterval);
-            })(i);
-            timeOffsetLength +=1;
-        }
-        for (i = 0; i < thrownOutCardsLength; i += 1) {
-            (function (i) {
-                setTimeout(function () {
-                    removeCard(data.thrownOutCards[i], FOOL.direction.UP);
-                }, timeOffsetLength * FOOL.innerDefaults.animationInterval);
-            })(i);
-            timeOffsetLength +=1;
-        }
-    }
-
-    /**
-     * This method should draw the retreat.
-     */
-    function renderPlayer(data) {
-        console.log('=> renderPlayer()');
-        var i,
-            playerContainer = document.getElementsByClassName(FOOL.styles.PLAYER_CARDS_CONTAINER_CLASS_NAME)[0],
-            timeOffsetLength = 0,
-            pickedUpCardsLength = data.cardsPickedUp ? data.cardsPickedUp.length : 0,
-            thrownOutCardsLength = data.cardsThrownOut ? data.cardsThrownOut.length : 0;
-        for (i = 0; i < pickedUpCardsLength; i += 1) {
-            (function (i) {
-                setTimeout(function () {
-                    addCard(data.cardsPickedUp[i], playerContainer, FOOL.direction.DOWN, true);
-                }, timeOffsetLength * FOOL.innerDefaults.animationInterval);
-            })(i);
-            timeOffsetLength +=1;
-        }
-        for (i = 0; i < thrownOutCardsLength; i += 1) {
-            (function (i) {
-                setTimeout(function () {
-                    removeCard(data.cardsThrownOut[i], FOOL.direction.UP);
-                }, timeOffsetLength * FOOL.innerDefaults.animationInterval);
-            })(i);
-            timeOffsetLength +=1;
-        }
-    }
-
-    /**
-     *
-     * @param {FOOL.classes.Card} card
-     * @returns {string}
-     */
-    function getCardId(card) {
-        return card.getValue() + '-' + card.getColor();
-    }
-
-    /**
-     *
-     * @param {FOOL.classes.Card} card
-     * @param {boolean} isOpen
-     * @returns {string}
-     * @param animationDirection
-     */
-    function getCardHtml(card, animationDirection, isOpen) {
-        var id = getCardId(card);
-        return '' +
-            '<li class="card '
-                + (animationDirection ? (animationDirection === FOOL.direction.UP
-                    ? FOOL.styles.ADD_CARD_UP_ANIMATION
-                    : FOOL.styles.ADD_CARD_DOWN_ANIMATION) : '')
-                + (isOpen ? ' open' : ' close') + '" id="' + id + '">' +
-            '<img src="images/cards/' + id + '.png">' +
-            '<img src="images/cards/back.png">' +
-            '</li>';
-    }
-
-    /**
-     *
-     * @param {FOOL.classes.Card} card
-     * @param {HTMLElement} container
-     * @param {number} direction
-     * @param {boolean} isOpen
-     * @param {Function} callback
-     */
-    function addCard(card, container, direction, isOpen, callback) {
-        var elem, tempElem = document.createElement('div');
-        tempElem.innerHTML = getCardHtml(card, direction, isOpen);
-        container.appendChild(tempElem.childNodes[0]);
-        elem = document.getElementById(getCardId(card));
-        setTimeout(function () {
-            FOOL.document.removeClass(elem, direction === FOOL.direction.UP
-                ? FOOL.styles.ADD_CARD_UP_ANIMATION
-                : FOOL.styles.ADD_CARD_DOWN_ANIMATION);
-            callback ? callback() : 0;
-        }, 500);
-    }
-
-    /**
-     *
-     * @param {FOOL.classes.Card} card
-     * @param {number} direction
-     * @param {Function} callback
-     */
-    function removeCard(card, direction, callback) {
-        var elem = document.getElementById(getCardId(card));
-        FOOL.document.addClass(elem, direction === FOOL.direction.UP
-            ? FOOL.styles.REMOVE_CARD_UP_ANIMATION
-            : FOOL.styles.REMOVE_CARD_DOWN_ANIMATION);
-        setTimeout(function () {
-            elem.parentNode.removeChild(elem);
-            callback ? callback() : 0;
-        }, 500);
-    }
-
-    /**
-     *
-     */
-    UIBuilder.prototype.initUIListeners = function () {
-        var playerCards = document.querySelectorAll(FOOL.styles.PLAYER_CARD_SELECTOR),
-            rivalCards = document.querySelectorAll(FOOL.styles.RIVAL_CARD_SELECTOR),
-            talonCards = document.querySelectorAll(FOOL.styles.TALON_CARD_SELECTOR),
-            boutCards = document.querySelectorAll(FOOL.styles.BOUT_CARD_SELECTOR),
-            retreatCards = document.querySelectorAll(FOOL.styles.RETREAT_CARD_SELECTOR),
-            helper = document.querySelector(FOOL.styles.HELPER_BUTTON_SELECTOR);
-
-        [].forEach.call(playerCards, function(playerCard) {
-            FOOL.document.addEventListener(playerCard, 'click', function (event) {
-                FOOL.events.tunnel.sendEvent(new FOOL.events.GameEvent(FOOL.events.uiTypes.UI_ON_PLAYER_CARD_CLICK, {
-                    player: FOOL.currentGame.getPlayer(),
-                    card: FOOL.uiDetector.getCard(event)
-                }));
-            });
-        });
-
-        [].forEach.call(rivalCards, function(rivalCard) {
-            FOOL.document.addEventListener(rivalCard, 'click', function (event) {
-                FOOL.events.tunnel.sendEvent(new FOOL.events.GameEvent(FOOL.events.uiTypes.UI_ON_RIVAL_CARD_CLICK, {
-                    player: FOOL.uiDetector.getPlayer(event),
-                    card: FOOL.uiDetector.getCard(event)
-                }));
-            });
-        });
-
-        [].forEach.call(talonCards, function(talonCard) {
-            FOOL.document.addEventListener(talonCard, 'click', function () {
-                FOOL.events.tunnel.sendEvent(new FOOL.events.GameEvent(FOOL.events.uiTypes.UI_ON_TALON_CLICK, {
-                    player: FOOL.currentGame.getPlayer(),
-                    talon: FOOL.currentGame.getTalon()
-                }));
-            });
-        });
-
-        [].forEach.call(boutCards, function(boutCard) {
-            FOOL.document.addEventListener(boutCard, 'click', function (event) {
-                FOOL.events.tunnel.sendEvent(new FOOL.events.GameEvent(FOOL.events.uiTypes.UI_ON_BOUT_CLICK, {
-                    game: FOOL.currentGame
-                }));
-            });
-        });
-
-        [].forEach.call(retreatCards, function(retreatCard) {
-            FOOL.document.addEventListener(retreatCard, 'click', function (event) {
-                FOOL.events.tunnel.sendEvent(new FOOL.events.GameEvent(FOOL.events.uiTypes.UI_ON_RETREAT_CLICK, {
-                    game: FOOL.currentGame
-                }));
-            });
-        });
-
+    function initHelperButton() {
+        var helper = document.querySelector(FOOL.styles.HELPER_BUTTON_SELECTOR);
         FOOL.document.addEventListener(helper, 'click', function (event) {
             FOOL.events.tunnel.sendEvent(new FOOL.events.GameEvent(FOOL.events.uiTypes.UI_ON_HELP_BUTTON_CLICK, {
                 game: FOOL.currentGame
             }));
         });
-    };
+    }
 
     FOOL.uiBuilder = new UIBuilder();
 

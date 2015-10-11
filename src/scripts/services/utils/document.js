@@ -4,6 +4,7 @@
     /**
      *
      * @constructor
+     * @namespace Document
      */
     function Document() {
     }
@@ -43,7 +44,7 @@
      * @param {HTMLElement} o
      * @param {String} type
      * @param {Function} handler
-     * @param {boolean} useCapture
+     * @param {boolean} [useCapture]
      * @returns {*}
      */
     Document.prototype.addEventListener = function (o, type, handler, useCapture) {
@@ -84,10 +85,11 @@
      *
      * @param {HTMLElement} o
      * @param {String} type
-     * @param {Function} handler
+     * @param {Function} [handler]
+     * @param {boolean} [useCapture]
      * @returns {boolean}
      */
-    Document.prototype.removeEventListener = function (o, type, handler) {
+    Document.prototype.removeEventListener = function (o, type, handler, useCapture) {
         if (document.addEventListener) {
             o.removeEventListener(type, handler, !!useCapture);
             return true;

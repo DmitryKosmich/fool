@@ -4,6 +4,7 @@
     /**
      *
      * @constructor
+     * @namespace Robot
      */
     function Robot() {}
 

@@ -4,6 +4,7 @@
     /**
      *
      * @constructor
+     * @namespace Card
      */
     function Card(value, color, name) {
         this.value = value || null;

@@ -11,9 +11,8 @@
      * Creates a new talon.
      */
     TalonController.prototype.createTalon = function(game) {
-        console.log('=> createTalon()');
         createAndMixTalon(game);
-        sendTalonRenderEvent(game);
+//        sendTalonRenderEvent(game);
     };
 
     /**
@@ -38,7 +37,7 @@
      */
     function sendTalonRenderEvent(game) {
         FOOL.events.tunnel.sendEvent(new FOOL.events.GameEvent(FOOL.events.uiTypes.UI_TALON_RENDER, {
-            game: game
+            cardsPickedUp: game.getTalon()
         }, function() {}));
     }
 
@@ -63,6 +62,9 @@
                 player: player,
                 cardsPickedUp: [ pickedCard ]
             }, function() {}));
+            FOOL.events.tunnel.sendEvent(new FOOL.events.GameEvent(FOOL.events.uiTypes.UI_TALON_RENDER, {
+                cardsThrownOut: [ pickedCard ]
+            }));
         } else {
             FOOL.events.tunnel.sendEvent(new FOOL.events.GameEvent(FOOL.events.uiTypes.UI_SHOW_MESSAGE, {
                 message: FOOL.messages.FULL_PACK_OF_CARDS

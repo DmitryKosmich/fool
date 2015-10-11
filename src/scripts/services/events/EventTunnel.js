@@ -27,7 +27,7 @@
      * @param {FOOL.events.GameEvent} event
      */
     EventTunnel.prototype.sendEvent = function (event) {
-        console.log('=> sendEvent(event) :event = ', event);
+        console.log('=> sendEvent(event) :event[' + event.getEventType() + '] = ', event);
         var i, eventListeners = this.listeners[event.getEventType()],
             length = eventListeners ? eventListeners.length : 0;
         for (i = 0; i < length; i += 1) {

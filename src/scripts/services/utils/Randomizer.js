@@ -5,7 +5,9 @@
      *
      * @constructor
      */
-    function Randomizer() {}
+    function Randomizer() {
+        this.lastId = 0;
+    }
 
     /**
      * This method should mix cards
@@ -29,6 +31,15 @@
         }
         return result;
     }
+
+    Randomizer.prototype.generateId = function () {
+        var newId = new Date().getTime();
+        while (newId === this.lastId) {
+            newId += 1;
+        }
+        this.lastId = newId;
+        return newId;
+    };
 
     FOOL.randomizer = new Randomizer();
 

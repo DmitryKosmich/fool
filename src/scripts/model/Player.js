@@ -4,15 +4,24 @@
     /**
      *
      * @constructor
+     * @namespace Player
      */
     function Player(name, cards, game) {
         this.name = name || null;
         this.cards = cards || [];
         this.isRobot = true;
         this.isActive = false;
-
+        this.id = FOOL.randomizer.generateId();
         this.game = game || null;
     }
+
+    /**
+     *
+     * @returns {number}
+     */
+    Player.prototype.getId = function () {
+        return this.id;
+    };
 
     /**
      *

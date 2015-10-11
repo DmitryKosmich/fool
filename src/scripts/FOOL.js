@@ -35,12 +35,13 @@ var FOOL = {
         },
         uiTypes: {
             UI_CLEAR: 'UI_CLEAR',
+            UI_GAME_RENDER: 'UI_GAME_RENDER',
             UI_TALON_RENDER: 'UI_TALON_RENDER',
             UI_PLAYER_RENDER: 'UI_PLAYER_RENDER',
             UI_RIVAL_RENDER: 'UI_RIVAL_RENDER',
             UI_RETREAT_RENDER: 'UI_RETREAT_RENDER',
-            UI_CG_PL_RENDER: 'UI_CURRENT_GAME_RENDER_UPD_BY_PLAYER',
-            UI_CG_RV_RENDER: 'UI_CURRENT_GAME_RENDER_UPD_BY_RIVAL',
+            UI_BOUT_RENDER: 'UI_BOUT_RENDER',
+            UI_RIVALS_RENDER: 'UI_RIVALS_RENDER',
 
             UI_ON_PLAYER_CARD_CLICK: 'UI_ON_PLAYER_CARD_CLICK',
             UI_ON_BOUT_CLICK: 'UI_ON_BOUT_CLICK',
@@ -53,9 +54,9 @@ var FOOL = {
         }
     },
     messages: {
-        NOT_YOUR_TURN: "Сейчас не ваша очередь ходить, дождитесь своего хода!",
-        FULL_PACK_OF_CARDS: "У вас достаточно карт, нельзя брать более шести.",
-        CANNOT_THROW_CARD_AGAINST_RULES: "Вы не можете ходить данной картой, это противоречит правилам."
+        NOT_YOUR_TURN: "РќРµ РІР°С€ С…РѕРґ!",
+        FULL_PACK_OF_CARDS: "Р’С‹ РЅРµ РјРѕР¶РµС‚Рµ РЅР°Р±СЂР°С‚СЊ РєР°СЂС‚Сѓ, Сѓ РІР°СЃ РїРѕР»РЅС‹Р№ РЅР°Р±РѕСЂ!",
+        CANNOT_THROW_CARD_AGAINST_RULES: "Р’С‹ РЅРµ РјРѕР¶РµС‚Рµ РїСЂР±РѕСЃРёС‚СЊ РєР°СЂС‚Сѓ - СЌС‚Рѕ РїСЂРѕС‚РёРІ РїСЂР°РІРёР»!"
     },
     styles: {
         PLAYER_CARD_SELECTOR: '.player-cards > .card',
@@ -66,10 +67,12 @@ var FOOL = {
         HELPER_BUTTON_SELECTOR: '.helper > .button',
 
         RIVALS_CONTAINER_CLASS_NAME: 'opponents',
+        RIVAL_CONTAINER_CLASS_NAME: 'opponent-cards',
         PLAYER_CARDS_CONTAINER_CLASS_NAME: 'player-cards',
         BOUT_CARDS_CONTAINER_CLASS_NAME: 'table-cards',
         TALON_CARDS_CONTAINER_CLASS_NAME: 'pack-cards',
         RETREAT_CARDS_CONTAINER_CLASS_NAME: 'retreat-cards',
+        CARDS_CLASS_NAME: 'cards',
         PLAYER_CLASS_NAME: 'player',
 
         ADD_CARD_UP_ANIMATION: 'add-card-up',
