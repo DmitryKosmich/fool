@@ -48,6 +48,7 @@
      * @returns {*}
      */
     Document.prototype.addEventListener = function (o, type, handler, useCapture) {
+//        console.log('=> addEventListener(o) o:', o);
         var key,
             boundedHandler;
         if (document.addEventListener) {
@@ -90,6 +91,7 @@
      * @returns {boolean}
      */
     Document.prototype.removeEventListener = function (o, type, handler, useCapture) {
+//        console.log('=> removeEventListener(o) o:', o);
         if (document.addEventListener) {
             o.removeEventListener(type, handler, !!useCapture);
             return true;

@@ -34,7 +34,7 @@
         FOOL.document.addEventListener(elem, 'click', function () {
             FOOL.events.tunnel.sendEvent(new FOOL.events.GameEvent(getEventTypeByContainer(container), {
                 card: card,
-                player: FOOL.search.findPlayerByCard(card)
+                player: FOOL.currentGame.getPlayer()
             }));
         });
 
@@ -140,6 +140,7 @@
      * @returns {string}
      */
     function getCardId(card) {
+        console.log('=> getCardId(card) card:', card);
         return card.getValue() + '-' + card.getColor();
     }
 

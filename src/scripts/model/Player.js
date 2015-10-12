@@ -13,6 +13,13 @@
         this.isActive = false;
         this.id = FOOL.randomizer.generateId();
         this.game = game || null;
+
+        var self = this;
+        setInterval(function () {
+            if (!game.getLock() && self.isRobot && self.isActive) {
+                FOOL.ai.action(self);
+            }
+        }, FOOL.defaults.robotPing);
     }
 
     /**
@@ -75,7 +82,7 @@
      *
      * @param {boolean} isActive
      */
-    Player.prototype.setIsActive = function (isActive) {
+    Player.prototype.setActiveIs = function (isActive) {
         this.isActive = isActive;
     };
 

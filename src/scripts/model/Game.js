@@ -8,15 +8,63 @@
      */
     function Game() {
         this.talon = [];
-        this.trump = null;
         this.player = null;
         this.rivals = [];
-        this.attacker = null;
-        this.defender = null;
         this.retreat = [];
         this.boutCards = [];
+
+        this.lock = false;
+        this.trump = null;
+        this.boutIsActive = false;
         this.activePlayer = null;
+        this.attacker = null;
+        this.defender = null;
     }
+
+    /**
+     *
+     * @returns {Player[]}
+     */
+    Game.prototype.getPlayers = function () {
+        var result = [];
+        result.push(this.player);
+        [].push.apply(result, this.rivals.slice(0));
+        return result;
+    };
+
+    /**
+     *
+     * @returns {boolean}
+     */
+    Game.prototype.getLock = function () {
+        return this.lock;
+    };
+
+    /**
+     *
+     * @param {boolean} lock
+     */
+    Game.prototype.setLock = function (lock) {
+        this.lock = lock;
+    };
+
+
+
+    /**
+     *
+     * @returns {boolean}
+     */
+    Game.prototype.isActiveBout = function () {
+        return this.boutIsActive;
+    };
+
+    /**
+     *
+     * @param {boolean} boutIsActive
+     */
+    Game.prototype.setBoutActive = function (boutIsActive) {
+        this.boutIsActive = boutIsActive;
+    };
 
     /**
      *
@@ -36,7 +84,7 @@
 
     /**
      *
-     * @returns {FOOL.classes.Card|null|*}
+     * @returns {Card|null|*}
      */
     Game.prototype.getTrump = function () {
         return this.trump;
@@ -44,7 +92,7 @@
 
     /**
      *
-     * @param {FOOL.classes.Card} trump
+     * @param {Card} trump
      */
     Game.prototype.setTrump = function (trump) {
         this.trump = trump;
@@ -52,7 +100,7 @@
 
     /**
      *
-     * @returns {FOOL.classes.Player|null|*}
+     * @returns {Player|null|*}
      */
     Game.prototype.getPlayer = function () {
         return this.player;
@@ -60,7 +108,7 @@
 
     /**
      *
-     * @param {FOOL.classes.Player} player
+     * @param {Player} player
      */
     Game.prototype.setPlayer = function (player) {
         this.player = player;
@@ -84,7 +132,7 @@
 
     /**
      *
-     * @returns {FOOL.classes.Player|null|*}
+     * @returns {Player|null|*}
      */
     Game.prototype.getAttacker = function () {
         return this.attacker;
@@ -92,7 +140,7 @@
 
     /**
      *
-     * @param {FOOL.classes.Player} attacker
+     * @param {Player} attacker
      */
     Game.prototype.setAttacker = function (attacker) {
         this.attacker = attacker;
@@ -100,7 +148,7 @@
 
     /**
      *
-     * @returns {FOOL.classes.Player|null|*}
+     * @returns {Player|null|*}
      */
     Game.prototype.getDefender = function () {
         return this.defender;
@@ -108,7 +156,7 @@
 
     /**
      *
-     * @param {FOOL.classes.Player} defender
+     * @param {Player} defender
      */
     Game.prototype.setDefender = function (defender) {
         this.defender = defender;
@@ -116,7 +164,7 @@
 
     /**
      *
-     * @returns {FOOL.classes.Player|null|*}
+     * @returns {Player|null|*}
      */
     Game.prototype.getActivePlayer = function () {
         return this.activePlayer;
@@ -124,9 +172,11 @@
 
     /**
      *
-     * @param {FOOL.classes.Player} activePlayer
+     * @param {Player} activePlayer
      */
     Game.prototype.setActivePlayer = function (activePlayer) {
+        this.activePlayer ? this.activePlayer.setActiveIs(false) : 0;
+        activePlayer ? activePlayer.setActiveIs(true) : 0;
         this.activePlayer = activePlayer;
     };
 

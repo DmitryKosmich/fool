@@ -50,6 +50,10 @@ var FOOL = {
             UI_ON_RIVAL_CARD_CLICK: 'UI_ON_RIVAL_CARD_CLICK',
             UI_ON_HELP_BUTTON_CLICK: 'UI_ON_HELP_BUTTON_CLICK',
 
+            AI_ON_PLAYER_CARD_CLICK: 'AI_ON_PLAYER_CARD_CLICK',
+            AI_ON_BOUT_CLICK: 'AI_ON_BOUT_CLICK',
+            AI_ON_TALON_CLICK: 'AI_ON_TALON_CLICK',
+
             UI_SHOW_MESSAGE: 'UI_SHOW_MESSAGE'
         }
     },
@@ -87,7 +91,7 @@ FOOL.defaults = {
     robotName: 'Robot',
     playersNumber: 2,
     startCardsNumber: 6,
-    animationInterval: 250
+    robotPing: 1000
 };
 
 FOOL.innerDefaults = {

@@ -9,7 +9,6 @@
 
     /**
      *
-     * @param data
      */
     function uiClear() {
         FOOL.uiBuilder.clear();
@@ -17,7 +16,8 @@
 
     /**
      *
-     * @param {GameEvent} event
+     * A handler for the {@link FOOL.events.uiTypes.UI_TALON_RENDER} event.
+     * @param {GameEvent} event game event
      */
     function talonRender(event) {
 //        console.log('=> talonRender(event) event:', event);
@@ -26,7 +26,8 @@
 
     /**
      *
-     * @param {GameEvent} event
+     * A handler for the {@link FOOL.events.uiTypes.UI_PLAYER_RENDER} event.
+     * @param {GameEvent} event game event
      */
     function playerRender(event) {
 //        console.log('=> playerRender(event) event:', event);
@@ -35,7 +36,8 @@
 
     /**
      *
-     * @param {GameEvent} event
+     * A handler for the {@link FOOL.events.uiTypes.UI_RIVAL_RENDER} event.
+     * @param {GameEvent} event game event
      */
     function rivalRender(event) {
 //        console.log('=> rivalRender(event) event:', event);
@@ -44,7 +46,8 @@
 
     /**
      *
-     * @param {GameEvent} event
+     * A handler for the {@link FOOL.events.uiTypes.UI_RETREAT_RENDER} event.
+     * @param {GameEvent} event game event
      */
     function retreatRender(event) {
 //        console.log('=> retreatRender(event) event:', event);
@@ -53,7 +56,8 @@
 
     /**
      *
-     * @param {GameEvent} event
+     * A handler for the {@link FOOL.events.uiTypes.UI_BOUT_RENDER} event.
+     * @param {GameEvent} event game event
      */
     function boutRender(event) {
 //        console.log('=> boutRender(event) event:', event);
@@ -62,7 +66,8 @@
 
     /**
      *
-     * @param {GameEvent} event
+     * A handler for the {@link FOOL.events.uiTypes.UI_RIVALS_RENDER} event.
+     * @param {GameEvent} event game event
      */
     function rivalsRender(event) {
 //        console.log('=> rivalsRender(event) event:', event);
@@ -71,7 +76,8 @@
 
     /**
      *
-     * @param {GameEvent} event
+     * A handler for the {@link FOOL.events.uiTypes.UI_GAME_RENDER} event.
+     * @param {GameEvent} event game event
      */
     function gameRender(event) {
 //        console.log('=> gameRender(event) event:', event);
@@ -102,7 +108,7 @@
             .addListener(FOOL.events.uiTypes.UI_RIVALS_RENDER, rivalsRenderEventListener);
     };
 
-    FOOL.engine.controls.uiController = new UIController();
-    FOOL.engine.controls.uiController.initialize();
+    var controller =  new UIController();
+    controller.initialize();
 
 })(FOOL);

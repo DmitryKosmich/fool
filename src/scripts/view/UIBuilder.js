@@ -30,11 +30,12 @@
             i,
             timeOffsetLength = 0,
             pickedUpCardsLength = data.cardsPickedUp ? data.cardsPickedUp.length : 0,
-            thrownOutCardsLength = data.cardsThrownOut ? data.cardsThrownOut.length : 0;
+            thrownOutCardsLength = data.cardsThrownOut ? data.cardsThrownOut.length : 0,
+            operationNumber = pickedUpCardsLength + thrownOutCardsLength;
 
         // pick up for container
         for (i = 0; i < pickedUpCardsLength; i += 1) {
-            (function (i) {
+            (function (i, timeOffsetLength) {
                 setTimeout(function () {
                     var isShown = isOpen;
                     if (showExceptionArr && showExceptionArr.indexOf(i) !== -1) {
@@ -47,30 +48,34 @@
                         hasAnimation: hasAnimation,
                         direction: FOOL.direction.DOWN,
                         isOpen : isShown,
-                        callback : callback
+                        callback : (timeOffsetLength === operationNumber - 1) ? callback : null
                     };
 
                     FOOL.uiCardCarrier.addCard(cardParams);
 
                 }, timeOffsetLength * animationInterval);
-            })(i);
+            })(i, timeOffsetLength);
             timeOffsetLength +=1;
         }
 
         // throw out for container
         for (i = 0; i < thrownOutCardsLength; i += 1) {
-            (function (i) {
+            (function (i, timeOffsetLength) {
                 setTimeout(function () {
                     var cardParams = {
                         card: data.cardsThrownOut[i],
                         hasAnimation: hasAnimation,
                         direction: FOOL.direction.UP,
-                        callback : callback
+                        callback : (timeOffsetLength === operationNumber - 1) ? callback : null
                     };
                     FOOL.uiCardCarrier.removeCard(cardParams);
                 }, timeOffsetLength * animationInterval);
-            })(i);
+            })(i, timeOffsetLength);
             timeOffsetLength +=1;
+        }
+
+        if (operationNumber === 0) {
+            callback ? callback() : 0;
         }
     };
 
@@ -253,7 +258,8 @@
             opponents = '';
         for (i = 0; i < length; i += 1) {
             if (rivals[i].getIsRobot()) {
-                opponents += '<li class="player ' + (rivals[i].getIsActive() ? 'active' : '') + ' opponent-player" id="' + rivals[i].getId() + '"><ul class="cards opponent-cards"></ul></li>';
+//                opponents += '<li class="player ' + (rivals[i].getIsActive() ? 'active' : '') + ' opponent-player" id="' + rivals[i].getId() + '"><ul class="cards opponent-cards"></ul></li>';
+                opponents += '<li class="player ' + 'active' + ' opponent-player" id="' + rivals[i].getId() + '"><ul class="cards opponent-cards"></ul></li>';
             }
         }
         opponentsContainer.innerHTML = opponents;

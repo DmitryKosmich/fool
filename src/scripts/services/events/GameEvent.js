@@ -10,7 +10,7 @@
     function GameEvent(eventType, data, callback) {
         this.eventType= eventType;
         this.data = data;
-        this.callback = callback ? callback : function() {};
+        this.callback = callback || function() {};
     }
 
     /**
@@ -30,8 +30,8 @@
     /**
      * @returns {Function}
      */
-    GameEvent.prototype.callBack = function(data) {
-        return this.callback(data);
+    GameEvent.prototype.callBack = function() {
+        return this.callback;
     };
 
     FOOL.events.GameEvent = GameEvent;
