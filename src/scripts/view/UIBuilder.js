@@ -18,7 +18,7 @@
      * @param {Function} [params.callback]
      */
     UIBuilder.prototype.render = function (params) {
-        console.log('=> render(params) params:', params);
+//        console.log('=> render(params) params:', params);
         var data = params.data,
             isOpen = params.isOpen,
             container = params.container,
@@ -135,7 +135,7 @@
      * @param {Function} [callback]
      */
     UIBuilder.prototype.renderRival = function (data, hasAnimation, callback) {
-        console.log('=> renderRival(data) data:', data);
+//        console.log('=> renderRival(data) data:', data);
         var params = {
             data: data,
             container: document.getElementById('' + data.player.getId()).childNodes[0],

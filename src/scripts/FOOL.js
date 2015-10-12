@@ -107,11 +107,6 @@ FOOL.talon = [
     },
     {
         color: FOOL.color.CROSSES,
-        value: 3,
-        name: '3'
-    },
-    {
-        color: FOOL.color.CROSSES,
         value: 4,
         name: '4'
     },
@@ -177,11 +172,6 @@ FOOL.talon = [
     },
     {
         color: FOOL.color.DIAMONDS,
-        value: 3,
-        name: '3'
-    },
-    {
-        color: FOOL.color.DIAMONDS,
         value: 4,
         name: '4'
     },
@@ -239,11 +229,6 @@ FOOL.talon = [
         color: FOOL.color.HEARTS,
         value: 2,
         name: '2'
-    },
-    {
-        color: FOOL.color.HEARTS,
-        value: 3,
-        name: '3'
     },
     {
         color: FOOL.color.HEARTS,
@@ -309,11 +294,6 @@ FOOL.talon = [
         color: FOOL.color.SPADES,
         value: 2,
         name: '2'
-    },
-    {
-        color: FOOL.color.SPADES,
-        value: 3,
-        name: '3'
     },
     {
         color: FOOL.color.SPADES,

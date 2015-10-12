@@ -20,7 +20,7 @@
      * @param {GameEvent} event
      */
     function talonRender(event) {
-        console.log('=> talonRender(event) event:', event);
+//        console.log('=> talonRender(event) event:', event);
         FOOL.uiBuilder.renderTalon(event.getData(), true, event.callback);
     }
 
