@@ -70,6 +70,8 @@
             return;
         }
 
+        checkWinners(player, game);
+
         card = talon.pop();
         player.getCards().push(card);
         setNextGameStage(game, event);
@@ -145,9 +147,18 @@
      * @param {GameEvent} event
      */
     function chooseNextAttacker(game, event) {
-        var defender = game.getDefender();
-        if (defender) {
+        var defender = game.getDefender(),
+            indexOfDefender;
+        if (defender && defender !== game.getUnactivePlayer()) {
             game.setAttacker(defender);
+        } else if (defender && defender === game.getUnactivePlayer()) {
+            indexOfDefender =  game.getPlayers().indexOf(defender);
+            if (indexOfDefender < game.getPlayers().length - 1) {
+                game.setAttacker(game.getPlayers()[indexOfDefender + 1])
+            } else {
+                game.setAttacker(game.getPlayers()[0]);
+            }
+            game.setUnactivePlayer(null)
         } else {
             // TODO: implement algorithm
             game.setAttacker(game.getPlayer());
@@ -159,7 +170,7 @@
      * @param {Game} game
      * @param {GameEvent} event
      */
-    function chooseNextDefender (game, event) {
+    function chooseNextDefender(game, event) {
         var indexOfAttacker =  game.getPlayers().indexOf(game.getAttacker());
         if (indexOfAttacker < game.getPlayers().length - 1) {
             game.setDefender(game.getPlayers()[indexOfAttacker + 1])
@@ -168,8 +179,11 @@
         }
     }
 
-    function checkWinners(game) {
-
+    function checkWinners(player, game) {
+        if (game.getTalon().length === 0 && player.getCards().length === 0) {
+            alert('Игрок с именем ' + player.getName() + ' одержал победу! =)');
+            FOOL.events.tunnel.sendEvent(new GameEvent(FOOL.events.uiTypes.UI_CLEAR));
+        }
     }
 
     /**
@@ -182,6 +196,7 @@
             player = data.player,
             card = data.card,
             game = player.getGame(),
+            talon = game.getTalon(),
             eventType = player === game.getPlayer()
                 ? FOOL.events.uiTypes.UI_PLAYER_RENDER
                 : FOOL.events.uiTypes.UI_RIVAL_RENDER;
@@ -193,6 +208,9 @@
 
         card = (player.getCards().splice(player.getCards().indexOf(card), 1))[0];
         game.getBoutCards().push(card);
+
+        checkWinners(player, game);
+
         setNextGameStage(game, event);
 
 
@@ -278,6 +296,7 @@
             }));
         } else if (player === game.getDefender()) {
             [].push.apply(player.getCards(), cards);
+            game.setUnactivePlayer(player);
             FOOL.events.tunnel.sendEvent(new GameEvent(eventType, {
                 cardsPickedUp: cards,
                 player: player

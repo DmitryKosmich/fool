@@ -17,6 +17,7 @@
         this.trump = null;
         this.boutIsActive = false;
         this.activePlayer = null;
+        this.unactivePlayer = null; // player that should miss action
         this.attacker = null;
         this.defender = null;
     }
@@ -34,6 +35,22 @@
 
     /**
      *
+     * @returns {Player}
+     */
+    Game.prototype.getUnactivePlayer= function () {
+        return this.unactivePlayer;
+    };
+
+    /**
+     *
+     * @param {Player} player
+     */
+    Game.prototype.setUnactivePlayer = function (player) {
+        this.unactivePlayer = player;
+    };
+
+    /**
+     *
      * @returns {boolean}
      */
     Game.prototype.getLock = function () {
@@ -47,8 +64,6 @@
     Game.prototype.setLock = function (lock) {
         this.lock = lock;
     };
-
-
 
     /**
      *
