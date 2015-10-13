@@ -16,6 +16,7 @@
         console.log('=> start()');
         var game = new FOOL.classes.Game();
         initTalon(game);
+        game.setTrump(game.getTalon()[0]);
         initPlayer(game);
         initRivals(game);
         FOOL.currentGame = game;
@@ -71,7 +72,7 @@
 
         card = talon.pop();
         player.getCards().push(card);
-        setNextGameStage(game);
+        setNextGameStage(game, event);
 
         FOOL.events.tunnel.sendEvent(new GameEvent(FOOL.events.uiTypes.UI_TALON_RENDER, {
             cardsThrownOut: [card]
@@ -83,7 +84,12 @@
         }));
     }
 
-    function setNextGameStage(game) {
+    /**
+     *
+     * @param {Game} game
+     * @param {GameEvent} event
+     */
+    function setNextGameStage(game, event) {
         game.setLock(true);
         if (game.isActiveBout()) {
             if (game.getAttacker() === game.getActivePlayer()) {
@@ -92,13 +98,18 @@
                 game.setActivePlayer(game.getAttacker());
             }
         } else {
-            choosePlayerForTakingCard(game);
+            choosePlayerForTakingCard(game, event);
         }
 
         game.setLock(false);
     }
 
-    function choosePlayerForTakingCard(game) {
+    /**
+     *
+     * @param {Game} game
+     * @param {GameEvent} event
+     */
+    function choosePlayerForTakingCard(game, event) {
         var i,
             players = game.getPlayers(),
             playersLength = players.length,
@@ -121,21 +132,34 @@
             game.setActivePlayer(defender);
             return;
         }
-        chooseNextAttacker(game);
-        chooseNextDefender(game);
+        console.log(event.getEventType());
+        chooseNextAttacker(game, event);
+        chooseNextDefender(game, event);
         game.setActivePlayer(game.getAttacker());
         game.setBoutActive(true);
     }
 
-    function chooseNextAttacker(game) {
-        if (game.getDefender()) {
-            game.setAttacker(game.getDefender());
+    /**
+     *
+     * @param {Game} game
+     * @param {GameEvent} event
+     */
+    function chooseNextAttacker(game, event) {
+        var defender = game.getDefender();
+        if (defender) {
+            game.setAttacker(defender);
         } else {
+            // TODO: implement algorithm
             game.setAttacker(game.getPlayer());
         }
     }
 
-    function chooseNextDefender (game) {
+    /**
+     *
+     * @param {Game} game
+     * @param {GameEvent} event
+     */
+    function chooseNextDefender (game, event) {
         var indexOfAttacker =  game.getPlayers().indexOf(game.getAttacker());
         if (indexOfAttacker < game.getPlayers().length - 1) {
             game.setDefender(game.getPlayers()[indexOfAttacker + 1])
@@ -162,14 +186,14 @@
                 ? FOOL.events.uiTypes.UI_PLAYER_RENDER
                 : FOOL.events.uiTypes.UI_RIVAL_RENDER;
 
-        if (!player.getIsActive()) {
+        if (!isPlayerValidForTossingOfCard(player, card)) {
             console.info('Вы не можете сейчас ходить!');
             return;
         }
 
         card = (player.getCards().splice(player.getCards().indexOf(card), 1))[0];
         game.getBoutCards().push(card);
-        setNextGameStage(game);
+        setNextGameStage(game, event);
 
 
         FOOL.events.tunnel.sendEvent(new GameEvent(eventType, {
@@ -180,6 +204,45 @@
         FOOL.events.tunnel.sendEvent(new GameEvent(FOOL.events.uiTypes.UI_BOUT_RENDER, {
             cardsPickedUp: [card]
         }));
+    }
+
+    function isPlayerValidForTossingOfCard(player, card) {
+        var game = player.getGame(),
+            boutCards = game.getBoutCards(),
+            trumpColor = game.getTrump().getColor(),
+            lastBoutCard = boutCards.length ? boutCards[boutCards.length - 1] : null;
+        if (!player.getIsActive()) {
+            console.info('Не ваш ход!');
+            return false;
+        }
+        if (player.getCards().length < FOOL.defaults.startCardsNumber && game.getTalon().length > 0 && !game.isActiveBout()) {
+            console.info('Вам нужно набрать карту!');
+            return false;
+        }
+        if (player === game.getAttacker() && boutCards.length > 0
+            && !boutCards.some(function (boutCard) { return boutCard.getValue() === card.getValue(); })) {
+            console.info('Не пытайтесь жульничать, таких карт нет на столе');
+            return false;
+        }
+        if (player === game.getDefender() && boutCards.length > 0) {
+            if (lastBoutCard.getColor() === trumpColor && card.getColor() === trumpColor) {
+                if (lastBoutCard.getValue() > card.getValue()) {
+                    console.info('Вы можете отбить только козырем больше');
+                    return false;
+                }
+            } else if (lastBoutCard.getColor() === trumpColor && card.getColor() !== trumpColor) {
+                console.info('Вы можете отбить только козырем');
+                return false;
+            } else if (lastBoutCard.getColor() !== card.getColor() && card.getColor() !== trumpColor){
+                console.info('Вы можете положить карту только масти: ', lastBoutCard.getColor());
+                return false;
+            } else if (lastBoutCard.getValue() > card.getValue() && card.getColor() !== trumpColor) {
+                console.info('Ваша карта меньше', card);
+                return false;
+            }
+        }
+
+        return true;
     }
 
     /**
@@ -222,7 +285,7 @@
         }
 
         game.setBoutActive(false);
-        setNextGameStage(game);
+        setNextGameStage(game, event);
 
     }
 

@@ -12,7 +12,7 @@
 
     /**
      *
-     * @param {FOOL.events.GameEvent} event
+     * @param {GameEvent} event
      */
     EventListener.prototype.onEvent = function (event) {
         this.eventHandler(event);

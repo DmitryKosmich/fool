@@ -140,7 +140,7 @@
      * @returns {string}
      */
     function getCardId(card) {
-        console.log('=> getCardId(card) card:', card);
+//        console.log('=> getCardId(card) card:', card);
         return card.getValue() + '-' + card.getColor();
     }
 
