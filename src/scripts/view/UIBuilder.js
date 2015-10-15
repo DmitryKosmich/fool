@@ -243,8 +243,6 @@
         UIBuilder.prototype.renderBout({
             cardsPickedUp: boutCards
         });
-
-        initHelperButton();
     };
 
     /**
@@ -263,18 +261,6 @@
             }
         }
         opponentsContainer.innerHTML = opponents;
-    }
-
-    /**
-     *
-     */
-    function initHelperButton() {
-        var helper = document.querySelector(FOOL.styles.HELPER_BUTTON_SELECTOR);
-        FOOL.document.addEventListener(helper, 'click', function (event) {
-            FOOL.events.tunnel.sendEvent(new FOOL.events.GameEvent(FOOL.events.uiTypes.UI_ON_HELP_BUTTON_CLICK, {
-                game: FOOL.currentGame
-            }));
-        });
     }
 
     FOOL.uiBuilder = new UIBuilder();

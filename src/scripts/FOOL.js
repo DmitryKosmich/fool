@@ -68,7 +68,8 @@ var FOOL = {
         BOUT_CARD_SELECTOR: '.table-cards > .card',
         RETREAT_CARD_SELECTOR: '.retreat-cards > .card',
         TALON_CARD_SELECTOR: '.pack-cards > .card',
-        HELPER_BUTTON_SELECTOR: '.helper > .button',
+        MESSAGE_SELECTOR: '.message-container > .message',
+        MESSAGE_CONTAINER_SELECTOR: '.message-container',
 
         RIVALS_CONTAINER_CLASS_NAME: 'opponents',
         RIVAL_CONTAINER_CLASS_NAME: 'opponent-cards',
@@ -91,7 +92,8 @@ FOOL.defaults = {
     robotName: 'Robot',
     playersNumber: 2,
     startCardsNumber: 6,
-    robotPing: 1000
+    robotPing: 3000,
+    timeOfShowingMessages: 5000
 };
 
 FOOL.innerDefaults = {

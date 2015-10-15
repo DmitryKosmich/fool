@@ -23,6 +23,8 @@
         FOOL.events.tunnel.sendEvent(new GameEvent(FOOL.events.uiTypes.UI_GAME_RENDER, game));
         game.setActivePlayer(game.getPlayer());
         setNextGameStage(game);
+        FOOL.events.tunnel.sendEvent(new GameEvent(FOOL.events.uiTypes.UI_SHOW_MESSAGE,
+            'Визьмите карты из колоды!'));
     };
 
     function initTalon(game) {
@@ -56,8 +58,9 @@
      * @param {GameEvent} event game event
      */
     function takeCard(event) {
-        var card,
+        var cards = [],
             data = event.getData(),
+            numberOfNecessaryCards,
             player = data.player,
             game = player.getGame(),
             talon = game.getTalon(),
@@ -65,31 +68,46 @@
                 ? FOOL.events.uiTypes.UI_PLAYER_RENDER
                 : FOOL.events.uiTypes.UI_RIVAL_RENDER;
 
-        if (!player.getIsActive() || game.isActiveBout()) {
-            console.info('Вы не можете сейчас набирать карты!');
+        if (!player.getIsActive()) {
+            FOOL.events.tunnel.sendEvent(new GameEvent(FOOL.events.uiTypes.UI_SHOW_MESSAGE,
+                'Вы не можете сейчас набирать карты!'));
+            return;
+        }
+
+        if (game.isActiveBout()) {
+            FOOL.events.tunnel.sendEvent(new GameEvent(FOOL.events.uiTypes.UI_SHOW_MESSAGE,
+                'Вы не можете сейчас набирать карты! Делайие ход!'));
             return;
         }
 
         checkWinners(player, game);
-
-        card = talon.pop();
-        player.getCards().push(card);
+        numberOfNecessaryCards = getNumberOfNecessaryCards(player);
+        while (numberOfNecessaryCards) {
+            cards.push(talon.pop());
+            numberOfNecessaryCards -= 1;
+        }
+        [].push.apply(player.getCards(), cards);
         setNextGameStage(game, event);
 
         FOOL.events.tunnel.sendEvent(new GameEvent(FOOL.events.uiTypes.UI_TALON_RENDER, {
-            cardsThrownOut: [card]
+            cardsThrownOut: cards
         }));
 
         FOOL.events.tunnel.sendEvent(new GameEvent(eventType, {
-            cardsPickedUp: [card],
+            cardsPickedUp: cards,
             player: player
         }));
+    }
+
+    function getNumberOfNecessaryCards (player) {
+        var currNumber = player.getCards().length;
+        return FOOL.defaults.startCardsNumber - currNumber;
     }
 
     /**
      *
      * @param {Game} game
-     * @param {GameEvent} event
+     * @param {GameEvent} [event]
      */
     function setNextGameStage(game, event) {
         game.setLock(true);
@@ -202,7 +220,6 @@
                 : FOOL.events.uiTypes.UI_RIVAL_RENDER;
 
         if (!isPlayerValidForTossingOfCard(player, card)) {
-            console.info('Вы не можете сейчас ходить!');
             return;
         }
 
@@ -230,32 +247,39 @@
             trumpColor = game.getTrump().getColor(),
             lastBoutCard = boutCards.length ? boutCards[boutCards.length - 1] : null;
         if (!player.getIsActive()) {
-            console.info('Не ваш ход!');
+            FOOL.events.tunnel.sendEvent(new GameEvent(FOOL.events.uiTypes.UI_SHOW_MESSAGE,
+                'Не ваш ход!'));
             return false;
         }
         if (player.getCards().length < FOOL.defaults.startCardsNumber && game.getTalon().length > 0 && !game.isActiveBout()) {
-            console.info('Вам нужно набрать карту!');
+            FOOL.events.tunnel.sendEvent(new GameEvent(FOOL.events.uiTypes.UI_SHOW_MESSAGE,
+                'Вам нужно набрать карту!'));
             return false;
         }
         if (player === game.getAttacker() && boutCards.length > 0
             && !boutCards.some(function (boutCard) { return boutCard.getValue() === card.getValue(); })) {
-            console.info('Не пытайтесь жульничать, таких карт нет на столе');
+            FOOL.events.tunnel.sendEvent(new GameEvent(FOOL.events.uiTypes.UI_SHOW_MESSAGE,
+                'Не пытайтесь жульничать, таких карт нет на столе'));
             return false;
         }
         if (player === game.getDefender() && boutCards.length > 0) {
             if (lastBoutCard.getColor() === trumpColor && card.getColor() === trumpColor) {
                 if (lastBoutCard.getValue() > card.getValue()) {
-                    console.info('Вы можете отбить только козырем больше');
+                    FOOL.events.tunnel.sendEvent(new GameEvent(FOOL.events.uiTypes.UI_SHOW_MESSAGE,
+                        'Вы можете отбить только козырем больше'));
                     return false;
                 }
             } else if (lastBoutCard.getColor() === trumpColor && card.getColor() !== trumpColor) {
-                console.info('Вы можете отбить только козырем');
+                FOOL.events.tunnel.sendEvent(new GameEvent(FOOL.events.uiTypes.UI_SHOW_MESSAGE,
+                    'Вы можете отбить только козырем'));
                 return false;
             } else if (lastBoutCard.getColor() !== card.getColor() && card.getColor() !== trumpColor){
-                console.info('Вы можете положить карту только масти: ', lastBoutCard.getColor());
+                FOOL.events.tunnel.sendEvent(new GameEvent(FOOL.events.uiTypes.UI_SHOW_MESSAGE,
+                    'Вы можете положить карту только масти: ' + lastBoutCard.getColor()));
                 return false;
             } else if (lastBoutCard.getValue() > card.getValue() && card.getColor() !== trumpColor) {
-                console.info('Ваша карта меньше', card);
+                FOOL.events.tunnel.sendEvent(new GameEvent(FOOL.events.uiTypes.UI_SHOW_MESSAGE,
+                    'Ваша карта меньше'));
                 return false;
             }
         }
@@ -278,7 +302,8 @@
                 : FOOL.events.uiTypes.UI_RIVAL_RENDER;
 
         if (!player.getIsActive()) {
-            console.info('Вы не можете сейчас забрать или бросить в отбой!');
+            FOOL.events.tunnel.sendEvent(new GameEvent(FOOL.events.uiTypes.UI_SHOW_MESSAGE,
+                'Вы не можете сейчас забрать или бросить в отбой!'));
             return;
         }
 
