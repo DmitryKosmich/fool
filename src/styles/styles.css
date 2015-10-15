@@ -71,6 +71,7 @@ body {
 
 /* navbar */
 .menu {
+    height: 39px;
     background-color: rgba(175, 179, 184, 0.05);
     width: 100%;
     z-index: 9999;
@@ -167,6 +168,7 @@ body {
     transform: rotate(90deg);
 }
 
+.cards.retreat-cards,
 .cards.pack-cards {
     width: 150px;
 }

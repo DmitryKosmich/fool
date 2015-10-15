@@ -8,7 +8,7 @@
     function AI() {}
 
     AI.prototype.action = function (player) {
-        console.log(player.getName() + ' has made action!');
+//        console.log(player.getName() + ' has made action!');
         var game = player.getGame();
         if (game.isActiveBout()) {
             if (player === game.getAttacker()) {
@@ -24,7 +24,7 @@
                     onBoutClick(player);
                 }
             } else {
-                console.log(player.getName() + ' does nothing...');
+                console.error(player.getName() + ' does nothing...');
             }
         } else {
             if (player.getCards().length < FOOL.defaults.startCardsNumber) {

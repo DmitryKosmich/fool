@@ -13,7 +13,7 @@
      *
      */
     GameEngine.prototype.start = function () {
-        console.log('=> start()');
+//        console.log('=> start()');
         var game = new FOOL.classes.Game();
         initTalon(game);
         game.setTrump(game.getTalon()[0]);
@@ -82,12 +82,15 @@
 
         checkWinners(player, game);
         numberOfNecessaryCards = getNumberOfNecessaryCards(player);
+        var a = numberOfNecessaryCards;
         while (numberOfNecessaryCards) {
             cards.push(talon.pop());
             numberOfNecessaryCards -= 1;
         }
         [].push.apply(player.getCards(), cards);
-        setNextGameStage(game, event);
+        setTimeout(function () {
+            setNextGameStage(game, event);
+        }, a * FOOL.defaults.animationInterval);
 
         FOOL.events.tunnel.sendEvent(new GameEvent(FOOL.events.uiTypes.UI_TALON_RENDER, {
             cardsThrownOut: cards
@@ -152,7 +155,7 @@
             game.setActivePlayer(defender);
             return;
         }
-        console.log(event.getEventType());
+//        console.log(event.getEventType());
         chooseNextAttacker(game, event);
         chooseNextDefender(game, event);
         game.setActivePlayer(game.getAttacker());

@@ -24,7 +24,7 @@
             container = params.container,
             hasAnimation = params.hasAnimation,
             showExceptionArr = params.showExceptionArr,
-            animationInterval = hasAnimation ? (params.interval || FOOL.innerDefaults.animationInterval) : 0,
+            animationInterval = hasAnimation ? (params.interval || FOOL.defaults.animationInterval) : 0,
             callback = params.callback,
 
             i,

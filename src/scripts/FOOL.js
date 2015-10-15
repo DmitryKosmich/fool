@@ -92,11 +92,8 @@ FOOL.defaults = {
     robotName: 'Robot',
     playersNumber: 2,
     startCardsNumber: 6,
-    robotPing: 3000,
-    timeOfShowingMessages: 5000
-};
-
-FOOL.innerDefaults = {
+    robotPing: 2000,
+    timeOfShowingMessages: 5000,
     animationInterval: 250
 };
 
