@@ -67,6 +67,20 @@
         return null;
     };
 
+
+    /**
+     *
+     * @param {number} id
+     * @param {FOOL.classes.Game} [game]
+     * @returns {FOOL.classes.Card}
+     */
+    SearchEngine.prototype.findCardById = function (id, game) {
+        var currentGame = game || FOOL.currentGame,
+            value = id.split('-')[0],
+            color = id.split('-')[1];
+        return SearchEngine.prototype.findCardByColorAndValue(+color, +value, currentGame);
+    };
+
     /**
      *
      * @param {FOOL.classes.Card} card

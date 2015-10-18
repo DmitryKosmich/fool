@@ -13,7 +13,6 @@
      *
      */
     GameEngine.prototype.start = function () {
-//        console.log('=> start()');
         var game = new FOOL.classes.Game();
         initTalon(game);
         game.setTrump(game.getTalon()[0]);
@@ -80,7 +79,10 @@
             return;
         }
 
-        checkWinners(player, game);
+        if (checkWinners(player, game)) {
+            return;
+        }
+
         numberOfNecessaryCards = getNumberOfNecessaryCards(player);
         var a = numberOfNecessaryCards;
         while (numberOfNecessaryCards) {
@@ -202,9 +204,18 @@
 
     function checkWinners(player, game) {
         if (game.getTalon().length === 0 && player.getCards().length === 0) {
-            alert('Игрок с именем ' + player.getName() + ' одержал победу! =)');
-            FOOL.events.tunnel.sendEvent(new GameEvent(FOOL.events.uiTypes.UI_CLEAR));
+            game.setActivePlayer(game.getPlayer());
+            game.setBoutActive(true);
+            FOOL.events.tunnel.sendEvent(new GameEvent(FOOL.events.uiTypes.UI_SHOW_MODAL, {
+                buttonMessage: 'Начать заново!',
+                textMessage: player === game.getPlayer() ? 'Вы победили!' : 'Вы проиграли!',
+                type: player === game.getPlayer() ? FOOL.modalType.SUCCESS : FOOL.modalType.WARNING
+            }));
+            FOOL.engine.start();
+            return true;
         }
+
+        return false;
     }
 
     /**
@@ -229,7 +240,9 @@
         card = (player.getCards().splice(player.getCards().indexOf(card), 1))[0];
         game.getBoutCards().push(card);
 
-        checkWinners(player, game);
+        if (checkWinners(player, game)) {
+            return;
+        }
 
         setNextGameStage(game, event);
 

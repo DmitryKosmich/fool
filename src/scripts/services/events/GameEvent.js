@@ -30,7 +30,7 @@
     /**
      * @returns {Function}
      */
-    GameEvent.prototype.callBack = function() {
+    GameEvent.prototype.getCallback = function() {
         return this.callback;
     };
 

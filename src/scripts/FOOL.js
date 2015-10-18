@@ -43,6 +43,8 @@ var FOOL = {
             UI_BOUT_RENDER: 'UI_BOUT_RENDER',
             UI_RIVALS_RENDER: 'UI_RIVALS_RENDER',
 
+            UI_SHOW_MODAL: 'UI_SHOW_MODAL',
+
             UI_ON_PLAYER_CARD_CLICK: 'UI_ON_PLAYER_CARD_CLICK',
             UI_ON_BOUT_CLICK: 'UI_ON_BOUT_CLICK',
             UI_ON_TALON_CLICK: 'UI_ON_TALON_CLICK',
@@ -84,6 +86,11 @@ var FOOL = {
         ADD_CARD_DOWN_ANIMATION: 'add-card-down',
         REMOVE_CARD_UP_ANIMATION: 'remove-card-up',
         REMOVE_CARD_DOWN_ANIMATION: 'remove-card-up'
+    },
+    modalType: {
+        SUCCESS: 'SUCCESS',
+        WARNING: 'WARNING',
+        INFO: 'INFO'
     }
 };
 

@@ -38,7 +38,7 @@
             }));
         });
 
-        container.appendChild(elem);
+        insertCard(container, elem, card);
 
         // remove animation class
         setTimeout(function () {
@@ -48,6 +48,38 @@
             callback ? callback() : 0;
         }, 500);
     };
+
+    function insertCard(container, newCardElem, card) {
+        var i,
+            cardElems = container.childNodes,
+            length = cardElems ? cardElems.length : 0;
+
+        if (FOOL.currentGame.getPlayer().getCards().indexOf(card) !== -1) {
+            for (i = 0; i < length ; i += 1) {
+                if (compareCards(card, FOOL.search.findCardById(cardElems[i].id)) > 0) {
+                    container.insertBefore(newCardElem, cardElems[i]);
+                    return;
+                }
+            }
+        }
+        container.appendChild(newCardElem);
+    }
+
+    function compareCards(a, b) {
+        var game = FOOL.currentGame,
+            trumpColor = game.getTrump().getColor();
+        if (a.getColor() === trumpColor && b.getColor() !== trumpColor) {
+            return 1;
+        } else if (a.getColor() !== trumpColor && b.getColor() === trumpColor) {
+            return -1;
+        }
+//        else if (a.getColor() !== b.getColor()) {
+//            return a.getColor() > b.getColor() ? 1 : -1;
+//        }
+        else {
+            return a.getValue() > b.getValue() ? 1 : -1;
+        }
+    }
 
     /**
      * @param {Object} params
