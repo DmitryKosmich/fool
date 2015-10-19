@@ -23,7 +23,7 @@
         game.setActivePlayer(game.getPlayer());
         setNextGameStage(game);
         FOOL.events.tunnel.sendEvent(new GameEvent(FOOL.events.uiTypes.UI_SHOW_MESSAGE,
-            'Визьмите карты из колоды!'));
+            FOOL.messages.YOU_SHOULD_TAKE_CARD));
     };
 
     function initTalon(game) {
@@ -69,13 +69,13 @@
 
         if (!player.getIsActive()) {
             FOOL.events.tunnel.sendEvent(new GameEvent(FOOL.events.uiTypes.UI_SHOW_MESSAGE,
-                'Вы не можете сейчас набирать карты!'));
+                FOOL.messages.YOU_CAN_NOT_TAKE_CARD));
             return;
         }
 
         if (game.isActiveBout()) {
             FOOL.events.tunnel.sendEvent(new GameEvent(FOOL.events.uiTypes.UI_SHOW_MESSAGE,
-                'Вы не можете сейчас набирать карты! Делайие ход!'));
+                FOOL.messages.YOU_SHOULD_MAKE_ACTION));
             return;
         }
 
@@ -207,8 +207,8 @@
             game.setActivePlayer(game.getPlayer());
             game.setBoutActive(true);
             FOOL.events.tunnel.sendEvent(new GameEvent(FOOL.events.uiTypes.UI_SHOW_MODAL, {
-                buttonMessage: 'Начать заново!',
-                textMessage: player === game.getPlayer() ? 'Вы победили!' : 'Вы проиграли!',
+                buttonMessage: FOOL.messages.RESTART_GAME,
+                textMessage: player === game.getPlayer() ? FOOL.messages.YOU_WON : FOOL.messages.YOU_LOSE,
                 type: player === game.getPlayer() ? FOOL.modalType.SUCCESS : FOOL.modalType.WARNING
             }));
             FOOL.engine.start();
@@ -264,38 +264,38 @@
             lastBoutCard = boutCards.length ? boutCards[boutCards.length - 1] : null;
         if (!player.getIsActive()) {
             FOOL.events.tunnel.sendEvent(new GameEvent(FOOL.events.uiTypes.UI_SHOW_MESSAGE,
-                'Не ваш ход!'));
+                FOOL.messages.ACTION_IS_NOT_YOUR));
             return false;
         }
         if (player.getCards().length < FOOL.defaults.startCardsNumber && game.getTalon().length > 0 && !game.isActiveBout()) {
             FOOL.events.tunnel.sendEvent(new GameEvent(FOOL.events.uiTypes.UI_SHOW_MESSAGE,
-                'Вам нужно набрать карту!'));
+                FOOL.messages.YOU_SHOULD_TAKE_CARD));
             return false;
         }
         if (player === game.getAttacker() && boutCards.length > 0
             && !boutCards.some(function (boutCard) { return boutCard.getValue() === card.getValue(); })) {
             FOOL.events.tunnel.sendEvent(new GameEvent(FOOL.events.uiTypes.UI_SHOW_MESSAGE,
-                'Не пытайтесь жульничать, таких карт нет на столе'));
+                FOOL.messages.YOU_CAN_NOT_TOSS_THIS_CARD));
             return false;
         }
         if (player === game.getDefender() && boutCards.length > 0) {
             if (lastBoutCard.getColor() === trumpColor && card.getColor() === trumpColor) {
                 if (lastBoutCard.getValue() > card.getValue()) {
                     FOOL.events.tunnel.sendEvent(new GameEvent(FOOL.events.uiTypes.UI_SHOW_MESSAGE,
-                        'Вы можете отбить только козырем больше'));
+                        FOOL.messages.YOU_CAN_RESPOND_BY_USING_MORE_TRUMP));
                     return false;
                 }
             } else if (lastBoutCard.getColor() === trumpColor && card.getColor() !== trumpColor) {
                 FOOL.events.tunnel.sendEvent(new GameEvent(FOOL.events.uiTypes.UI_SHOW_MESSAGE,
-                    'Вы можете отбить только козырем'));
+                    FOOL.messages.YOU_CAN_RESPOND_ONLY_BY_USING_TRUMP));
                 return false;
             } else if (lastBoutCard.getColor() !== card.getColor() && card.getColor() !== trumpColor){
                 FOOL.events.tunnel.sendEvent(new GameEvent(FOOL.events.uiTypes.UI_SHOW_MESSAGE,
-                    'Вы можете положить карту только масти: ' + lastBoutCard.getColor()));
+                    FOOL.messages.YOU_SHOULD_RESPOND_ONLY_BY_USING_SAME_COLOR));
                 return false;
             } else if (lastBoutCard.getValue() > card.getValue() && card.getColor() !== trumpColor) {
                 FOOL.events.tunnel.sendEvent(new GameEvent(FOOL.events.uiTypes.UI_SHOW_MESSAGE,
-                    'Ваша карта меньше'));
+                    FOOL.messages.YOUR_CARD_IS_LESS_THAN_ATTACKER_CARD));
                 return false;
             }
         }
@@ -319,7 +319,7 @@
 
         if (!player.getIsActive()) {
             FOOL.events.tunnel.sendEvent(new GameEvent(FOOL.events.uiTypes.UI_SHOW_MESSAGE,
-                'Вы не можете сейчас забрать или бросить в отбой!'));
+                FOOL.messages.YOU_CAN_NOT_PULL_OR_TOSS_TO_RETREAT_CARDS));
             return;
         }
 

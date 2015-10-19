@@ -1,3 +1,4 @@
+
 var FOOL = {
     classes: {},
     currentGame: null,
@@ -60,9 +61,19 @@ var FOOL = {
         }
     },
     messages: {
-        NOT_YOUR_TURN: "Не ваш ход!",
-        FULL_PACK_OF_CARDS: "Вы не можете набрать карту, у вас полный набор!",
-        CANNOT_THROW_CARD_AGAINST_RULES: "Вы не можете прбосить карту - это против правил!"
+        YOU_SHOULD_TAKE_CARD: 'Визьмите карты из колоды!',
+        YOU_CAN_NOT_TAKE_CARD: 'Вы не можете сейчас набирать карты!',
+        YOU_SHOULD_MAKE_ACTION: 'Ходите!',
+        RESTART_GAME: 'Начать заново!',
+        YOU_WON: 'Вы победили =)',
+        YOU_LOSE: 'Вы проиграли =(',
+        ACTION_IS_NOT_YOUR: 'Не ваш ход!',
+        YOU_CAN_NOT_TOSS_THIS_CARD: 'Не жульничайте, таких карт нет на столе!',
+        YOU_CAN_RESPOND_BY_USING_MORE_TRUMP: 'Вы можете отбиться только козырем больше!',
+        YOU_CAN_RESPOND_ONLY_BY_USING_TRUMP: 'Вы можете отбиться только козырем!',
+        YOU_SHOULD_RESPOND_ONLY_BY_USING_SAME_COLOR: 'Вы должны отбиваться картой такойже масти!',
+        YOUR_CARD_IS_LESS_THAN_ATTACKER_CARD: 'Ваша карта меньше!',
+        YOU_CAN_NOT_PULL_OR_TOSS_TO_RETREAT_CARDS: 'Вы не можете сейчас забрать или бросить в отбой!'
     },
     styles: {
         PLAYER_CARD_SELECTOR: '.player-cards > .card',
