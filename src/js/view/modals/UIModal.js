@@ -5,16 +5,16 @@
      *
      * @constructor
      */
-    function UIStartGameModal() {}
+    function UIModal() {}
 
     /**
      *
      * @param {GameEvent} event
      */
     function showModal(event) {
-        var modal = document.querySelector('.modal'),
-            text = modal.querySelector('.modal__body__text'),
-            button = modal.querySelector('.modal__body__button'),
+        var modal = document.querySelector(FOOL.styles.MODAL_SELECTOR),
+            text = modal.querySelector(FOOL.styles.MODAL_TEXT_SELECTOR),
+            button = modal.querySelector(FOOL.styles.MODAL_BUTTON_SELECTOR),
             data = event.getData();
 //            callback = event.getCallback();
 
@@ -24,20 +24,20 @@
         FOOL.document.removeEventListener(button, 'click');
         FOOL.document.addEventListener(button, 'click', function (e) {
 //            callback ? callback() : 0;
-            FOOL.document.removeClass(modal, 'modal_show');
-            FOOL.document.addClass(modal, 'modal_hide');
+            FOOL.document.removeClass(modal, FOOL.styles.MODAL_SHOW_CLASS);
+            FOOL.document.addClass(modal, FOOL.styles.MODAL_HIDE_CLASS);
         });
 
-        FOOL.document.removeClass(modal, 'modal_hide');
-        FOOL.document.addClass(modal, 'modal_show');
+        FOOL.document.removeClass(modal, FOOL.styles.MODAL_HIDE_CLASS);
+        FOOL.document.addClass(modal, FOOL.styles.MODAL_SHOW_CLASS);
     }
 
-    UIStartGameModal.prototype.initialize = function () {
+    UIModal.prototype.initialize = function () {
         var showModalEventListener = new FOOL.events.EventListener(showModal);
         FOOL.events.tunnel.addListener(FOOL.events.uiTypes.UI_SHOW_MODAL, showModalEventListener);
     };
 
-    var uiStartGameModal = new UIStartGameModal();
+    var uiStartGameModal = new UIModal();
     uiStartGameModal.initialize();
 
 })(FOOL);

@@ -61,6 +61,8 @@ var FOOL = {
         }
     },
     messages: {
+        START_GAME: 'Начать игру',
+        WELCOME: 'Добро пожаловать!',
         YOU_SHOULD_TAKE_CARD: 'Визьмите карты из колоды!',
         YOU_CAN_NOT_TAKE_CARD: 'Вы не можете сейчас набирать карты!',
         YOU_SHOULD_MAKE_ACTION: 'Ходите!',
@@ -83,6 +85,9 @@ var FOOL = {
         TALON_CARD_SELECTOR: '.pack-cards > .card',
         MESSAGE_SELECTOR: '.message-container > .message',
         MESSAGE_CONTAINER_SELECTOR: '.message-container',
+        MODAL_SELECTOR: '.modal',
+        MODAL_TEXT_SELECTOR: '.modal__body__text',
+        MODAL_BUTTON_SELECTOR: '.modal__body__button',
 
         RIVALS_CONTAINER_CLASS_NAME: 'opponents',
         RIVAL_CONTAINER_CLASS_NAME: 'opponent-cards',
@@ -92,6 +97,8 @@ var FOOL = {
         RETREAT_CARDS_CONTAINER_CLASS_NAME: 'retreat-cards',
         CARDS_CLASS_NAME: 'cards',
         PLAYER_CLASS_NAME: 'player',
+        MODAL_SHOW_CLASS: 'modal_show',
+        MODAL_HIDE_CLASS: 'modal_hide',
 
         ADD_CARD_UP_ANIMATION: 'add-card-up',
         ADD_CARD_DOWN_ANIMATION: 'add-card-down',
@@ -112,7 +119,8 @@ FOOL.defaults = {
     startCardsNumber: 6,
     robotPing: 2000,
     timeOfShowingMessages: 5000,
-    animationInterval: 250
+    animationInterval: 250,
+    cardsImagesDir: 'img/'
 };
 
 FOOL.talon = [

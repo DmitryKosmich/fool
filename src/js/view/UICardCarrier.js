@@ -137,11 +137,7 @@
                     : ' ')
                 : ' ';
 
-        return '' +
-            '<li class="card ' + animation + (isOpen ? ' open' : ' close') + '" id="' + id + '">' +
-            '<img src="images/cards/' + id + '.png">' +
-            '<img src="images/cards/back.png">' +
-            '</li>';
+        return '<li class="card card-sprite card-' + (isOpen ? id : 'back') + ' ' + animation + '" id="' + id + '"></li>';
     }
 
     /**

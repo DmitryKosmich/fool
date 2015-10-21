@@ -5,7 +5,17 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles/styles.css">
+
+    <!-- build:css -->
+    <link rel="stylesheet" href="css/animation/add-card-down.css">
+    <link rel="stylesheet" href="css/animation/add-card-up.css">
+    <link rel="stylesheet" href="css/animation/remove-card-down.css">
+    <link rel="stylesheet" href="css/animation/remove-card-up.css">
+    <link rel="stylesheet" href="css/card-sprite.css">
+    <link rel="stylesheet" href="css/modal.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <!-- endbuild -->
+
 </head>
 <body>
 
@@ -13,96 +23,65 @@
     <nav class="menu">
         <ul class="menu-items">
             <li class="menu-item" onclick="FOOL.engine.start()">Начать заново</li>
-            <!--<li class="menu-item md-trigger" data-modal="modal-options">Настройки</li>-->
-            <!--<li class="menu-item">Авторы</li>-->
         </ul>
     </nav>
 
     <div class="opponents-container">
-        <ul class="opponents">
-            <!--<li class="player active opponent-player">-->
-                <!--<ul class="cards">-->
-                    <!--<li class="card close">-->
-                        <!--<img src="images/cards/10-3.png">-->
-                        <!--<img src="images/cards/back.png">-->
-                    <!--</li>-->
-                <!--</ul>-->
-            <!--</li>-->
-        </ul>
+        <ul class="opponents"></ul>
     </div>
 
     <div class="table-container">
         <ul class="cards table-cards">
-            <!--<li class="card open">-->
-                <!--<img src="images/cards/10-2.png">-->
-                <!--<img src="images/cards/back.png">-->
-            <!--</li>-->
         </ul>
-        <ul class="cards retreat-cards" title="Отбой">
-            <!--<li class="card close">-->
-                <!--<img src="images/cards/10-3.png">-->
-                <!--<img src="images/cards/back.png">-->
-            <!--</li>-->
-        </ul>
-        <ul class="cards pack-cards" title="Колода">
-            <!--<li class="card open">-->
-                <!--<img src="images/cards/10-3.png">-->
-                <!--<img src="images/cards/back.png">-->
-            <!--</li>-->
-        </ul>
+        <ul class="cards retreat-cards" title="Отбой"></ul>
+        <ul class="cards pack-cards" title="Колода"></ul>
     </div>
 
     <br class="clear"/>
 
     <div class="user-container">
         <div class="player" id="User">
-            <ul class="cards player-cards">
-                <!--<li class="card open">-->
-                    <!--<img src="images/cards/10-3.png">-->
-                    <!--<img src="images/cards/back.png">-->
-                <!--</li>-->
-            </ul>
+            <ul class="cards player-cards"></ul>
         </div>
     </div>
 
-    <div class="message-container">
-        <!--<div class="message">Пример сообщения!</div>-->
-    </div>
+    <div class="message-container"></div>
 </div>
 
 <div class="modal modal_hide">
     <div class="modal__body">
-        <!--<img class="modal__body__image"/>-->
         <p class="modal__body__text"></p>
         <a class="modal__body__button"></a>
     </div>
 </div>
 
-<script src="scripts/FOOL.js"></script>
-<script src="scripts/services/utils/Document.js"></script>
-<script src="scripts/services/utils/Randomizer.js"></script>
-<script src="scripts/services/utils/SearchEngine.js"></script>
-<script src="scripts/model/Card.js"></script>
-<script src="scripts/model/Player.js"></script>
-<script src="scripts/model/Game.js"></script>
-<script src="scripts/view/UICardCarrier.js"></script>
-<script src="scripts/view/UIDetector.js"></script>
-<script src="scripts/view/UIBuilder.js"></script>
-<script src="scripts/services/events/GameEvent.js"></script>
-<script src="scripts/services/events/EventFactory.js"></script>
-<script src="scripts/services/events/EventListener.js"></script>
-<script src="scripts/services/events/EventTunnel.js"></script>
-<script src="scripts/services/core/GameEngine.js"></script>
-<script src="scripts/services/core/AI.js"></script>
-<script src="scripts/view/UIController.js"></script>
-<script src="scripts/view/UIHelper.js"></script>
-<script src="scripts/view/modals/game-modal.js"></script>
+<!-- build:js -->
+<script src="js/FOOL.js"></script>
+<script src="js/services/utils/Document.js"></script>
+<script src="js/services/utils/Randomizer.js"></script>
+<script src="js/services/utils/SearchEngine.js"></script>
+<script src="js/model/Card.js"></script>
+<script src="js/model/Player.js"></script>
+<script src="js/model/Game.js"></script>
+<script src="js/view/UICardCarrier.js"></script>
+<script src="js/view/UIDetector.js"></script>
+<script src="js/view/UIBuilder.js"></script>
+<script src="js/services/events/GameEvent.js"></script>
+<script src="js/services/events/EventFactory.js"></script>
+<script src="js/services/events/EventListener.js"></script>
+<script src="js/services/events/EventTunnel.js"></script>
+<script src="js/services/core/GameEngine.js"></script>
+<script src="js/services/core/AI.js"></script>
+<script src="js/view/UIController.js"></script>
+<script src="js/view/UIHelper.js"></script>
+<script src="js/view/modals/UIModal.js"></script>
+<!-- endbuild -->
 
 <!-- Start of game -->
 <script>
     FOOL.events.tunnel.sendEvent(new FOOL.events.GameEvent(FOOL.events.uiTypes.UI_SHOW_MODAL, {
-        buttonMessage: 'Начать игру!',
-        textMessage: 'Добро пожаловать!',
+        buttonMessage: FOOL.messages.START_GAME,
+        textMessage: FOOL.messages.WELCOME,
         type: FOOL.modalType.INFO
     }));
     FOOL.engine.start();
