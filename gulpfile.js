@@ -5,7 +5,8 @@ var p = require('./package.json'),
     minify = require('gulp-minify-css'),
     autoprefixer = require('gulp-autoprefixer'),
     imagemin = require('gulp-imagemin'),
-    htmlreplace = require('gulp-html-replace');
+    htmlreplace = require('gulp-html-replace'),
+    clean = require('gulp-clean');
 
 var jsFiles = [
        'src/js/FOOL.js',
@@ -43,34 +44,42 @@ var imgFiles = 'src/img/card-sprite.png';
 
 var htmlFiles = 'src/index.html';
 
+var newFileName = p.name + '-' + p.version,
+    distDir = 'dist/buid' + '-' + p.version;
+
 gulp.task('js', function () {
     return gulp.src(jsFiles)
         .pipe(uglify())
-        .pipe(concat(p.name + '.min.js'))
-        .pipe(gulp.dest('build/js'));
+        .pipe(concat(newFileName + '.min.js'))
+        .pipe(gulp.dest(distDir + '/js'));
 });
 
 gulp.task('css', function () {
     return gulp.src(cssFiles)
         .pipe(minify())
         .pipe(autoprefixer('last 2 version', 'safari 5', 'ie 8', 'ie 9'))
-        .pipe(concat(p.name + '.min.css'))
-        .pipe(gulp.dest('build/css'));
+        .pipe(concat(newFileName + '.min.css'))
+        .pipe(gulp.dest(distDir + '/css'));
 });
 
 gulp.task('img', function() {
     return gulp.src(imgFiles)
         .pipe(imagemin())
-        .pipe(gulp.dest('build/img'))
+        .pipe(gulp.dest(distDir + '/img'))
 });
 
 gulp.task('html', function() {
     return gulp.src(htmlFiles)
         .pipe(htmlreplace({
-            'css': 'css/' + p.name + '.min.css',
-            'js': 'js/' + p.name + '.min.js'
+            'css': 'css/' + newFileName + '.min.css',
+            'js': 'js/' +newFileName + '.min.js'
         }))
-        .pipe(gulp.dest('build'));
+        .pipe(gulp.dest(distDir));
+});
+
+gulp.task('clean', function () {
+    return gulp.src(distDir, {read: false})
+        .pipe(clean());
 });
 
 gulp.task('watch', function () {
