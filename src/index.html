@@ -50,6 +50,7 @@
 
 <div class="modal modal_hide">
     <div class="modal__body">
+        <h1 class="modal__body__header"></h1>
         <p class="modal__body__text"></p>
         <a class="modal__body__button"></a>
     </div>
@@ -80,8 +81,8 @@
 <!-- Start of game -->
 <script>
     FOOL.events.tunnel.sendEvent(new FOOL.events.GameEvent(FOOL.events.uiTypes.UI_SHOW_MODAL, {
+        headerMessage: FOOL.messages.WELCOME,
         buttonMessage: FOOL.messages.START_GAME,
-        textMessage: FOOL.messages.WELCOME,
         type: FOOL.modalType.INFO
     }));
     FOOL.engine.start();

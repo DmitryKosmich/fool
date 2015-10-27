@@ -60,7 +60,28 @@ var FOOL = {
             UI_SHOW_MESSAGE: 'UI_SHOW_MESSAGE'
         }
     },
+    messagesKeys: {
+        OK: 'OK',
+        MORE_INFO: 'MORE_INFO',
+        START_GAME: 'START_GAME',
+        WELCOME: 'WELCOME',
+        YOU_SHOULD_TAKE_CARD: 'YOU_SHOULD_TAKE_CARD',
+        YOU_CAN_NOT_TAKE_CARD: 'YOU_CAN_NOT_TAKE_CARD',
+        YOU_SHOULD_MAKE_ACTION: 'YOU_SHOULD_MAKE_ACTION',
+        RESTART_GAME: 'RESTART_GAME',
+        YOU_WON: 'YOU_WON',
+        YOU_LOSE: 'YOU_LOSE',
+        ACTION_IS_NOT_YOUR: 'ACTION_IS_NOT_YOUR',
+        YOU_CAN_NOT_TOSS_THIS_CARD: 'YOU_CAN_NOT_TOSS_THIS_CARD',
+        YOU_CAN_RESPOND_BY_USING_MORE_TRUMP: 'YOU_CAN_RESPOND_BY_USING_MORE_TRUMP',
+        YOU_CAN_RESPOND_ONLY_BY_USING_TRUMP: 'YOU_CAN_RESPOND_ONLY_BY_USING_TRUMP',
+        YOU_SHOULD_RESPOND_ONLY_BY_USING_SAME_COLOR: 'YOU_SHOULD_RESPOND_ONLY_BY_USING_SAME_COLOR',
+        YOUR_CARD_IS_LESS_THAN_ATTACKER_CARD: 'YOUR_CARD_IS_LESS_THAN_ATTACKER_CARD',
+        YOU_CAN_NOT_PULL_OR_TOSS_TO_RETREAT_CARDS: 'YOU_CAN_NOT_PULL_OR_TOSS_TO_RETREAT_CARDS'
+    },
     messages: {
+        OK: 'Ок',
+        MORE_INFO: 'Подробнее...',
         START_GAME: 'Начать игру',
         WELCOME: 'Добро пожаловать!',
         YOU_SHOULD_TAKE_CARD: 'Визьмите карты из колоды!',
@@ -69,6 +90,18 @@ var FOOL = {
         RESTART_GAME: 'Начать заново!',
         YOU_WON: 'Вы победили =)',
         YOU_LOSE: 'Вы проиграли =(',
+        ACTION_IS_NOT_YOUR: 'Не ваш ход!',
+        YOU_CAN_NOT_TOSS_THIS_CARD: 'Не жульничайте, таких карт нет на столе!',
+        YOU_CAN_RESPOND_BY_USING_MORE_TRUMP: 'Вы можете отбиться только козырем больше!',
+        YOU_CAN_RESPOND_ONLY_BY_USING_TRUMP: 'Вы можете отбиться только козырем!',
+        YOU_SHOULD_RESPOND_ONLY_BY_USING_SAME_COLOR: 'Вы должны отбиваться картой такойже масти!',
+        YOUR_CARD_IS_LESS_THAN_ATTACKER_CARD: 'Ваша карта меньше!',
+        YOU_CAN_NOT_PULL_OR_TOSS_TO_RETREAT_CARDS: 'Вы не можете сейчас забрать или бросить в отбой!'
+    },
+    messagesFull: {
+        YOU_SHOULD_TAKE_CARD: 'Для того чтобы взять карты из колоды необходимо кликнуть мышью на элемент под номером 4.',
+        YOU_CAN_NOT_TAKE_CARD: 'Вы не можете сейчас набирать карты!',
+        YOU_SHOULD_MAKE_ACTION: 'Ходите!',
         ACTION_IS_NOT_YOUR: 'Не ваш ход!',
         YOU_CAN_NOT_TOSS_THIS_CARD: 'Не жульничайте, таких карт нет на столе!',
         YOU_CAN_RESPOND_BY_USING_MORE_TRUMP: 'Вы можете отбиться только козырем больше!',
@@ -87,6 +120,7 @@ var FOOL = {
         MESSAGE_CONTAINER_SELECTOR: '.message-container',
         MODAL_SELECTOR: '.modal',
         MODAL_TEXT_SELECTOR: '.modal__body__text',
+        MODAL_HEADER_SELECTOR: '.modal__body__header',
         MODAL_BUTTON_SELECTOR: '.modal__body__button',
 
         RIVALS_CONTAINER_CLASS_NAME: 'opponents',

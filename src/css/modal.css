@@ -12,35 +12,38 @@
 }
 
 .modal.modal_show {
+    overflow-y: auto;
+    box-sizing: border-box;
+    padding: 10% 0 5% 50%;
     display: block;
 }
 
-.modal.modal_hide{
+.modal.modal_hide {
     display: none;
 }
 
 .modal__body {
-    text-align: center;
-    position: relative;
-    margin-left: 50%;
-    margin-top: 200px;
-    height: 600px;
-    left: -200px;
     width: 400px;
+    margin-left: -200px;
+    text-align: center;
     color: #aaa;
 }
 
+.modal__body__header {
+    font-weight: normal;
+    font-size: 30px;
+}
+
 .modal__body__text {
-    font-size: 60px;
+    margin: 20px 0 30px;
 }
 
 .modal__body__button {
-    display: block;
-    margin: 100px 0 0 0;
-    cursor: pointer;
-    background-color: rgba(52, 79, 84, 0.7);
     border-left: 5px solid rgba(52, 79, 84, 0.0);
-    padding: 20px;
+    background-color: rgba(52, 79, 84, 0.7);
+    display: inline-block;
+    padding: 20px 40px;
+    cursor: pointer;
 }
 
 .modal__body__button:hover {

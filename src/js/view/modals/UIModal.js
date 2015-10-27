@@ -13,12 +13,14 @@
      */
     function showModal(event) {
         var modal = document.querySelector(FOOL.styles.MODAL_SELECTOR),
+            header = modal.querySelector(FOOL.styles.MODAL_HEADER_SELECTOR),
             text = modal.querySelector(FOOL.styles.MODAL_TEXT_SELECTOR),
             button = modal.querySelector(FOOL.styles.MODAL_BUTTON_SELECTOR),
             data = event.getData();
 //            callback = event.getCallback();
 
-        text.innerHTML =  data.textMessage;
+        header.innerHTML = data.headerMessage || '';
+        text.innerHTML = data.textMessage || '';
         button.innerHTML = data.buttonMessage;
 
         FOOL.document.removeEventListener(button, 'click');

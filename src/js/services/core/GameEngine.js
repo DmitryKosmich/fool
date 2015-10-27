@@ -23,7 +23,7 @@
         game.setActivePlayer(game.getPlayer());
         setNextGameStage(game);
         FOOL.events.tunnel.sendEvent(new GameEvent(FOOL.events.uiTypes.UI_SHOW_MESSAGE,
-            FOOL.messages.YOU_SHOULD_TAKE_CARD));
+            FOOL.messagesKeys.YOU_SHOULD_TAKE_CARD));
     };
 
     function initTalon(game) {
@@ -69,13 +69,13 @@
 
         if (!player.getIsActive()) {
             FOOL.events.tunnel.sendEvent(new GameEvent(FOOL.events.uiTypes.UI_SHOW_MESSAGE,
-                FOOL.messages.YOU_CAN_NOT_TAKE_CARD));
+                FOOL.messagesKeys.YOU_CAN_NOT_TAKE_CARD));
             return;
         }
 
         if (game.isActiveBout()) {
             FOOL.events.tunnel.sendEvent(new GameEvent(FOOL.events.uiTypes.UI_SHOW_MESSAGE,
-                FOOL.messages.YOU_SHOULD_MAKE_ACTION));
+                FOOL.messagesKeys.YOU_SHOULD_MAKE_ACTION));
             return;
         }
 
@@ -207,8 +207,8 @@
             game.setActivePlayer(game.getPlayer());
             game.setBoutActive(true);
             FOOL.events.tunnel.sendEvent(new GameEvent(FOOL.events.uiTypes.UI_SHOW_MODAL, {
-                buttonMessage: FOOL.messages.RESTART_GAME,
-                textMessage: player === game.getPlayer() ? FOOL.messages.YOU_WON : FOOL.messages.YOU_LOSE,
+                buttonMessage: FOOL.messagesKeys.RESTART_GAME,
+                textMessage: player === game.getPlayer() ? FOOL.messagesKeys.YOU_WON : FOOL.messagesKeys.YOU_LOSE,
                 type: player === game.getPlayer() ? FOOL.modalType.SUCCESS : FOOL.modalType.WARNING
             }));
             FOOL.engine.start();
@@ -264,38 +264,38 @@
             lastBoutCard = boutCards.length ? boutCards[boutCards.length - 1] : null;
         if (!player.getIsActive()) {
             FOOL.events.tunnel.sendEvent(new GameEvent(FOOL.events.uiTypes.UI_SHOW_MESSAGE,
-                FOOL.messages.ACTION_IS_NOT_YOUR));
+                FOOL.messagesKeys.ACTION_IS_NOT_YOUR));
             return false;
         }
         if (player.getCards().length < FOOL.defaults.startCardsNumber && game.getTalon().length > 0 && !game.isActiveBout()) {
             FOOL.events.tunnel.sendEvent(new GameEvent(FOOL.events.uiTypes.UI_SHOW_MESSAGE,
-                FOOL.messages.YOU_SHOULD_TAKE_CARD));
+                FOOL.messagesKeys.YOU_SHOULD_TAKE_CARD));
             return false;
         }
         if (player === game.getAttacker() && boutCards.length > 0
             && !boutCards.some(function (boutCard) { return boutCard.getValue() === card.getValue(); })) {
             FOOL.events.tunnel.sendEvent(new GameEvent(FOOL.events.uiTypes.UI_SHOW_MESSAGE,
-                FOOL.messages.YOU_CAN_NOT_TOSS_THIS_CARD));
+                FOOL.messagesKeys.YOU_CAN_NOT_TOSS_THIS_CARD));
             return false;
         }
         if (player === game.getDefender() && boutCards.length > 0) {
             if (lastBoutCard.getColor() === trumpColor && card.getColor() === trumpColor) {
                 if (lastBoutCard.getValue() > card.getValue()) {
                     FOOL.events.tunnel.sendEvent(new GameEvent(FOOL.events.uiTypes.UI_SHOW_MESSAGE,
-                        FOOL.messages.YOU_CAN_RESPOND_BY_USING_MORE_TRUMP));
+                        FOOL.messagesKeys.YOU_CAN_RESPOND_BY_USING_MORE_TRUMP));
                     return false;
                 }
             } else if (lastBoutCard.getColor() === trumpColor && card.getColor() !== trumpColor) {
                 FOOL.events.tunnel.sendEvent(new GameEvent(FOOL.events.uiTypes.UI_SHOW_MESSAGE,
-                    FOOL.messages.YOU_CAN_RESPOND_ONLY_BY_USING_TRUMP));
+                    FOOL.messagesKeys.YOU_CAN_RESPOND_ONLY_BY_USING_TRUMP));
                 return false;
             } else if (lastBoutCard.getColor() !== card.getColor() && card.getColor() !== trumpColor){
                 FOOL.events.tunnel.sendEvent(new GameEvent(FOOL.events.uiTypes.UI_SHOW_MESSAGE,
-                    FOOL.messages.YOU_SHOULD_RESPOND_ONLY_BY_USING_SAME_COLOR));
+                    FOOL.messagesKeys.YOU_SHOULD_RESPOND_ONLY_BY_USING_SAME_COLOR));
                 return false;
             } else if (lastBoutCard.getValue() > card.getValue() && card.getColor() !== trumpColor) {
                 FOOL.events.tunnel.sendEvent(new GameEvent(FOOL.events.uiTypes.UI_SHOW_MESSAGE,
-                    FOOL.messages.YOUR_CARD_IS_LESS_THAN_ATTACKER_CARD));
+                    FOOL.messagesKeys.YOUR_CARD_IS_LESS_THAN_ATTACKER_CARD));
                 return false;
             }
         }
@@ -319,7 +319,7 @@
 
         if (!player.getIsActive()) {
             FOOL.events.tunnel.sendEvent(new GameEvent(FOOL.events.uiTypes.UI_SHOW_MESSAGE,
-                FOOL.messages.YOU_CAN_NOT_PULL_OR_TOSS_TO_RETREAT_CARDS));
+                FOOL.messagesKeys.YOU_CAN_NOT_PULL_OR_TOSS_TO_RETREAT_CARDS));
             return;
         }
 

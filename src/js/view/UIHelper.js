@@ -15,12 +15,12 @@
     function showMessage(event) {
         var messageElem,
             timeout,
-            message = event.getData(),
+            messageKey = event.getData(),
             id = FOOL.randomizer.generateId(),
             tempElem = document.createElement('div'),
             container = document.querySelector(FOOL.styles.MESSAGE_CONTAINER_SELECTOR);
 
-        tempElem.innerHTML = '<div class="message" id="' + id + '">' + message + '</div>';
+        tempElem.innerHTML = '<div class="message" id="' + id + '">' + FOOL.messages[messageKey] + '</div>';
         messageElem = tempElem.firstChild;
 
         timeout = setTimeout(function () {
@@ -30,11 +30,21 @@
 
         FOOL.document.addEventListener(messageElem, 'click', function (event) {
             clearTimeout(timeout);
+            showModal(messageKey);
             messageElem.parentNode.removeChild(messageElem);
         });
 
         container.appendChild(messageElem);
 
+    }
+
+    function showModal(key) {
+        FOOL.events.tunnel.sendEvent(new FOOL.events.GameEvent(FOOL.events.uiTypes.UI_SHOW_MODAL, {
+            headerMessage: FOOL.messages[key],
+            textMessage: FOOL.messagesFull[key],
+            buttonMessage: FOOL.messages.OK,
+            type: FOOL.modalType.INFO
+        }));
     }
 
     UIHelper.prototype.initialize  = function() {
