@@ -87,13 +87,13 @@
             result = null;
         //TODO: improve algorithm
         player.getCards().forEach(function (playerCard) {
-            if (playerCard.getValue() > lastBoutCard.getValue()
-                && playerCard.getColor() === lastBoutCard.getColor()) {
+            console.log('playerCard', playerCard);
+            console.log('lastBoutCard', lastBoutCard);
+            if (playerCard.getValue() > lastBoutCard.getValue() && playerCard.getColor() === lastBoutCard.getColor()) {
                 if (!result || result.getValue() > playerCard.getValue()) {
                     result = playerCard;
                 }
-            } else if (playerCard.getColor() === game.getTrump().getColor()
-                && lastBoutCard.getColor() !== game.getTrump().getColor()) {
+            } else if (playerCard.getColor() === game.getTrump().getColor() && lastBoutCard.getColor() !== game.getTrump().getColor()) {
                 if (!result || result.getValue() > playerCard.getValue()) {
                     result = playerCard;
                 }

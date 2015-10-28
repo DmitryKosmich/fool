@@ -30,6 +30,8 @@
         tempParentElem.innerHTML = getCardHtml(card, hasAnimation, direction, isOpen);
         elem = tempParentElem.childNodes[0];
 
+        insertCard(container, elem, card);
+
         // add listener
         FOOL.document.addEventListener(elem, 'click', function () {
             FOOL.events.tunnel.sendEvent(new FOOL.events.GameEvent(getEventTypeByContainer(container), {
@@ -37,8 +39,6 @@
                 player: FOOL.currentGame.getPlayer()
             }));
         });
-
-        insertCard(container, elem, card);
 
         // remove animation class
         setTimeout(function () {
@@ -168,7 +168,7 @@
      * @returns {string}
      */
     function getCardId(card) {
-//        console.log('=> getCardId(card) card:', card);
+        console.log('=> getCardId(card) card:', card);
         return card.getValue() + '-' + card.getColor();
     }
 

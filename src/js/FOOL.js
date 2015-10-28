@@ -1,4 +1,3 @@
-
 var FOOL = {
     classes: {},
     currentGame: null,
@@ -81,7 +80,7 @@ var FOOL = {
     },
     messages: {
         OK: 'Ок',
-        MORE_INFO: 'Подробнее...',
+        MORE_INFO: 'Кликните сюда, чтобы узнать больше...',
         START_GAME: 'Начать игру',
         WELCOME: 'Добро пожаловать!',
         YOU_SHOULD_TAKE_CARD: 'Визьмите карты из колоды!',
@@ -94,20 +93,20 @@ var FOOL = {
         YOU_CAN_NOT_TOSS_THIS_CARD: 'Не жульничайте, таких карт нет на столе!',
         YOU_CAN_RESPOND_BY_USING_MORE_TRUMP: 'Вы можете отбиться только козырем больше!',
         YOU_CAN_RESPOND_ONLY_BY_USING_TRUMP: 'Вы можете отбиться только козырем!',
-        YOU_SHOULD_RESPOND_ONLY_BY_USING_SAME_COLOR: 'Вы должны отбиваться картой такойже масти!',
+        YOU_SHOULD_RESPOND_ONLY_BY_USING_SAME_COLOR: 'Вы должны отбиваться картой такой же масти!',
         YOUR_CARD_IS_LESS_THAN_ATTACKER_CARD: 'Ваша карта меньше!',
         YOU_CAN_NOT_PULL_OR_TOSS_TO_RETREAT_CARDS: 'Вы не можете сейчас забрать или бросить в отбой!'
     },
     messagesFull: {
-        YOU_SHOULD_TAKE_CARD: 'Для того чтобы взять карты из колоды необходимо кликнуть мышью на элемент под номером 4.',
-        YOU_CAN_NOT_TAKE_CARD: 'Вы не можете сейчас набирать карты!',
-        YOU_SHOULD_MAKE_ACTION: 'Ходите!',
-        ACTION_IS_NOT_YOUR: 'Не ваш ход!',
-        YOU_CAN_NOT_TOSS_THIS_CARD: 'Не жульничайте, таких карт нет на столе!',
-        YOU_CAN_RESPOND_BY_USING_MORE_TRUMP: 'Вы можете отбиться только козырем больше!',
-        YOU_CAN_RESPOND_ONLY_BY_USING_TRUMP: 'Вы можете отбиться только козырем!',
-        YOU_SHOULD_RESPOND_ONLY_BY_USING_SAME_COLOR: 'Вы должны отбиваться картой такойже масти!',
-        YOUR_CARD_IS_LESS_THAN_ATTACKER_CARD: 'Ваша карта меньше!',
+        YOU_SHOULD_TAKE_CARD: 'Для того чтобы взять карты из колоды, необходимо кликнуть мышью на карты, находящиеся в области под номером 3. (См. ниже...)',
+        YOU_CAN_NOT_TAKE_CARD: 'На данном этапе игры Вы не можете набрать карты!',
+        YOU_SHOULD_MAKE_ACTION: 'Для того чтобы сделать ход, необходимо кликнуть мышью на карты, находящиеся в области под номером 5. (См. ниже...)',
+        ACTION_IS_NOT_YOUR: 'На данном этапе игры Вы не можете делать какие-либо действия. Ожидайте действия противника!',
+        YOU_CAN_NOT_TOSS_THIS_CARD: 'Вы можете подбрасывать только те карты, которые уже есть на игровом столе (область 2, см. ниже...). Иначе, если у Вас нет таких карт, Вы должны бросить карты в отбой. Для этого необходимо кликнуть мышью на карты, находящиеся в области под номером 2. (См. ниже...)',
+        YOU_CAN_RESPOND_BY_USING_MORE_TRUMP: 'Старшинство карт в колоде из 36 карт (от меньшего достоинства к большему): 6, 7, 8, 9, 10, В, Д, К, Т.',
+        YOU_CAN_RESPOND_ONLY_BY_USING_TRUMP: 'Козырем является карта, лежащая лицевой стороной к игрокам (область 3). (См. ниже...)',
+        YOU_SHOULD_RESPOND_ONLY_BY_USING_SAME_COLOR: 'Масть подкидной карты, последней выложенной на игровой стол (см. область под номером 2) должна совпадать с мастью карты, которой вы хотите отбиться. Или Ваша карта должна быть козырной.',
+        YOUR_CARD_IS_LESS_THAN_ATTACKER_CARD: 'Старшинство карт в колоде из 36 карт (от меньшего достоинства к большему): 6, 7, 8, 9, 10, В, Д, К, Т. Вы можете отбиться только картой большего достоинства, путем клика мыши на карты, находящиеся в области под номером 5. (См. ниже...)',
         YOU_CAN_NOT_PULL_OR_TOSS_TO_RETREAT_CARDS: 'Вы не можете сейчас забрать или бросить в отбой!'
     },
     styles: {
@@ -120,6 +119,7 @@ var FOOL = {
         MESSAGE_CONTAINER_SELECTOR: '.message-container',
         MODAL_SELECTOR: '.modal',
         MODAL_TEXT_SELECTOR: '.modal__body__text',
+        MODAL_IMAGE_SELECTOR: '.modal__body__img',
         MODAL_HEADER_SELECTOR: '.modal__body__header',
         MODAL_BUTTON_SELECTOR: '.modal__body__button',
 
@@ -133,6 +133,7 @@ var FOOL = {
         PLAYER_CLASS_NAME: 'player',
         MODAL_SHOW_CLASS: 'modal_show',
         MODAL_HIDE_CLASS: 'modal_hide',
+        MODAL_IMAGE_HIDE: 'modal__body__img_hide',
 
         ADD_CARD_UP_ANIMATION: 'add-card-up',
         ADD_CARD_DOWN_ANIMATION: 'add-card-down',
@@ -152,57 +153,57 @@ FOOL.defaults = {
     playersNumber: 2,
     startCardsNumber: 6,
     robotPing: 2000,
-    timeOfShowingMessages: 5000,
+    timeOfShowingMessages: 60000,
     animationInterval: 250,
     cardsImagesDir: 'img/'
 };
 
 FOOL.talon = [
-    {
-        color: FOOL.color.CROSSES,
-        value: 2,
-        name: '2'
-    },
-    {
-        color: FOOL.color.CROSSES,
-        value: 3,
-        name: '3'
-    },
-    {
-        color: FOOL.color.CROSSES,
-        value: 4,
-        name: '4'
-    },
-    {
-        color: FOOL.color.CROSSES,
-        value: 5,
-        name: '5'
-    },
-    {
-        color: FOOL.color.CROSSES,
-        value: 6,
-        name: '6'
-    },
-    {
-        color: FOOL.color.CROSSES,
-        value: 7,
-        name: '7'
-    },
-    {
-        color: FOOL.color.CROSSES,
-        value: 8,
-        name: '8'
-    },
-    {
-        color: FOOL.color.CROSSES,
-        value: 9,
-        name: '9'
-    },
-    {
-        color: FOOL.color.CROSSES,
-        value: 10,
-        name: '10'
-    },
+//    {
+//        color: FOOL.color.CROSSES,
+//        value: 2,
+//        name: '2'
+//    },
+//    {
+//        color: FOOL.color.CROSSES,
+//        value: 3,
+//        name: '3'
+//    },
+//    {
+//        color: FOOL.color.CROSSES,
+//        value: 4,
+//        name: '4'
+//    },
+//    {
+//        color: FOOL.color.CROSSES,
+//        value: 5,
+//        name: '5'
+//    },
+//    {
+//        color: FOOL.color.CROSSES,
+//        value: 6,
+//        name: '6'
+//    },
+//    {
+//        color: FOOL.color.CROSSES,
+//        value: 7,
+//        name: '7'
+//    },
+//    {
+//        color: FOOL.color.CROSSES,
+//        value: 8,
+//        name: '8'
+//    },
+//    {
+//        color: FOOL.color.CROSSES,
+//        value: 9,
+//        name: '9'
+//    },
+//    {
+//        color: FOOL.color.CROSSES,
+//        value: 10,
+//        name: '10'
+//    },
     {
         color: FOOL.color.CROSSES,
         value: 11,
@@ -223,51 +224,51 @@ FOOL.talon = [
         value: 14,
         name: 'Ace'
     },
-    {
-        color: FOOL.color.DIAMONDS,
-        value: 2,
-        name: '2'
-    },
-    {
-        color: FOOL.color.DIAMONDS,
-        value: 3,
-        name: '3'
-    },
-    {
-        color: FOOL.color.DIAMONDS,
-        value: 4,
-        name: '4'
-    },
-    {
-        color: FOOL.color.DIAMONDS,
-        value: 5,
-        name: '5'
-    },
-    {
-        color: FOOL.color.DIAMONDS,
-        value: 6,
-        name: '6'
-    },
-    {
-        color: FOOL.color.DIAMONDS,
-        value: 7,
-        name: '7'
-    },
-    {
-        color: FOOL.color.DIAMONDS,
-        value: 8,
-        name: '8'
-    },
-    {
-        color: FOOL.color.DIAMONDS,
-        value: 9,
-        name: '9'
-    },
-    {
-        color: FOOL.color.DIAMONDS,
-        value: 10,
-        name: '10'
-    },
+//    {
+//        color: FOOL.color.DIAMONDS,
+//        value: 2,
+//        name: '2'
+//    },
+//    {
+//        color: FOOL.color.DIAMONDS,
+//        value: 3,
+//        name: '3'
+//    },
+//    {
+//        color: FOOL.color.DIAMONDS,
+//        value: 4,
+//        name: '4'
+//    },
+//    {
+//        color: FOOL.color.DIAMONDS,
+//        value: 5,
+//        name: '5'
+//    },
+//    {
+//        color: FOOL.color.DIAMONDS,
+//        value: 6,
+//        name: '6'
+//    },
+//    {
+//        color: FOOL.color.DIAMONDS,
+//        value: 7,
+//        name: '7'
+//    },
+//    {
+//        color: FOOL.color.DIAMONDS,
+//        value: 8,
+//        name: '8'
+//    },
+//    {
+//        color: FOOL.color.DIAMONDS,
+//        value: 9,
+//        name: '9'
+//    },
+//    {
+//        color: FOOL.color.DIAMONDS,
+//        value: 10,
+//        name: '10'
+//    },
     {
         color: FOOL.color.DIAMONDS,
         value: 11,
@@ -288,51 +289,51 @@ FOOL.talon = [
         value: 14,
         name: 'Ace'
     },
-    {
-        color: FOOL.color.HEARTS,
-        value: 2,
-        name: '2'
-    },
-    {
-        color: FOOL.color.HEARTS,
-        value: 3,
-        name: '3'
-    },
-    {
-        color: FOOL.color.HEARTS,
-        value: 4,
-        name: '4'
-    },
-    {
-        color: FOOL.color.HEARTS,
-        value: 5,
-        name: '5'
-    },
-    {
-        color: FOOL.color.HEARTS,
-        value: 6,
-        name: '6'
-    },
-    {
-        color: FOOL.color.HEARTS,
-        value: 7,
-        name: '7'
-    },
-    {
-        color: FOOL.color.HEARTS,
-        value: 8,
-        name: '8'
-    },
-    {
-        color: FOOL.color.HEARTS,
-        value: 9,
-        name: '9'
-    },
-    {
-        color: FOOL.color.HEARTS,
-        value: 10,
-        name: '10'
-    },
+//    {
+//        color: FOOL.color.HEARTS,
+//        value: 2,
+//        name: '2'
+//    },
+//    {
+//        color: FOOL.color.HEARTS,
+//        value: 3,
+//        name: '3'
+//    },
+//    {
+//        color: FOOL.color.HEARTS,
+//        value: 4,
+//        name: '4'
+//    },
+//    {
+//        color: FOOL.color.HEARTS,
+//        value: 5,
+//        name: '5'
+//    },
+//    {
+//        color: FOOL.color.HEARTS,
+//        value: 6,
+//        name: '6'
+//    },
+//    {
+//        color: FOOL.color.HEARTS,
+//        value: 7,
+//        name: '7'
+//    },
+//    {
+//        color: FOOL.color.HEARTS,
+//        value: 8,
+//        name: '8'
+//    },
+//    {
+//        color: FOOL.color.HEARTS,
+//        value: 9,
+//        name: '9'
+//    },
+//    {
+//        color: FOOL.color.HEARTS,
+//        value: 10,
+//        name: '10'
+//    },
     {
         color: FOOL.color.HEARTS,
         value: 11,
@@ -353,51 +354,51 @@ FOOL.talon = [
         value: 14,
         name: 'Ace'
     },
-    {
-        color: FOOL.color.SPADES,
-        value: 2,
-        name: '2'
-    },
-    {
-        color: FOOL.color.SPADES,
-        value: 3,
-        name: '3'
-    },
-    {
-        color: FOOL.color.SPADES,
-        value: 4,
-        name: '4'
-    },
-    {
-        color: FOOL.color.SPADES,
-        value: 5,
-        name: '5'
-    },
-    {
-        color: FOOL.color.SPADES,
-        value: 6,
-        name: '6'
-    },
-    {
-        color: FOOL.color.SPADES,
-        value: 7,
-        name: '7'
-    },
-    {
-        color: FOOL.color.SPADES,
-        value: 8,
-        name: '8'
-    },
-    {
-        color: FOOL.color.SPADES,
-        value: 9,
-        name: '9'
-    },
-    {
-        color: FOOL.color.SPADES,
-        value: 10,
-        name: '10'
-    },
+//    {
+//        color: FOOL.color.SPADES,
+//        value: 2,
+//        name: '2'
+//    },
+//    {
+//        color: FOOL.color.SPADES,
+//        value: 3,
+//        name: '3'
+//    },
+//    {
+//        color: FOOL.color.SPADES,
+//        value: 4,
+//        name: '4'
+//    },
+//    {
+//        color: FOOL.color.SPADES,
+//        value: 5,
+//        name: '5'
+//    },
+//    {
+//        color: FOOL.color.SPADES,
+//        value: 6,
+//        name: '6'
+//    },
+//    {
+//        color: FOOL.color.SPADES,
+//        value: 7,
+//        name: '7'
+//    },
+//    {
+//        color: FOOL.color.SPADES,
+//        value: 8,
+//        name: '8'
+//    },
+//    {
+//        color: FOOL.color.SPADES,
+//        value: 9,
+//        name: '9'
+//    },
+//    {
+//        color: FOOL.color.SPADES,
+//        value: 10,
+//        name: '10'
+//    },
     {
         color: FOOL.color.SPADES,
         value: 11,

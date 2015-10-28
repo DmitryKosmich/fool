@@ -207,8 +207,8 @@
             game.setActivePlayer(game.getPlayer());
             game.setBoutActive(true);
             FOOL.events.tunnel.sendEvent(new GameEvent(FOOL.events.uiTypes.UI_SHOW_MODAL, {
-                buttonMessage: FOOL.messagesKeys.RESTART_GAME,
-                textMessage: player === game.getPlayer() ? FOOL.messagesKeys.YOU_WON : FOOL.messagesKeys.YOU_LOSE,
+                buttonMessage: FOOL.messages.RESTART_GAME,
+                headerMessage: player === game.getPlayer() ? FOOL.messages.YOU_WON : FOOL.messages.YOU_LOSE,
                 type: player === game.getPlayer() ? FOOL.modalType.SUCCESS : FOOL.modalType.WARNING
             }));
             FOOL.engine.start();
