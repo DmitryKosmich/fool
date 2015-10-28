@@ -179,31 +179,31 @@ FOOL.talon = [
 //        value: 5,
 //        name: '5'
 //    },
-//    {
-//        color: FOOL.color.CROSSES,
-//        value: 6,
-//        name: '6'
-//    },
-//    {
-//        color: FOOL.color.CROSSES,
-//        value: 7,
-//        name: '7'
-//    },
-//    {
-//        color: FOOL.color.CROSSES,
-//        value: 8,
-//        name: '8'
-//    },
-//    {
-//        color: FOOL.color.CROSSES,
-//        value: 9,
-//        name: '9'
-//    },
-//    {
-//        color: FOOL.color.CROSSES,
-//        value: 10,
-//        name: '10'
-//    },
+    {
+        color: FOOL.color.CROSSES,
+        value: 6,
+        name: '6'
+    },
+    {
+        color: FOOL.color.CROSSES,
+        value: 7,
+        name: '7'
+    },
+    {
+        color: FOOL.color.CROSSES,
+        value: 8,
+        name: '8'
+    },
+    {
+        color: FOOL.color.CROSSES,
+        value: 9,
+        name: '9'
+    },
+    {
+        color: FOOL.color.CROSSES,
+        value: 10,
+        name: '10'
+    },
     {
         color: FOOL.color.CROSSES,
         value: 11,
@@ -244,31 +244,31 @@ FOOL.talon = [
 //        value: 5,
 //        name: '5'
 //    },
-//    {
-//        color: FOOL.color.DIAMONDS,
-//        value: 6,
-//        name: '6'
-//    },
-//    {
-//        color: FOOL.color.DIAMONDS,
-//        value: 7,
-//        name: '7'
-//    },
-//    {
-//        color: FOOL.color.DIAMONDS,
-//        value: 8,
-//        name: '8'
-//    },
-//    {
-//        color: FOOL.color.DIAMONDS,
-//        value: 9,
-//        name: '9'
-//    },
-//    {
-//        color: FOOL.color.DIAMONDS,
-//        value: 10,
-//        name: '10'
-//    },
+    {
+        color: FOOL.color.DIAMONDS,
+        value: 6,
+        name: '6'
+    },
+    {
+        color: FOOL.color.DIAMONDS,
+        value: 7,
+        name: '7'
+    },
+    {
+        color: FOOL.color.DIAMONDS,
+        value: 8,
+        name: '8'
+    },
+    {
+        color: FOOL.color.DIAMONDS,
+        value: 9,
+        name: '9'
+    },
+    {
+        color: FOOL.color.DIAMONDS,
+        value: 10,
+        name: '10'
+    },
     {
         color: FOOL.color.DIAMONDS,
         value: 11,
@@ -309,31 +309,31 @@ FOOL.talon = [
 //        value: 5,
 //        name: '5'
 //    },
-//    {
-//        color: FOOL.color.HEARTS,
-//        value: 6,
-//        name: '6'
-//    },
-//    {
-//        color: FOOL.color.HEARTS,
-//        value: 7,
-//        name: '7'
-//    },
-//    {
-//        color: FOOL.color.HEARTS,
-//        value: 8,
-//        name: '8'
-//    },
-//    {
-//        color: FOOL.color.HEARTS,
-//        value: 9,
-//        name: '9'
-//    },
-//    {
-//        color: FOOL.color.HEARTS,
-//        value: 10,
-//        name: '10'
-//    },
+    {
+        color: FOOL.color.HEARTS,
+        value: 6,
+        name: '6'
+    },
+    {
+        color: FOOL.color.HEARTS,
+        value: 7,
+        name: '7'
+    },
+    {
+        color: FOOL.color.HEARTS,
+        value: 8,
+        name: '8'
+    },
+    {
+        color: FOOL.color.HEARTS,
+        value: 9,
+        name: '9'
+    },
+    {
+        color: FOOL.color.HEARTS,
+        value: 10,
+        name: '10'
+    },
     {
         color: FOOL.color.HEARTS,
         value: 11,
@@ -374,31 +374,31 @@ FOOL.talon = [
 //        value: 5,
 //        name: '5'
 //    },
-//    {
-//        color: FOOL.color.SPADES,
-//        value: 6,
-//        name: '6'
-//    },
-//    {
-//        color: FOOL.color.SPADES,
-//        value: 7,
-//        name: '7'
-//    },
-//    {
-//        color: FOOL.color.SPADES,
-//        value: 8,
-//        name: '8'
-//    },
-//    {
-//        color: FOOL.color.SPADES,
-//        value: 9,
-//        name: '9'
-//    },
-//    {
-//        color: FOOL.color.SPADES,
-//        value: 10,
-//        name: '10'
-//    },
+    {
+        color: FOOL.color.SPADES,
+        value: 6,
+        name: '6'
+    },
+    {
+        color: FOOL.color.SPADES,
+        value: 7,
+        name: '7'
+    },
+    {
+        color: FOOL.color.SPADES,
+        value: 8,
+        name: '8'
+    },
+    {
+        color: FOOL.color.SPADES,
+        value: 9,
+        name: '9'
+    },
+    {
+        color: FOOL.color.SPADES,
+        value: 10,
+        name: '10'
+    },
     {
         color: FOOL.color.SPADES,
         value: 11,
